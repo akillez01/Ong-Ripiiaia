@@ -1,18 +1,17 @@
-
-import Header from "@/components/sections/Header";
+import CallToActionSection from "@/components/sections/CallToActionSection";
+import DualProfileSection from "@/components/sections/DualProfileSection";
+import Footer from "@/components/sections/Footer";
 import HeroSection from "@/components/sections/HeroSection";
+import SobreSection from "@/components/sections/SobreSection";
 import SubdomainsSection from "@/components/sections/SubdomainsSection";
 import ValuesSection from "@/components/sections/ValuesSection";
-import DualProfileSection from "@/components/sections/DualProfileSection";
-import CallToActionSection from "@/components/sections/CallToActionSection";
-import Footer from "@/components/sections/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-background to-amber-50 dark:from-slate-900 dark:via-background dark:to-emerald-950/20">
-      <Header />
+    <div className="min-h-screen bg-background text-foreground">
       <HeroSection />
       <SubdomainsSection />
+      <SobreSection />
       <ValuesSection />
       <DualProfileSection />
       <CallToActionSection />

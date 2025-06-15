@@ -10,20 +10,20 @@ import { useEffect, useRef, useState } from "react";
 
 // Importa os ícones do Lucide React
 import {
-  ArrowLeft, // Ícone para voltar
-  Bot, // Ícone para assistente
   Sprout, // Ícone para tradições
   Users
 } from "lucide-react";
 
 // --- Dados da Página ---
 const plataformas = [
-    {
+
+  {
       title: "Ripi Iaiá - Universo Daime",
       description: "Conteúdo, cultura e espiritualidade do Daime e medicinas da floresta.",
-      url: "https://akillez01.github.io/Ripi-Iaia/",
+      url: "/ripi-iaia", // Agora direciona para a rota interna do projeto
       type: "Portal Principal"
     },
+    
     {
       title: "Comunidade 5000",
       description: "Rede de conexões e projetos colaborativos da comunidade.",
@@ -51,12 +51,12 @@ const plataformas = [
 ];
 
 const subdominios = [
-  {
-      title: "ICEFLU",
-      description: "Organização internacional de fomento e estudo da doutrina do Daime.",
-      url: "https://iceflu.org/",
-      type: "Igreja Oficial"
-    },
+  // {
+  //     title: "ICEFLU",
+  //     description: "Organização internacional de fomento e estudo da doutrina do Daime.",
+  //     url: "https://iceflu.org/",
+  //     type: "Igreja Oficial"
+  //   },
     {
       title: "Barquinha (Alto Santo)",
       description: "Tradição Barquinha do Daime, com raízes em Alto Santo, Acre.",
@@ -141,25 +141,6 @@ const artistas = [
   }
 ];
 
-
-// --- Header da Página Comunidades ---
-const Header = () => (
-  <header className="w-full bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-md">
-    <div className="container-custom flex items-center justify-between px-4 py-3 md:py-4">
-      <div className="flex items-center gap-3">
-        <Link to="/" className="flex items-center text-emerald-600 hover:text-emerald-700 transition-colors">
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          <span>Voltar</span>
-        </Link>
-        <Users className="w-7 h-7 text-emerald-600" />
-        <span className="font-bold text-lg md:text-xl text-slate-800">Comunidades</span>
-      </div>
-      <Button className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2 px-4 py-2 rounded-lg">
-        <Bot className="w-5 h-5" /> Assistente
-      </Button>
-    </div>
-  </header>
-);
 
 // --- Footer Moderno ---
 const Footer = () => (
@@ -306,7 +287,6 @@ const TradicoesSection = () => (
 const Comunidades = () => {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-gray-700">
-      <Header />
       <HeroSection />
       <PortalGrid />
       <ArtistasCarousel />

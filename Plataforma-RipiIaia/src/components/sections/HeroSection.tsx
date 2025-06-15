@@ -1,9 +1,6 @@
 // src/components/HeroSection.tsx
 
 import { Badge } from "@/components/ui/badge"; // Mantenha este import
-import { Button } from "@/components/ui/button"; // Mantenha este import
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -30,7 +27,7 @@ const HeroSection = () => {
           Uma plataforma multifacetada que une cultura, inovação social e serviços profissionais.
           Cada espaço com sua missão única, unidos pelo propósito de promover harmonia, inclusão e desenvolvimento humano.
         </p>
-        <div className="flex flex-col sm:flex-row gap-5 justify-center animate-fade-in stagger-2">
+        {/* <div className="flex flex-col sm:flex-row gap-5 justify-center animate-fade-in stagger-2">
           <Button size="lg" className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-lg px-8 py-4 text-xl shadow-lg hover:shadow-xl transition-all duration-300" asChild>
             <Link to="/portal">
               Explorar Espaços
@@ -40,7 +37,7 @@ const HeroSection = () => {
           <Button size="lg" variant="outline" className="border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 shadow-md hover:shadow-lg transition-all duration-300 rounded-lg px-8 py-4 text-xl font-semibold" asChild>
             <Link to="/sobre">Nossa História</Link>
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

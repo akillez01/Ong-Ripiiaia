@@ -76,7 +76,7 @@ const Footer = () => {
         <div className="border-t border-emerald-900/50 mt-12 pt-8 text-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Ripi Iaiá. Todos os direitos reservados.</p>
           <p className="mt-2">Feito com <span className="text-red-500">💚</span> na Floresta Amazônica.</p>
-          <p className="mt-1 text-xs">Atualizado em 11 de junho de 2025</p>
+          <p className="mt-1 text-xs">Atualizado em 15 de junho de 2025</p>
         </div>
       </div>
     </footer>
