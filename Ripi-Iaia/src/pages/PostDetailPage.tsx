@@ -43,7 +43,7 @@ const PostDetailPage = () => {
         ]);
         
         // Verifica se os comentários têm _id válido
-        const verifiedComments = commentsRes.data.map(comment => ({
+        const verifiedComments = commentsRes.data.map((comment: Comment) => ({
           ...comment,
           _id: comment._id || `temp-${Math.random().toString(36).substr(2, 9)}`
         }));
