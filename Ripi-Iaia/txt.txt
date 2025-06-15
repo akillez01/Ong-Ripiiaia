@@ -1,0 +1,13 @@
+1067080653271-hjejh0ivt8j2ta5b94jof42rgnnpuia3.apps.googleusercontent.com
+
+
+mysql -u ripiiaia_user -p ripiiaia_db
+6fDa0zki0R#ye!Fl
+
+
+node src/index.js
+
+bg-primary-600
+
+
+############
