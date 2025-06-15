@@ -4,8 +4,8 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Para deploy no Plesk, use base '/'. Para GitHub Pages, use VITE_BASE_URL='/Ong-Ripiiaia/'
-  base: process.env.VITE_BASE_URL || '/Ong-Ripiiaia/',
+  // Para deploy no Plesk, use base: '/Ong-Ripiiaia/' se o site está em https://ripiiaia.org/Ong-Ripiiaia/
+  base: '/Ong-Ripiiaia/',
 
   server: {
     host: "::",
@@ -22,7 +22,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
 
-  // As configurações de build já estão corretas para a saída em 'dist'
   build: {
     outDir: 'dist',
     rollupOptions: {
