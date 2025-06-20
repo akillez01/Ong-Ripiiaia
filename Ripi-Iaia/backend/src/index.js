@@ -8,6 +8,12 @@ const fs = require('fs');
 const crypto = require('crypto');
 const cors = require('cors');
 
+// Importar configuração de CORS para produção
+const configureCorsForProduction = require('./cors-fix-prod');
+
+// Verificação se estamos em ambiente de produção
+const isProduction = process.env.NODE_ENV === 'production';
+
 // Verificação de variáveis de ambiente essenciais
 const requiredEnvVars = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME', 'JWT_SECRET'];
 requiredEnvVars.forEach(env => {
@@ -30,25 +36,35 @@ const app = express();
 app.use('/api', helmet());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-app.use(cors({
-  origin: '*', // Permitir qualquer origem temporariamente para debug
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
-    'Accept', 
-    'X-Requested-With',
-    'Cache-Control',
-    'Pragma',
-    'Expires',
-    'Origin'
-  ],
-  exposedHeaders: ['Content-Length', 'X-Timestamp', 'Content-Type'],
-  credentials: true,
-  optionsSuccessStatus: 200, // Alterado de 204 para 200 para melhor compatibilidade
-  preflightContinue: false,
-  maxAge: 86400 // 24 horas
-}));
+
+// Configuração de CORS conforme o ambiente
+if (isProduction) {
+  // Em produção, usar configuração de CORS específica para origens permitidas
+  console.log('🚀 Aplicando configuração de CORS para PRODUÇÃO');
+  configureCorsForProduction(app);
+} else {
+  // Em desenvolvimento, ser mais permissivo com CORS
+  console.log('🔧 Aplicando configuração de CORS para DESENVOLVIMENTO');
+  app.use(cors({
+    origin: '*', // Permitir qualquer origem em desenvolvimento
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: [
+      'Content-Type', 
+      'Authorization', 
+      'Accept', 
+      'X-Requested-With',
+      'Cache-Control',
+      'Pragma',
+      'Expires',
+      'Origin'
+    ],
+    exposedHeaders: ['Content-Length', 'X-Timestamp', 'Content-Type'],
+    credentials: true,
+    optionsSuccessStatus: 200, // Alterado de 204 para 200 para melhor compatibilidade
+    preflightContinue: false,
+    maxAge: 86400 // 24 horas
+  }));
+}
 
 // Middleware para debug CORS - imprime cabeçalhos e origem
 app.use((req, res, next) => {

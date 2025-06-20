@@ -1,61 +1,86 @@
-
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Wrench, Globe, Server, Code, Shield, Zap, HeadphonesIcon, CheckCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Code, Globe, HandCoins, HeadphonesIcon, HeartHandshake, Server, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Servicos = () => {
-  const services = [
+  const freeServices = [
     {
-      title: "Hospedagem Web",
-      description: "Servidores seguros e rápidos para seu site ou aplicação",
-      features: ["99.9% Uptime", "SSL Gratuito", "Backups Diários", "Suporte 24/7"],
-      price: "A partir de R$ 29,90/mês",
+      title: "Hospedagem Gratuita",
+      description: "Para projetos comunitários e ONGs com até 10.000 visitas/mês",
+      features: ["5GB de armazenamento", "SSL Gratuito", "Email institucional", "Suporte básico"],
+      price: "Totalmente grátis",
+      icon: HeartHandshake,
+      badge: "Impacto Social"
+    },
+    {
+      title: "Domínio .org.br",
+      description: "Registro gratuito de domínio para organizações certificadas",
+      features: ["1 ano grátis", "Renovação com desconto", "DNS management", "Proteção de privacidade"],
+      price: "Grátis para ONGs",
+      icon: Globe,
+      badge: "Para organizações"
+    },
+    {
+      title: "Site Comunitário",
+      description: "Desenvolvimento de site básico para iniciativas sociais",
+      features: ["Design responsivo", "Formulário de contato", "Galeria de fotos", "1 página institucional"],
+      price: "Custo zero",
+      icon: Code,
+      badge: "Primeiros passos"
+    }
+  ];
+
+  const paidServices = [
+    {
+      title: "Hospedagem Profissional",
+      description: "Para negócios que precisam de mais recursos",
+      features: ["20GB SSD", "Certificado SSL", "Backups Diários", "Suporte prioritário"],
+      price: "A partir de R$ 49,90/mês",
       icon: Server
     },
     {
-      title: "Registro de Domínios",
-      description: "Registre e gerencie seus domínios com facilidade",
-      features: [".com.br", ".org", ".com", "Renovação Automática"],
-      price: "A partir de R$ 39,90/ano",
-      icon: Globe
-    },
-    {
-      title: "Desenvolvimento Web",
-      description: "Sites personalizados e lojas virtuais profissionais",
-      features: ["Design Responsivo", "SEO Otimizado", "E-commerce", "Manutenção"],
+      title: "Desenvolvimento Avançado",
+      description: "Sites e sistemas personalizados",
+      features: ["E-commerce", "Sistemas web", "Integrações API", "Manutenção"],
       price: "Orçamento personalizado",
       icon: Code
     },
     {
-      title: "Suporte Técnico",
-      description: "Assistência especializada para seus projetos digitais",
-      features: ["Consultoria", "Migração", "Otimização", "Treinamento"],
-      price: "R$ 120/hora",
+      title: "Consultoria Digital",
+      description: "Acelere seu projeto com nossa expertise",
+      features: ["Estratégia digital", "Otimização SEO", "Segurança", "Treinamentos"],
+      price: "R$ 150/hora",
       icon: HeadphonesIcon
     }
   ];
 
-  const plans = [
+  const impactPlans = [
     {
-      name: "Básico",
+      name: "Impacto Social",
+      price: "Grátis",
+      period: "",
+      for: "Comunidades e ONGs",
+      features: ["1 Site", "5GB SSD", "SSL Gratuito", "1 Email", "10.000 visitas/mês", "Suporte por email"],
+      cta: "Se inscrever"
+    },
+    {
+      name: "Impacto Plus",
       price: "R$ 29,90",
       period: "/mês",
-      features: ["1 Site", "5GB SSD", "Certificado SSL", "Email Profissional", "Suporte Básico"]
-    },
-    {
-      name: "Profissional",
-      price: "R$ 59,90",
-      period: "/mês",
       popular: true,
-      features: ["5 Sites", "20GB SSD", "Certificado SSL", "Emails Ilimitados", "Suporte Prioritário", "Backup Automático"]
+      for: "ONGs em crescimento",
+      features: ["3 Sites", "15GB SSD", "SSL Gratuito", "5 Emails", "50.000 visitas/mês", "Suporte prioritário", "Backup semanal"],
+      cta: "Contratar"
     },
     {
-      name: "Empresarial",
-      price: "R$ 129,90",
+      name: "Negócio Social",
+      price: "R$ 89,90",
       period: "/mês",
-      features: ["Sites Ilimitados", "100GB SSD", "Certificado SSL", "Emails Ilimitados", "Suporte 24/7", "CDN Grátis", "Otimização"]
+      for: "Negócios de impacto",
+      features: ["Sites Ilimitados", "50GB SSD", "SSL Wildcard", "Emails Ilimitados", "Visitas Ilimitadas", "Suporte 24/7", "CDN Grátis"],
+      cta: "Contratar"
     }
   ];
 
@@ -72,10 +97,10 @@ const Servicos = () => {
               </Link>
             </div>
             <div className="flex items-center space-x-3">
-              <Wrench className="w-8 h-8 text-slate-600" />
+              <HeartHandshake className="w-8 h-8 text-slate-600" />
               <div>
-                <h1 className="text-xl font-bold text-gray-800">Ripiiaia Serviços</h1>
-                <p className="text-sm text-gray-600">Soluções Tecnológicas</p>
+                <h1 className="text-xl font-bold text-gray-800">Ripiiaia Impacto Digital</h1>
+                <p className="text-sm text-gray-600">Tecnologia que transforma</p>
               </div>
             </div>
           </div>
@@ -85,36 +110,129 @@ const Servicos = () => {
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge variant="outline" className="mb-6 border-slate-200 text-slate-700">
-            🚀 Tecnologia Profissional
+          <Badge variant="outline" className="mb-6 border-green-200 bg-green-50 text-green-700">
+            🌍 Tecnologia com Propósito
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-            Soluções Digitais Completas
+            Serviços Gratuitos para Comunidades e ONGs
           </h2>
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Oferecemos serviços profissionais de hospedagem, desenvolvimento e suporte técnico. 
-            Cada cliente tem espaço exclusivo com infraestrutura independente, garantindo 
-            performance, segurança e profissionalismo.
+            Acreditamos no poder transformador da tecnologia. Oferecemos hospedagem, domínios e 
+            desenvolvimento web gratuitos para iniciativas sociais, enquanto sustentamos nosso 
+            trabalho com serviços comerciais.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-slate-600 hover:bg-slate-700">
-              <Zap className="mr-2 w-5 h-5" />
-              Ver Planos
+            <Button size="lg" className="bg-green-600 hover:bg-green-700">
+              <Users className="mr-2 w-5 h-5" />
+              Serviços Gratuitos
             </Button>
             <Button size="lg" variant="outline" className="border-slate-600 text-slate-600">
-              <Shield className="mr-2 w-5 h-5" />
-              Solicitar Orçamento
+              <HandCoins className="mr-2 w-5 h-5" />
+              Como Apoiar
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Serviços */}
-      <section className="py-16 px-4 bg-white/50">
+      {/* Serviços Gratuitos */}
+      <section className="py-16 px-4 bg-green-50">
         <div className="container mx-auto max-w-6xl">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Nossos Serviços</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => {
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Nossos Programas de Impacto</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {freeServices.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <Card key={index} className="hover:shadow-xl transition-all duration-300 group border-green-200">
+                  {service.badge && (
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600">
+                      {service.badge}
+                    </Badge>
+                  )}
+                  <CardHeader>
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <CardTitle className="text-lg">{service.title}</CardTitle>
+                    <CardDescription>{service.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm text-gray-600">
+                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="pt-4 border-t border-green-100">
+                      <p className="font-semibold text-green-600">{service.price}</p>
+                      <Button variant="outline" className="w-full mt-3 border-green-300 text-green-600 hover:bg-green-50">
+                        Solicitar
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Planos de Impacto */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-800">Planos de Impacto</h3>
+            <p className="text-lg text-gray-600 mt-2">
+              Escolha o plano que melhor se adapta ao tamanho do seu impacto social
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {impactPlans.map((plan, index) => (
+              <Card key={index} className={`relative hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-green-600 scale-105' : ''}`}>
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600">
+                    Recomendado
+                  </Badge>
+                )}
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <div className="py-4">
+                    <span className="text-4xl font-bold text-green-600">{plan.price}</span>
+                    <span className="text-gray-600">{plan.period}</span>
+                    <p className="text-sm text-gray-500 mt-1">{plan.for}</p>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className={`w-full mt-6 ${plan.popular ? 'bg-green-600 hover:bg-green-700' : 'bg-green-500 hover:bg-green-600'}`}>
+                    {plan.cta}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Serviços Comerciais */}
+      <section className="py-16 px-4 bg-slate-50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-800">Serviços Comerciais</h3>
+            <p className="text-lg text-gray-600 mt-2">
+              Nossas soluções profissionais que sustentam os projetos gratuitos
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {paidServices.map((service, index) => {
               const IconComponent = service.icon;
               return (
                 <Card key={index} className="hover:shadow-xl transition-all duration-300 group">
@@ -136,6 +254,9 @@ const Servicos = () => {
                     </ul>
                     <div className="pt-4 border-t">
                       <p className="font-semibold text-slate-600">{service.price}</p>
+                      <Button variant="outline" className="w-full mt-3 border-slate-600 text-slate-600 hover:bg-slate-50">
+                        Saiba mais
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -145,69 +266,31 @@ const Servicos = () => {
         </div>
       </section>
 
-      {/* Planos de Hospedagem */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Planos de Hospedagem</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {plans.map((plan, index) => (
-              <Card key={index} className={`relative hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-slate-600 scale-105' : ''}`}>
-                {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-slate-600">
-                    Mais Popular
-                  </Badge>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <div className="py-4">
-                    <span className="text-4xl font-bold text-slate-600">{plan.price}</span>
-                    <span className="text-gray-600">{plan.period}</span>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className={`w-full mt-6 ${plan.popular ? 'bg-slate-600 hover:bg-slate-700' : 'bg-slate-500 hover:bg-slate-600'}`}>
-                    Contratar Plano
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Diferenciais */}
-      <section className="py-16 px-4 bg-slate-600 text-white">
+      <section className="py-16 px-4 bg-green-600 text-white">
         <div className="container mx-auto text-center max-w-4xl">
-          <h3 className="text-3xl font-bold mb-8">Por Que Escolher a Ripiiaia?</h3>
+          <h3 className="text-3xl font-bold mb-8">Nosso Modelo de Impacto</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8" />
+                <HeartHandshake className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">Segurança Garantida</h4>
-              <p className="opacity-90">Servidores seguros com certificados SSL e backups automáticos</p>
+              <h4 className="font-semibold mb-2">1. Apoiamos Comunidades</h4>
+              <p className="opacity-90">Oferecemos serviços gratuitos para quem está transformando realidades</p>
             </div>
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8" />
+                <HandCoins className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">Performance Otimizada</h4>
-              <p className="opacity-90">Infraestrutura de alta performance para máxima velocidade</p>
+              <h4 className="font-semibold mb-2">2. Negócios nos Sustentam</h4>
+              <p className="opacity-90">Serviços comerciais financiam nossa operação e projetos sociais</p>
             </div>
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <HeadphonesIcon className="w-8 h-8" />
+                <Users className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">Suporte Especializado</h4>
-              <p className="opacity-90">Equipe técnica dedicada para resolver suas necessidades</p>
+              <h4 className="font-semibold mb-2">3. Juntos Transformamos</h4>
+              <p className="opacity-90">Cada contrato comercial permite apoiar mais uma iniciativa social</p>
             </div>
           </div>
         </div>
@@ -216,18 +299,18 @@ const Servicos = () => {
       {/* CTA */}
       <section className="py-16 px-4 bg-white">
         <div className="container mx-auto text-center max-w-3xl">
-          <h3 className="text-3xl font-bold mb-6 text-gray-800">Pronto para Começar?</h3>
+          <h3 className="text-3xl font-bold mb-6 text-gray-800">Faça Parte Dessa Jornada</h3>
           <p className="text-xl text-gray-600 mb-8">
-            Entre em contato conosco e descubra como podemos ajudar seu projeto digital a crescer.
+            Seja apoiando como cliente comercial ou se inscrevendo para receber nossos serviços gratuitos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-slate-600 hover:bg-slate-700">
-              <Globe className="mr-2 w-5 h-5" />
-              Falar com Especialista
+            <Button size="lg" className="bg-green-600 hover:bg-green-700">
+              <HeartHandshake className="mr-2 w-5 h-5" />
+              Solicitar Apoio
             </Button>
             <Button size="lg" variant="outline" className="border-slate-600 text-slate-600">
-              <Code className="mr-2 w-5 h-5" />
-              Ver Portfólio
+              <HandCoins className="mr-2 w-5 h-5" />
+              Tornar-se Apoiador
             </Button>
           </div>
         </div>

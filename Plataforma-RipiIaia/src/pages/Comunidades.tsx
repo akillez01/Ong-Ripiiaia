@@ -20,7 +20,7 @@ const plataformas = [
   {
       title: "Ripi Iaiá - Universo Daime",
       description: "Conteúdo, cultura e espiritualidade do Daime e medicinas da floresta.",
-      url: "/ripi-iaia", // Agora direciona para a rota interna do projeto
+      url: "https://dreamy-carson.66-179-92-233.plesk.page/", // Agora direciona para a rota interna do projeto
       type: "Portal Principal"
     },
     
