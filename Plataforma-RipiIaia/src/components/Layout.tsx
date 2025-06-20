@@ -1,3 +1,4 @@
+import Footer from "@/components/sections/Footer"
 import { useTheme } from "@/components/theme/ThemeProvider"
 import { ReactNode, useEffect } from 'react'
 
@@ -27,6 +28,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'dark' : 'light'}`}>
       {children}
+      <Footer />
     </div>
   )
 }

@@ -1,113 +1,147 @@
 // src/components/CallToActionSection.tsx
 
-import { Users } from "lucide-react";
+import { Heart, Sparkles, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CadastroEquipePanel from "./CadastroEquipePanel"; // Importe o componente do modal
+import CadastroEquipePanel from "./CadastroEquipePanel";
 
 const CallToActionSection = () => {
   const [openPanel, setOpenPanel] = useState(false);
 
-  // Dados dos membros da equipe com cores personalizadas para as bordas e texto
+  // Cores vibrantes para cada membro
+  const colorPalettes = [
+    { bg: 'bg-gradient-to-br from-emerald-500 to-teal-500', border: 'border-emerald-400' },
+    { bg: 'bg-gradient-to-br from-cyan-500 to-blue-500', border: 'border-cyan-400' },
+    { bg: 'bg-gradient-to-br from-purple-500 to-fuchsia-500', border: 'border-purple-400' },
+    { bg: 'bg-gradient-to-br from-amber-500 to-orange-500', border: 'border-amber-400' },
+    { bg: 'bg-gradient-to-br from-rose-500 to-pink-500', border: 'border-rose-400' },
+    { bg: 'bg-gradient-to-br from-violet-500 to-indigo-500', border: 'border-violet-400' }
+  ];
+
   const teamMembers = [
     {
       name: "Jorge",
-      role: "CEO",
-      description: "Liderança estratégica, inovação e visão social.",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      borderColor: "emerald-400",
-      textColor: "emerald-600"
+      passion: "Conector de pessoas e criador de soluções coletivas",
+      funFact: "Violonista nas horas vagas e contador de histórias",
+      image: "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
       name: "Achillhes Souza",
-      role: "Webmaster",
-      description: "Desenvolvimento, infraestrutura e tecnologia.",
-      image: "./images/achilles.jpeg", // Certifique-se que o caminho está correto
-      borderColor: "cyan-400",
-      textColor: "cyan-600"
+      passion: "Transforma vidas através da tecnologia",
+      funFact: "Ensina programação para jovens da comunidade",
+      image: "./images/achilles.jpeg"
     },
     {
       name: "Fátima",
-      role: "Jornalista",
-      description: "Comunicação, conteúdo e cultura.",
-      image: "https://randomuser.me/api/portraits/women/65.jpg",
-      borderColor: "purple-400",
-      textColor: "purple-600"
+      passion: "Acredita no poder transformador das histórias",
+      funFact: "Colecionadora de livros raros e amante de café",
+      image: "https://randomuser.me/api/portraits/women/65.jpg"
     },
     {
       name: "Lucas Souza",
-      role: "Produtor",
-      description: "Gestão de projetos e produção cultural.",
-      image: "https://randomuser.me/api/portraits/men/77.jpg",
-      borderColor: "amber-400",
-      textColor: "amber-600"
+      passion: "Dá vida às ideias com criatividade",
+      funFact: "Malabarista e artista circense nas horas livres",
+      image: "https://randomuser.me/api/portraits/men/77.jpg"
     },
     {
       name: "Ana Paula",
-      role: "Produtora",
-      description: "Eventos, logística e articulação social.",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      borderColor: "pink-400",
-      textColor: "pink-600"
+      passion: "Organiza com carinho e faz acontecer",
+      funFact: "Famosa pelos seus bolos incríveis",
+      image: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     {
       name: "Pedro Lima",
-      role: "Músico",
-      description: "Música, trilhas sonoras e expressão artística.",
-      image: "https://randomuser.me/api/portraits/men/12.jpg",
-      borderColor: "blue-400",
-      textColor: "blue-600"
+      passion: "Expressa emoções através da música",
+      funFact: "Multi-instrumentista (toca 5 instrumentos!)",
+      image: "https://randomuser.me/api/portraits/men/12.jpg"
     }
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-black text-gray-200 relative overflow-hidden">
-      <div className="container mx-auto text-center max-w-5xl relative z-10">
-        <h3 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Junte-se a Nós!</h3>
-        <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-          Conheça nosso time multidisciplinar e colabore nessa jornada de transformação coletiva.
-        </p>
+    <section className="py-16 px-4 bg-slate-950 text-gray-200">
+      <div className="container mx-auto text-center max-w-6xl">
+        <div className="mb-16">
+          <h3 className="text-5xl font-bold mb-4 text-white">
+            Conheça <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Nossa Tribo</span>
+          </h3>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Cada membro traz cores únicas para nosso mosaico coletivo
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className={`flex flex-col items-center bg-slate-800 rounded-2xl shadow-xl p-6 transition-all duration-300
-                         border border-slate-700 hover:border-${member.borderColor}
-                         group relative overflow-hidden`}
-            >
-              {/* Efeito de brilho na borda ao hover */}
-              <div className={`absolute inset-0 rounded-2xl p-[2px] bg-gradient-to-br from-${member.borderColor} to-${member.textColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0`} />
-              <div className="relative z-10 flex flex-col items-center w-full h-full bg-slate-800 rounded-xl p-4"> {/* Conteúdo interno para manter o fundo escuro */}
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className={`w-28 h-28 rounded-full object-cover mb-4 border-4 border-${member.borderColor} shadow-md group-hover:scale-105 transition-transform duration-300`}
-                />
-                <h4 className="text-2xl font-semibold text-white mb-1">{member.name}</h4>
-                <span className={`text-lg font-medium mb-2 text-${member.textColor}`}>{member.role}</span>
-                <p className="text-gray-400 text-sm leading-relaxed text-center">{member.description}</p>
+          {teamMembers.map((member, index) => {
+            const colors = colorPalettes[index % colorPalettes.length];
+            return (
+              <div
+                key={index}
+                className={`relative group overflow-hidden rounded-2xl p-[2px] ${colors.bg} shadow-xl hover:shadow-2xl transition-all duration-500`}
+              >
+                {/* Efeito de brilho */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay"></div>
+                
+                <div className="relative bg-slate-900 rounded-[15px] h-full p-6 flex flex-col items-center">
+                  {/* Efeito de partículas */}
+                  <Sparkles className="absolute top-4 right-4 w-5 h-5 text-yellow-400 opacity-70" />
+                  
+                  <div className={`relative mb-6 rounded-full p-[2px] ${colors.bg} group-hover:rotate-6 transition-transform duration-500`}>
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-28 h-28 rounded-full object-cover border-4 border-slate-900"
+                    />
+                  </div>
+                  
+                  <h4 className="text-2xl font-bold text-white mb-2">{member.name}</h4>
+                  
+                  <div className={`mb-4 px-4 py-2 rounded-full ${colors.bg} bg-opacity-20 border ${colors.border} text-white text-sm font-medium`}>
+                    <Heart className="inline w-4 h-4 mr-2" />
+                    {member.passion}
+                  </div>
+                  
+                  <p className="text-gray-300 text-sm italic bg-slate-800/50 px-4 py-3 rounded-lg">
+                    ✨ "{member.funFact}"
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
+        </div>
+
+        <div className="max-w-4xl mx-auto mb-16 relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
+          <div className="relative bg-slate-800/80 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+            <p className="text-xl mb-4">
+              Na <span className="text-emerald-400 font-semibold">Ripi Iaiá</span>, valorizamos a <span className="text-cyan-400">singularidade</span> de cada pessoa.
+            </p>
+            <p className="text-lg">
+              Seu jeito único de ser é o que torna nosso coletivo especial!
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            className="bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-lg px-8 py-4 text-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3"
             onClick={() => setOpenPanel(true)}
+            className="relative overflow-hidden group bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-xl px-8 py-4 text-lg shadow-lg hover:shadow-2xl transition-all duration-300"
           >
-            Fazer Parte da Equipe
-            <Users className="w-6 h-6" />
+            <span className="relative z-10 flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Quero fazer parte
+            </span>
+            <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
           </button>
+          
           <Link
             to="/portal"
-            className="border border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 shadow-md hover:shadow-lg transition-all duration-300 rounded-lg px-8 py-4 text-xl font-semibold flex items-center justify-center gap-3"
+            className="relative overflow-hidden group border-2 border-emerald-400/50 hover:border-emerald-400 text-emerald-400 hover:text-white font-semibold rounded-xl px-8 py-4 text-lg shadow-lg hover:shadow-2xl transition-all duration-300"
           >
-            Conhecer Nossos Projetos
+            <span className="relative z-10">Ver nossos projetos</span>
+            <span className="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
           </Link>
         </div>
       </div>
+      
       <CadastroEquipePanel open={openPanel} onClose={() => setOpenPanel(false)} />
     </section>
   );

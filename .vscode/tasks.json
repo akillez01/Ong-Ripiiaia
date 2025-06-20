@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Iniciar Projeto Frontend",
+			"type": "shell",
+			"command": "cd /home/achilles/Documentos/Ripi-Iaia/Ong-Ripiiaia/Plataforma-RipiIaia && npm run dev",
+			"isBackground": true,
+			"group": "run",
+			"problemMatcher": []
+		}
+	]
+}

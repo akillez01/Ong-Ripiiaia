@@ -1,11 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { ArrowLeft, Globe, Handshake, Heart, Leaf, Lightbulb, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -232,24 +232,7 @@ const ProjetosParceiros = () => {
         </div>
       </section>
 
-      {/* Rodapé */}
-      <footer className="py-12 bg-white border-t border-earth-200">
-        <div className="container mx-auto px-4 text-center">
-          <div className="mb-8">
-            <Handshake className="w-10 h-10 mx-auto text-emerald-600" />
-            <h3 className="text-xl font-bold mt-2 text-primary-900">Ripi Iaiá</h3>
-            <p className="text-primary-600">Tecendo alianças com alma</p>
-          </div>
-          <div className="flex justify-center gap-6 mb-8">
-            <Link to="/privacidade" className="text-primary-600 hover:text-emerald-600">Privacidade</Link>
-            <Link to="/termos" className="text-primary-600 hover:text-emerald-600">Termos</Link>
-            <Link to="/contato" className="text-primary-600 hover:text-emerald-600">Contato</Link>
-          </div>
-          <p className="text-sm text-primary-500">
-            © {new Date().getFullYear()} Ripi Iaiá. Todos os direitos reservados.
-          </p>
-        </div>
-      </footer>
+      {/* O footer foi movido para o Layout.tsx para ser exibido em todas as páginas */}
     </div>
   );
 };

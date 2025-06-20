@@ -3,15 +3,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 
 // Importa os Hooks do React (useState, useEffect, useRef)
 import { useEffect, useRef, useState } from "react";
 
 // Importa os ícones do Lucide React
 import {
-  Sprout, // Ícone para tradições
-  Users
+    Sprout, // Ícone para tradições
+    Users
 } from "lucide-react";
 
 // --- Dados da Página ---
@@ -142,23 +141,7 @@ const artistas = [
 ];
 
 
-// --- Footer Moderno ---
-const Footer = () => (
-  <footer className="w-full bg-primary-50 border-t border-primary-200 text-primary-700 text-center py-8 mt-16">
-    <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div className="flex items-center gap-2 justify-center mb-2 md:mb-0">
-        <Users className="w-5 h-5 text-primary-500" />
-        <span className="font-semibold text-primary-900">Comunidades &copy; {new Date().getFullYear()}</span>
-      </div>
-      <div className="flex gap-6 justify-center">
-        <Link to="/privacidade" className="hover:text-primary-700 text-primary-900 transition-colors">Privacidade</Link>
-        <Link to="/termos-de-uso" className="hover:text-primary-700 text-primary-900 transition-colors">Termos de Uso</Link>
-        <a href="#plataformas" className="hover:text-primary-700 text-primary-900 transition-colors">Portais</a>
-        <a href="#tradicoes" className="hover:text-primary-700 text-primary-900 transition-colors">Tradições</a>
-      </div>
-    </div>
-  </footer>
-);
+// O footer foi removido pois agora está centralizado no Layout global;
 
 // --- Hero Section (Comunidades) ---
 const HeroSection = () => (
@@ -291,7 +274,6 @@ const Comunidades = () => {
       <PortalGrid />
       <ArtistasCarousel />
       <TradicoesSection />
-      <Footer />
     </div>
   );
 };

@@ -7,9 +7,7 @@ import {
   BookOpen,
   Calendar,
   CheckCircle,
-  Facebook,
   HeartHandshake,
-  Instagram,
   Leaf,
   MessageSquare,
   Mic,
@@ -18,11 +16,9 @@ import {
   Play,
   Radio,
   Send,
-  Twitter,
   Users,
   Video,
-  Volume2,
-  Youtube
+  Volume2
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -500,69 +496,7 @@ const RadioRipiiaia = () => {
         </section>
       )}
 
-      {/* Rodapé */}
-      <footer className="py-12 bg-emerald-800 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <Radio className="w-8 h-8 mr-2 text-emerald-300" />
-                <h3 className="text-xl font-bold">Rádio Ripi Iaiá</h3>
-              </div>
-              <p className="text-emerald-200">
-                A voz da floresta em frequência digital. Conectando saberes ancestrais ao mundo contemporâneo.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Navegação</h4>
-              <ul className="space-y-2">
-                <li><Link to="/sobre" className="text-emerald-200 hover:text-white">Sobre Nós</Link></li>
-                <li><Link to="/equipe" className="text-emerald-200 hover:text-white">Nossa Equipe</Link></li>
-                <li><Link to="/projetos" className="text-emerald-200 hover:text-white">Projetos</Link></li>
-                <li><Link to="/contato" className="text-emerald-200 hover:text-white">Contato</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Legal</h4>
-              <ul className="space-y-2">
-                <li><Link to="/privacidade" className="text-emerald-200 hover:text-white">Política de Privacidade</Link></li>
-                <li><Link to="/termos" className="text-emerald-200 hover:text-white">Termos de Uso</Link></li>
-                <li><Link to="/direitos" className="text-emerald-200 hover:text-white">Direitos Autorais</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Conecte-se</h4>
-              <div className="flex space-x-4">
-                <Link to="#" className="text-emerald-200 hover:text-white">
-                  <Facebook className="w-6 h-6" />
-                </Link>
-                <Link to="#" className="text-emerald-200 hover:text-white">
-                  <Instagram className="w-6 h-6" />
-                </Link>
-                <Link to="#" className="text-emerald-200 hover:text-white">
-                  <Youtube className="w-6 h-6" />
-                </Link>
-                <Link to="#" className="text-emerald-200 hover:text-white">
-                  <Twitter className="w-6 h-6" />
-                </Link>
-              </div>
-              <div className="mt-4">
-                <Button 
-                  variant="outline" 
-                  className="border-emerald-300 text-white hover:bg-emerald-700"
-                  onClick={() => window.open("https://radio.ripiiaia.org/", "_blank")}
-                >
-                  <Radio className="mr-2 w-5 h-5" />
-                  Ouvir Agora
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="pt-6 border-t border-emerald-700 text-center text-sm text-emerald-300">
-            © {new Date().getFullYear()} Rádio Ripi Iaiá. Todos os direitos reservados.
-          </div>
-        </div>
-      </footer>
+      {/* O footer foi movido para o Layout.tsx para ser exibido em todas as páginas */}
     </div>
   );
 };

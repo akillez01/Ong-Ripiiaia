@@ -1,4 +1,4 @@
-import { Building, Heart, Radio, Wrench } from "lucide-react";
+import { Heart, Radio, Wrench } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -19,18 +19,6 @@ const SubdomainsSection = () => {
   }, [bgImages.length]);
 
   const subdomains = [
-    {
-  title: "Fundação Ripi Iaiá",
-  subtitle: "Quem somos, Nossa missão",
-  description: "A Ripi Iaiá é uma fundação comprometida com a inclusão digital das populações tradicionais, nativas e imigrantes, que vivem nas florestas da América do Sul — com foco especial na Amazônia e nos demais territórios que compõem esse bioma sagrado.",
-  url: "portal.ripiiaia.org",
-  route: "/fundacao", // <--- AQUI ESTÁ A MUDANÇA!
-  icon: Building,
-  primaryColor: "cyan", // Verde-azulado
-  secondaryColor: "emerald", // Esmeralda
-  features: ["Projetos Sociais", "Equipe Multidisciplinar", "Parcerias Globais", "Transparência"],
-  designType: "gradient-card"
-},
     {
       title: "🌿 COMUNIDADES",
       subtitle: "Onde a floresta fala e a tecnologia escuta.",
@@ -58,35 +46,6 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
       designType: "gradient-card" // Fundo gradiente
     },
     {
-      title: "📡 COMUNICAÇÃO",
-      subtitle: "Do território para o planeta. Da memória viva para as novas mídias.", // Subtítulo mais específico
-      description: `Um espaço dinâmico que conecta povos, saberes e territórios através de narrativas plurais e formatos diversos — jornalismo, blogs, IPTV, lives e redes sociais.
-Acreditamos na comunicação como ferramenta de transformação cultural. Aqui, memória e identidade se entrelaçam para contar histórias que resistem ao apagamento. Porque manter viva uma cultura é também manter vivas suas vozes, seus gestos, seus símbolos e suas marcas.
-Entendemos que cultura não é estática — é mutante, moldada pelo tempo, território e experiências coletivas. Por isso, a comunicação na Ripi Iaiá não é apenas informativa: ela é afetiva, viva, orgânica. Um instrumento para ecoar saberes ancestrais e contemporâneos, enraizados e em fluxo.`,
-      url: "comunicacao.ripiiaia.org",
-      route: "/comunicacao", // Nova rota ou ajuste conforme necessário
-      icon: Radio, // Ícone adequado para comunicação
-      primaryColor: "teal", // Verde-azulado diferente do cyan
-      secondaryColor: "green", // Verde
-      features: ["Notícias", "Eventos", "Interação", "Multimídia"],
-      designType: "gradient-card" // Fundo gradiente
-    },
-    {
-      title: "🤝 PROJETOS E PARCERIAS",
-      subtitle: "Conexões vivas, alianças com alma.",
-      description:`Acreditamos na força da florestania colaborativa. Nossos projetos nascem da escuta e crescem com parcerias comprometidas com o equilíbrio entre inovação, ancestralidade e bioma.
-Estamos construindo um ecossistema vibrante de cooperação com iniciativas como @amazonaslifecamp, @voaguaxe, sejablah.com.br e tantos outros que compartilham o sonho de um futuro sustentável, justo e conectado às raízes.
-🌎 Estamos abertos ao diálogo internacional, buscando conexões que extrapolem fronteiras e amplifiquem ações de impacto real. Queremos parcerias que plantem agora as sementes do amanhã — em tecnologia, cultura, educação, proteção territorial e economia viva.
-Junte-se à nossa jornada. Ripi Iaiá é rede, é floresta viva, é futuro em construção.
- Frases de impacto para redes sociais tipo: > "Parceria pra gente é raiz que se entrelaça. Juntos, somos floresta em expansão.`,
-      route: "/parceiros",
-      icon: Building,
-      primaryColor: "pink", // Rosa
-      secondaryColor: "fuchsia", // Fúcsia
-      features: ["Conexões Sustentáveis", "Inovação Social", "Impacto Coletivo", "Rede Global"],
-      designType: "gradient-card" // Fundo gradiente
-    },
-    {
       title: "Serviços",
       subtitle: "Soluções Tecnológicas",
       description: "Braço comercial oferecendo serviços profissionais: hospedagem, domínios, criação de sites e suporte técnico especializado.",
@@ -109,59 +68,59 @@ Junte-se à nossa jornada. Ripi Iaiá é rede, é floresta viva, é futuro em co
       secondaryColor: "rose", // Rosa avermelhado
       features: ["Impacto Social", "Transparência Total", "Comunidade Fortalecida", "Futuro Sustentável"], // Features mais atrativas
       designType: "gradient-card-with-image", // Novo designType para este card
-      span: "col-span-1 md:col-span-2",
+      span: "col-span-full", // Ocupa toda a largura disponível em qualquer resolução
       internalBgImage: "https://images.unsplash.com/photo-1543269825-19252be14737?auto=format&fit=crop&w=1200&q=80",
-      // Adicionei um min-height específico para o card de doações
-      minHeightClass: "min-h-[250px] md:min-h-[350px]" // Exemplo: ajusta a altura mínima
+      minHeightClass: "min-h-[250px] md:min-h-[350px]" // Altura mínima para o card de doações
     }
   ];
 
-  const getCardClasses = (designType, primaryColor, secondaryColor, span, minHeightClass) => {
-    let classes = `rounded-2xl shadow-2xl overflow-hidden flex flex-col items-stretch group transition-all duration-300 hover:scale-[1.03] relative ${span || ''} ${minHeightClass || ''}`;
+  // Funções de estilo
+  const getCardClasses = (designType: string, primaryColor: string, secondaryColor: string, span?: string, minHeightClass?: string) => {
+    // Base classes para todos os cards
+    let classes = `group relative overflow-hidden bg-black text-white rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${minHeightClass || 'min-h-[450px]'} `;
 
-    switch (designType) {
-      case "gradient-card":
-        // Cada card terá um fundo gradiente específico
-        classes += ` bg-gradient-to-br from-${primaryColor}-500 via-${secondaryColor}-400 to-${primaryColor}-400`;
-        return classes;
-      case "gradient-card-with-image":
-        // Este é para o card de doações, com fundo gradiente e imagem interna
-        classes += ` bg-gradient-to-br from-${primaryColor}-600 via-${secondaryColor}-500 to-${primaryColor}-500`;
-        return classes;
-      // Removi os outros designTypes para simplificar e focar em cores únicas
-      default:
-        return classes;
+    // Classes específicas com base no tipo de design do card
+    if (designType === "gradient-card") {
+      classes += `bg-gradient-to-br from-${primaryColor}-500/80 via-${secondaryColor}-500/60 to-transparent backdrop-blur-md border border-${primaryColor}-400/20 `;
+    } 
+    else if (designType === "gradient-card-with-image") {
+      // Para cards com imagem de fundo (como o de doação)
+      classes += `bg-gradient-to-br from-${primaryColor}-800/40 via-${secondaryColor}-600/20 to-transparent backdrop-blur-sm border border-${primaryColor}-400/20 `;
     }
+
+    // Adiciona classes de span (para controle de grade)
+    if (span) {
+      classes += span + ' ';
+    }
+
+    return classes;
   };
 
-  const getIconClasses = (designType, primaryColor) => {
-    // Ícones sempre brancos e em um círculo escuro, com transição sutil
-    return `rounded-full p-3 bg-black/30 group-hover:bg-white/20 transition-colors duration-300`;
+  const getIconClasses = (designType: string, primaryColor: string) => {
+    return `inline-flex items-center justify-center p-2 rounded-full ${designType === "gradient-card" ? `bg-${primaryColor}-500/80` : `bg-${primaryColor}-600`}`;
   };
 
-  const getTitleClasses = (designType, primaryColor) => {
-    // Títulos sempre brancos
-    return `text-2xl font-bold mb-1 text-white drop-shadow-lg`;
+  const getTitleClasses = (designType: string, primaryColor: string) => {
+    return `font-bold text-xl lg:text-2xl text-${designType === "gradient-card" ? `${primaryColor}-200` : 'white'}`;
   };
 
-  const getSubtitleClasses = (designType, primaryColor) => {
-    // Subtítulos um pouco mais claros que a descrição
-    return `text-sm font-medium text-white/90`;
+  const getSubtitleClasses = (designType: string, primaryColor: string) => {
+    return `text-sm lg:text-base italic text-${designType === "gradient-card" ? `${primaryColor}-300/80` : 'gray-300'}`;
   };
 
-  const getDescriptionClasses = (designType) => {
-    // Descrição branca ou quase branca para boa legibilidade
-    return `mb-6 text-lg text-white/80`;
+  const getDescriptionClasses = (designType: string) => {
+    return `mb-8 text-sm lg:text-base ${designType === "flat-card" ? 'text-gray-300' : 'text-gray-200'}`;
   };
 
-  const getFeatureClasses = (designType, primaryColor) => {
-    // Features brancas ou quase brancas com bolinha colorida
-    return `flex items-center gap-2 text-sm text-white/90`;
+  const getFeatureClasses = (designType: string, primaryColor: string) => {
+    return `flex items-center gap-2 text-${primaryColor}-200 text-sm`;
   };
 
-  const getLinkClasses = (primaryColor) => {
-    // Botões com a cor principal e um efeito de hover
-    return `inline-block mt-auto px-6 py-3 rounded-lg bg-${primaryColor}-700 hover:bg-${primaryColor}-800 text-white font-semibold shadow-lg transition-all text-center`;
+  const getLinkClasses = (primaryColor: string) => {
+    return `block text-center py-3 px-6 rounded-xl transition-all duration-300 
+    bg-${primaryColor}-600 hover:bg-${primaryColor}-500 text-white 
+    font-medium text-sm sm:text-base
+    transform hover:scale-105 border border-${primaryColor}-400/30`;
   };
 
   return (
@@ -181,33 +140,22 @@ Junte-se à nossa jornada. Ripi Iaiá é rede, é floresta viva, é futuro em co
       </div>
       <div className="container mx-auto relative z-20">
         <div className="text-center mb-16">
-          {/* <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-green-400 break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-green-400 break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
             Nossos Espaços
-          </h2> */}
-          {/* <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
             Conheça as áreas que compõem a plataforma Ripi Iaiá: tecnologia, tradição, cultura e serviços para um ecossistema inovador e colaborativo.
-          </p> */}
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto items-stretch">
-          {subdomains.map((subdomain, index) => (
+        
+        {/* Grid principal - reorganizado para 3 cards em linha em telas médias */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto items-stretch">
+          {subdomains.slice(0, 3).map((subdomain, index) => (
             <div
               key={index}
-              className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, subdomain.span, subdomain.minHeightClass) + ' w-full max-w-full min-w-0'}
+              className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, "", subdomain.minHeightClass) + ' w-full max-w-full min-w-0'}
               style={{wordBreak: 'break-word', hyphens: 'auto'}}
             >
-              {/* Internal Background Image para o card de doações */}
-              {subdomain.internalBgImage && (subdomain.designType === "gradient-card-with-image") && (
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={subdomain.internalBgImage}
-                    alt={`${subdomain.title} Background`}
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-                  {/* Overlay para escurecer e contraste do texto */}
-                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors duration-300 rounded-2xl" />
-                </div>
-              )}
-
               {/* Conteúdo do Card */}
               <div className={`relative z-10 p-4 sm:p-6 md:p-8 flex flex-col justify-between h-full`}>
                 <div className="flex items-center gap-4 border-b border-white/10 pb-6 sm:pb-8 mb-6 sm:mb-8">
@@ -235,6 +183,65 @@ Junte-se à nossa jornada. Ripi Iaiá é rede, é floresta viva, é futuro em co
                 >
                   Acessar
                 </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Card de doação em destaque abaixo */}
+        <div className="mt-10 max-w-6xl mx-auto">
+          {subdomains.slice(3, 4).map((subdomain, index) => (
+            <div
+              key={`donation-${index}`}
+              className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, subdomain.span, subdomain.minHeightClass) + ' w-full max-w-full min-w-0'}
+              style={{wordBreak: 'break-word', hyphens: 'auto'}}
+            >
+              {/* Internal Background Image para o card de doações */}
+              {subdomain.internalBgImage && (subdomain.designType === "gradient-card-with-image") && (
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={subdomain.internalBgImage}
+                    alt={`${subdomain.title} Background`}
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                  {/* Overlay para escurecer e contraste do texto */}
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors duration-300 rounded-2xl" />
+                </div>
+              )}
+
+              {/* Conteúdo do Card */}
+              <div className={`relative z-10 p-6 sm:p-8 md:p-10 flex flex-col justify-between h-full`}>
+                <div className="flex items-center gap-4 border-b border-white/10 pb-6 sm:pb-8 mb-6 sm:mb-8">
+                  <span className={getIconClasses(subdomain.designType, subdomain.primaryColor)}>
+                    {subdomain.icon && <subdomain.icon className="w-10 h-10 text-white" />}
+                  </span>
+                  <div className="text-left">
+                    <h3 className={`text-3xl ${getTitleClasses(subdomain.designType, subdomain.primaryColor)} break-words w-full max-w-full`} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.title}</h3>
+                    <span className={`text-base ${getSubtitleClasses(subdomain.designType, subdomain.primaryColor)}`}>{subdomain.subtitle}</span>
+                  </div>
+                </div>
+                <div className="md:grid md:grid-cols-2 gap-8">
+                  <div>
+                    <p className={`text-xl ${getDescriptionClasses(subdomain.designType)} break-words w-full max-w-full`} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.description}</p>
+                  </div>
+                  <div>
+                    <ul className="mb-6 grid grid-cols-2 gap-4 text-base">
+                      {subdomain.features.map((feature, i) => (
+                        <li key={i} className={getFeatureClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>
+                          <span className={`inline-block w-2 h-2 bg-${subdomain.primaryColor}-300 rounded-full`}></span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      to={subdomain.route}
+                      className={`text-lg py-4 ${getLinkClasses(subdomain.primaryColor)} w-full max-w-full break-words`}
+                      style={{wordBreak: 'break-word', hyphens: 'auto'}}
+                    >
+                      Apoiar Agora
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
