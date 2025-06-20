@@ -1,0 +1,49 @@
+name: Build e Integração Plataforma + Ripi-Iaia
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Instalar dependências Plataforma
+        run: |
+          cd Plataforma-RipiIaia
+          npm install
+
+      - name: Instalar dependências Ripi-Iaia
+        run: |
+          cd Ripi-Iaia
+          npm install
+
+      - name: Build e integração
+        run: |
+          bash build-tudo.sh
+
+      - name: Upload build como artefato
+        uses: actions/upload-artifact@v3
+        with:
+          name: plataforma-build
+          path: Plataforma-RipiIaia/dist
+
+      # Exemplo de deploy via FTP (opcional)
+      # - name: Deploy via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: Plataforma-RipiIaia/dist
+      #     server-dir: /public_html/

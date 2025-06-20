@@ -1,0 +1,4 @@
+node_modules/
+.env
+beckend/node_modules/
+beckend/.env
