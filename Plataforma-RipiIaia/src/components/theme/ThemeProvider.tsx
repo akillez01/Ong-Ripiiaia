@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -10,53 +10,45 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
   theme: Theme
-  setTheme: (theme: Theme) => void
+  toggleTheme: () => void
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
-  setTheme: () => null,
+  theme: "light",
+  toggleTheme: () => null,
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "ripiiaia-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  )
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return defaultTheme
+    const storedTheme = localStorage.getItem(storageKey) as Theme
+    return storedTheme || defaultTheme
+  })
 
   useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove("light", "dark")
-
-    let appliedTheme = theme
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
-      appliedTheme = systemTheme
-    }
-    root.classList.add(appliedTheme)
-    // Força atualização do background do body
-    document.body.style.backgroundColor = ""
-    document.body.classList.remove("bg-earth-50", "bg-slate-950", "bg-gray-950", "bg-black")
-    if (appliedTheme === "dark") {
-      document.body.classList.add("bg-slate-950")
-    } else {
-      document.body.classList.add("bg-earth-50")
-    }
+    root.classList.remove('light', 'dark')
+    root.classList.add(theme)
+    
+    // Aplica cores personalizadas ao body também
+    document.body.className = theme
+    document.body.style.backgroundColor = theme === 'dark' ? '#3A3532' : '#FBF9F5'
+    document.body.style.color = theme === 'dark' ? '#D9A66C' : '#334155'
   }, [theme])
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+    toggleTheme: () => {
+      const newTheme = theme === 'dark' ? 'light' : 'dark'
+      localStorage.setItem(storageKey, newTheme)
+      setTheme(newTheme)
     },
   }
 
@@ -69,9 +61,7 @@ export function ThemeProvider({
 
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext)
-
   if (context === undefined)
     throw new Error("useTheme must be used within a ThemeProvider")
-
   return context
 }

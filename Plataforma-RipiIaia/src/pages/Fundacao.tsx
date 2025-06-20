@@ -1,408 +1,548 @@
-// src/pages/Fundacao.tsx (ou onde você o salvou)
-
-import { Badge } from "@/components/ui/badge"; // Componente de badge (Tailwind)
-import { Button } from "@/components/ui/button"; // Componente de botão (Tailwind)
+// src/pages/Fundacao.tsx
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
-  ArrowLeft, // Ícone para voltar
-  Award, // Ícone para impacto/prêmios
-  BookOpen, // Ícone para saberes/conhecimento
-  FileText, // Ícone para relatórios/transparência
-  Handshake, // Ícone para parcerias
-  HeartHandshake, // Ícone para doações/apoio
-  Leaf, // Ícone para sustentabilidade (corrigido!)
-  Lightbulb, // Ícone para inovação/projetos
-  Linkedin, // Ícone de rede social
-  Target, // Ícone para meta/objetivos
-  Users, // Ícone para equipe
-  Zap // Ícone principal da Fundação
-} from "lucide-react"; // Importação completa dos ícones Lucide
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Para navegação interna
-
-// Importa a seção de Equipe (CallToActionSection)
-// Ajuste o caminho se seu CallToActionSection.tsx estiver em outro lugar
-import CallToActionSection from "../components/sections/CallToActionSection";
+  ArrowLeft,
+  BarChart2, Bookmark,
+  BookOpen,
+  ChevronDown, ChevronUp,
+  FileText,
+  Globe,
+  Handshake,
+  Heart,
+  HeartHandshake, Leaf,
+  Linkedin,
+  Network,
+  Shield,
+  Target,
+  Users, Zap
+} from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Fundacao = () => {
-  // --- Dados da Página ---
-  // Dados dos projetos em destaque
-  const projects = [
-    {
-      title: "Educação Amazônica: Conectando Futuros",
-      description: "Programa de capacitação digital e inclusão social para jovens e adultos em comunidades ribeirinhas, utilizando metodologias inovadoras e adaptadas à realidade local.",
-      status: "Em andamento",
-      impact: "500+ pessoas beneficiadas diretamente com acesso à tecnologia e conhecimento.",
-      image: "https://images.pexels.com/photos/4096057/pexels-photo-4096057.jpeg" // Imagem para educação
-    },
-    {
-      title: "Guardiões da Floresta: Sustentabilidade Digital",
-      description: "Desenvolvimento e implementação de soluções tecnológicas para monitoramento ambiental, apoio à fiscalização e promoção do manejo sustentável em áreas protegidas da Amazônia.",
-      status: "Concluído",
-      impact: "Parceria com 15 organizações ambientais, otimizando suas operações e impacto no campo.",
-      image: "https://images.pexels.com/photos/1032646/pexels-photo-1032646.jpeg" // Imagem para sustentabilidade
-    },
-    {
-      title: "Tecendo Saberes: Intercâmbio Cultural Digital",
-      description: "Plataforma interativa para o intercâmbio de conhecimentos e tradições entre comunidades indígenas e o mundo, valorizando a cultura ancestral e promovendo o diálogo.",
-      status: "Planejamento",
-      impact: "Fase de captação de recursos e parcerias para lançamento da plataforma piloto.",
-      image: "https://images.pexels.com/photos/1759080/pexels-photo-1759080.jpeg" // Imagem para intercâmbio cultural
-    }
+  // Estado para controlar qual subaba está ativa
+  const [activeTab, setActiveTab] = useState("essencia");
+  const [expandedValues, setExpandedValues] = useState<number[]>([]);
+
+  // Dados para as subabas
+  const subabas = [
+    { id: "essencia", icon: "🌱", title: "Nossa Essência" },
+    { id: "governanca", icon: "🤍", title: "Governança Viva" },
+    { id: "rede", icon: "🌀", title: "Rede de Guardiões" },
+    { id: "impacto", icon: "🌍", title: "Impacto e Compromissos" }
   ];
 
-  // Dados dos pilares/valores fundamentais da Fundação
+  // Função para alternar a expansão dos valores
+  const toggleValueExpansion = (index: number) => {
+    if (expandedValues.includes(index)) {
+      setExpandedValues(expandedValues.filter(i => i !== index));
+    } else {
+      setExpandedValues([...expandedValues, index]);
+    }
+  };
+
+  // Dados dos valores fundamentais
   const coreValues = [
     {
       icon: BookOpen,
       title: "Saberes Ancestrais",
-      description: "Valorizamos e integramos a rica herança de conhecimentos tradicionais com a inovação contemporânea."
+      shortDesc: "Integração de conhecimentos tradicionais com inovação",
+      longDesc: "Valorizamos e integramos a rica herança de conhecimentos tradicionais dos povos da floresta com as inovações contemporâneas, criando soluções que honram o passado enquanto constroem o futuro."
     },
     {
       icon: Users,
-      title: "Colaboração e Inclusão",
-      description: "Fomentamos um ambiente de parceria e acolhimento para todas as culturas e visões."
+      title: "Colaboração Radical",
+      shortDesc: "Juntos somos mais fortes",
+      longDesc: "Acreditamos no poder das redes colaborativas. Trabalhamos lado a lado com comunidades, especialistas e instituições, criando pontes entre saberes diversos para soluções mais ricas e inclusivas."
     },
     {
       icon: Zap,
-      title: "Inovação Responsável",
-      description: "Utilizamos a tecnologia como ferramenta para soluções criativas e sustentáveis, com ética e propósito."
+      title: "Inovação com Raízes",
+      shortDesc: "Tecnologia que nasce do território",
+      longDesc: "Desenvolvemos tecnologias que emergem das necessidades e contextos locais, garantindo que nossas soluções sejam apropriáveis pelas comunidades e sustentáveis a longo prazo."
     },
     {
-      icon: Leaf, // Corrigido: Leaf está importado agora
-      title: "Sustentabilidade Plena",
-      description: "Compromisso com o equilíbrio ambiental, social e econômico em todas as nossas ações e projetos."
+      icon: Leaf,
+      title: "Florestania Digital",
+      shortDesc: "Direito de existir com dignidade na floresta",
+      longDesc: "Promovemos o conceito de florestania - o direito de viver com plenitude no território de origem, usando ferramentas digitais para fortalecer essa conexão entre pessoas e floresta."
     },
     {
       icon: HeartHandshake,
-      title: "Impacto Transformativo",
-      description: "Buscamos gerar mudanças reais e positivas na vida das pessoas e na saúde do planeta."
+      title: "Escuta Ativa",
+      shortDesc: "Ouvir antes de agir",
+      longDesc: "Nossos projetos nascem de processos profundos de escuta das comunidades. Acreditamos que as soluções mais poderosas emergem quando damos voz aos guardiões da floresta."
     }
   ];
 
-  // Função para determinar a classe da badge de status do projeto
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case "Em andamento":
-        return "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 backdrop-blur-sm";
-      case "Concluído":
-        return "bg-green-500/10 text-green-400 border border-green-500/30 backdrop-blur-sm";
-      case "Planejamento":
-        return "bg-sky-500/10 text-sky-400 border border-sky-500/30 backdrop-blur-sm";
-      default:
-        return "bg-gray-600/20 text-gray-300 border border-gray-500/30 backdrop-blur-sm";
-    }
-  };
-
-  // --- Lógica do Carrossel de Imagens de Fundo do Hero ---
-  const heroImages = [
-    "https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg", // Amazônia aérea (para ONG/Fundação)
-    "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg", // Tech abstrato / código (para startup)
-    "https://images.pexels.com/photos/7098035/pexels-photo-7098035.jpeg", // Painéis solares em campo verde (para sustentabilidade)
-    "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg"   // Caminho florestal nebuloso (para conexão com a natureza)
+  // Dados da linha do tempo
+  const timeline = [
+    { year: "2018", event: "Sementes da Ideia", description: "Primeiras conversas com lideranças comunitárias sobre desafios e oportunidades na Amazônia" },
+    { year: "2019", event: "Jornadas de Escuta", description: "Expedições por 12 comunidades para mapear necessidades e sonhos coletivos" },
+    { year: "2020", event: "Nascimento Oficial", description: "Fundação formalizada com conselho diverso de indígenas, ribeirinhos, técnicos e acadêmicos" },
+    { year: "2021", event: "Primeiros Projetos", description: "Lançamento do programa Educação Amazônica em 5 comunidades piloto" },
+    { year: "2023", event: "Expansão", description: "Atuação em 23 comunidades com 9 projetos simultâneos" }
   ];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 5000); // Mudar imagem a cada 5 segundos
-
-    return () => clearInterval(timer); // Limpeza ao desmontar o componente
-  }, [heroImages.length]);
-
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black text-gray-200 selection:bg-emerald-500 selection:text-white">
-      {/* --- Cabeçalho da Página da Fundação --- */}
-      <header className="bg-gray-800/30 backdrop-blur-lg border-b border-gray-700/50 sticky top-0 z-50 transition-all duration-300">
+    <div className="min-h-screen bg-primary-50 text-primary-900">
+      {/* Cabeçalho */}
+      <header className="bg-primary-100/80 backdrop-blur-lg border-b border-primary-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Botão de Voltar para a Home */}
-            <Link to="/" className="flex items-center space-x-2 text-emerald-400 hover:text-emerald-300 transition-colors">
+            <Link to="/" className="flex items-center space-x-2 text-primary-500 hover:text-primary-700">
               <ArrowLeft className="w-5 h-5" />
               <span>Voltar</span>
             </Link>
-            {/* Título e Subtítulo da Fundação */}
             <div className="flex items-center space-x-3">
-              <Zap className="w-8 h-8 text-emerald-400" /> {/* Ícone principal da Fundação */}
+              <Zap className="w-8 h-8 text-primary-500" />
               <div>
-                <h1 className="text-xl font-bold text-gray-100">Fundação Ripi Iaiá</h1>
-                <p className="text-sm text-gray-400">ONG e Startup Colaborativa</p>
+                <h1 className="text-xl font-bold text-primary-900">Fundação Ripi Iaiá</h1>
+                <p className="text-sm text-primary-700">Tecnologia com Raízes Amazônicas</p>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* --- Seção Hero: Nossa Missão / Sobre Nós --- */}
-      <section id="sobre" className="py-28 px-4 relative overflow-hidden bg-slate-800">
-        {/* Carrossel de Imagens de Fundo */}
-        <div className="absolute inset-0 z-0">
-          {heroImages.map((src, index) => (
-            <img
-              key={index}
-              src={src}
-              alt={`Fundo Hero ${index + 1}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
+      {/* Hero Section */}
+      <section className="relative py-24 px-4 bg-gradient-to-br from-primary-100/80 to-primary-300 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <img 
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+            alt="Floresta Amazônica"
+            className="w-full h-full object-cover"
+          />
         </div>
-
-        {/* Overlay para garantir legibilidade do texto sobre as imagens */}
-        <div className="absolute inset-0 bg-black/60 z-1"></div>
-
-        {/* Conteúdo Principal do Hero */}
-        <div className="container mx-auto text-center max-w-4xl relative z-10">
-          <Badge
-            variant="outline"
-            className="mb-8 border-emerald-500/50 bg-emerald-800/20 text-emerald-300 px-6 py-2 text-sm backdrop-blur-md shadow-lg hover:border-emerald-400/70 transition-all"
-          >
-            🌱 A Raiz da Transformação Social
+        <div className="container mx-auto max-w-6xl relative z-10 text-center">
+          <Badge className="mb-6 bg-primary-200/60 text-primary-700 border-primary-400/50 px-6 py-2 text-sm backdrop-blur-md">
+            🌿 Florestania Digital
           </Badge>
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500 drop-shadow-md">
-            Fundação Ripi Iaiá: <br/>Impacto Sustentável e Colaboração
-          </h2>
-          <p className="text-xl text-gray-200 mb-12 leading-relaxed drop-shadow-sm">
-            Como **ONG e startup colaborativa**, nossa missão é impulsionar o desenvolvimento humano e ambiental na Amazônia,
-            unindo a sabedoria ancestral com soluções tecnológicas inovadoras e a força de uma equipe multidisciplinar.
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-700">
+            Tecendo Futuros com Saberes da Floresta
+          </h1>
+          <p className="text-xl text-primary-800 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Somos uma fundação que une tecnologia ancestral e inovação para proteger a Amazônia e fortalecer seus povos.
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white rounded-lg shadow-lg hover:shadow-emerald-500/30 focus:ring-2 focus:ring-emerald-400 transition-all transform hover:scale-105"
-            >
-              <Target className="mr-2 w-5 h-5" />
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg">
+              <HeartHandshake className="mr-2" />
+              Apoie Nossa Causa
+            </Button>
+            <Button variant="outline" className="border-primary-500 text-primary-700 hover:bg-primary-100 px-8 py-3 rounded-lg">
+              <BookOpen className="mr-2" />
               Conheça Nossos Projetos
             </Button>
-            <a href="#transparencia" className="inline-block"> {/* Link direto para a seção de transparência */}
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-emerald-500 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 rounded-lg shadow-md hover:shadow-emerald-500/20 focus:ring-2 focus:ring-emerald-400 transition-all transform hover:scale-105 backdrop-blur-sm bg-slate-700/10"
-              >
-                <FileText className="mr-2 w-5 h-5" />
-                Transparência e Relatórios
-              </Button>
-            </a>
           </div>
         </div>
       </section>
 
-      {/* --- Seção: Nossos Pilares de Atuação (Valores Fundamentais) --- */}
-      <section id="pilares" className="py-20 px-4 bg-gray-900/40">
-        <div className="container mx-auto max-w-6xl">
-          <h3 className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Nossos Pilares de Atuação</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8"> {/* Layout flexível para 5 pilares */}
-            {coreValues.map((value, index) => {
-              const IconComponent = value.icon; // Componente do ícone Lucide
-              // Cores dinâmicas para os círculos dos ícones
-              const iconBgColors = [
-                "from-emerald-600 to-cyan-500",
-                "from-purple-600 to-pink-500",
-                "from-amber-600 to-yellow-500",
-                "from-green-600 to-lime-500",
-                "from-red-600 to-orange-500"
-              ];
-              const currentIconBg = iconBgColors[index % iconBgColors.length]; // Cicla pelas cores
-
-              return (
-                <div key={index} className="flex flex-col items-center text-center bg-gray-800/50 backdrop-blur-lg border border-gray-700/60 rounded-xl p-6 shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${currentIconBg} shadow-lg`}>
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <h4 className="text-xl font-bold text-emerald-300 mb-2">{value.title}</h4>
-                  <p className="text-gray-400 text-sm">{value.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* --- Seção: Iniciativas e Projetos (Detalhes com Imagem) --- */}
-      <section id="projetos" className="py-20 px-4 bg-slate-900">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-4 mb-8 justify-center">
-            <Lightbulb className="w-10 h-10 text-emerald-400" />
-            <h2 className="text-4xl font-bold text-gray-100">Iniciativas e Projetos</h2>
-          </div>
-          <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
-            Mergulhe nas iniciativas que estamos desenvolvendo para catalisar a transformação social e a preservação ambiental.
-          </p>
-          <div className="grid gap-12">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-emerald-500/30 transform hover:scale-[1.02]"
-              >
-                <div className="md:flex flex-col md:flex-row"> {/* Layout responsivo: coluna em mobile, linha em desktop */}
-                  <div className="md:w-2/5 relative overflow-hidden">
-                    <img src={project.image} alt={project.title} className="w-full h-72 md:h-full object-cover transition-transform duration-500 hover:scale-110" />
-                  </div>
-                  <div className="md:w-3/5 p-10 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-3 mb-4 flex-wrap"> {/* Badges quebra linha em telas menores */}
-                        <Badge className="px-4 py-1 bg-emerald-600/30 text-emerald-300 rounded-full text-sm font-medium border border-emerald-500/50">
-                          {project.title.includes("Educação") ? "Educação" : project.title.includes("Sustentabilidade") ? "Ambiental" : "Cultural"}
-                        </Badge>
-                        <Badge className={`px-4 py-1 rounded-full text-sm font-medium ${getStatusBadgeClass(project.status)}`}>
-                          {project.status}
-                        </Badge>
-                      </div>
-                      <h3 className="text-3xl font-semibold text-emerald-400 mb-5">{project.title}</h3>
-                      <p className="text-gray-300 mb-8 text-base leading-relaxed">{project.description}</p>
-                    </div>
-                    <div className="mt-auto"> {/* Alinha o conteúdo abaixo à base */}
-                      <div className="flex items-center text-sm text-emerald-400 font-medium mb-6">
-                        <Award className="w-5 h-5 mr-2 flex-shrink-0 text-emerald-500" />
-                        <span>Impacto: {project.impact}</span>
-                      </div>
-                      <Button className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-3 rounded-lg hover:from-emerald-600 hover:to-green-700 transition-all transform hover:scale-105 focus:ring-2 focus:ring-emerald-400">
-                        Ver Detalhes do Projeto
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- Seção: Nossas Parcerias Estratégicas --- */}
-      <section id="parcerias" className="py-20 px-4 bg-gray-900/50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-4 mb-8 justify-center">
-            <Handshake className="w-10 h-10 text-emerald-400" />
-            <h2 className="text-4xl font-bold text-gray-100">Nossas Parcerias Estratégicas</h2>
-          </div>
-          <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
-            Unimos forças com organizações visionárias para multiplicar nosso impacto e tecer uma rede robusta de inovação social.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { name: "Instituto Amazônia Viva", type: "ONG Ambiental", img: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg", desc: "Conservação e desenvolvimento sustentável na vanguarda da Amazônia." },
-              { name: "Fundação Cultura Ancestral", type: "Instituição Cultural", img: "https://images.pexels.com/photos/3183132/pexels-photo-3183132.jpeg", desc: "Preservação e difusão da rica herança cultural amazônica." },
-              { name: "Nexus Tech Solutions", type: "Empresa de Tecnologia", img: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg", desc: "Inovação digital e soluções tecnológicas para o bem social." }
-            ].map(partner => (
-              <div key={partner.name} className="bg-gray-800/60 backdrop-blur-xl border border-gray-700/60 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105 hover:border-emerald-500/50 hover:shadow-emerald-500/20">
-                <img src={partner.img} alt={partner.name} className="w-28 h-28 object-cover rounded-full mb-6 border-4 border-emerald-500/40 shadow-lg" />
-                <h3 className="text-2xl font-semibold text-emerald-400 mb-2">{partner.name}</h3>
-                <p className="text-emerald-500 font-medium mb-4 text-sm">{partner.type}</p>
-                <p className="text-gray-300 text-sm leading-relaxed">{partner.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- Seção: Compromisso com a Transparência --- */}
-      <section id="transparencia" className="py-20 px-4 bg-slate-900">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-4 mb-8 justify-center">
-            <FileText className="w-10 h-10 text-emerald-400" />
-            <h2 className="text-4xl font-bold text-gray-100">Compromisso com a Transparência</h2>
-          </div>
-          <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
-            Nossa responsabilidade é com a clareza e a ética. Acesse relatórios e dados que demonstram a integridade de nossas ações e o impacto de suas doações.
-          </p>
-          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
-            {[
-              { year: "2024", projects: "15", impacted: "7000+", investment: "R$750K", desc: "Relatório de atividades do ano corrente, destacando o crescimento e novas parcerias.", link: "/relatorio-2024.pdf" },
-              { year: "2023", projects: "12", impacted: "5000+", investment: "R$500K", desc: "Resultados detalhados e prestação de contas dos projetos de 2023.", link: "/relatorio-2023.pdf" },
-              { year: "2022", projects: "10", impacted: "4000+", investment: "R$400K", desc: "Análise dos marcos e impacto gerado pelos projetos de 2022.", link: "/relatorio-2022.pdf" }
-            ].map(report => (
-            <div key={report.year} className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl p-8 transform transition-all duration-300 hover:shadow-emerald-500/30 hover:border-emerald-500/30">
-              <div className="mb-8">
-                <h3 className="text-3xl font-semibold text-emerald-400 mb-3">Relatório Anual - {report.year}</h3>
-                <p className="text-gray-300">{report.desc}</p>
-              </div>
-              <div className="grid sm:grid-cols-3 gap-6 mb-10">
-                <div className="bg-emerald-700/20 border border-emerald-600/30 rounded-lg p-5 text-center transition-all hover:bg-emerald-600/30">
-                  <p className="text-sm text-emerald-300 mb-1 font-medium">Projetos Realizados</p>
-                  <p className="text-4xl font-bold text-emerald-400">{report.projects}</p>
-                </div>
-                <div className="bg-emerald-700/20 border border-emerald-600/30 rounded-lg p-5 text-center transition-all hover:bg-emerald-600/30">
-                  <p className="text-sm text-emerald-300 mb-1 font-medium">Pessoas Impactadas</p>
-                  <p className="text-4xl font-bold text-emerald-400">{report.impacted}</p>
-                </div>
-                <div className="bg-emerald-700/20 border border-emerald-600/30 rounded-lg p-5 text-center transition-all hover:bg-emerald-600/30">
-                  <p className="text-sm text-emerald-300 mb-1 font-medium">Investimento Total</p>
-                  <p className="text-4xl font-bold text-emerald-400">{report.investment}</p>
-                </div>
-              </div>
-              <a href={report.link} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-lg hover:from-emerald-600 hover:to-green-700 transition-all transform hover:scale-105 focus:ring-2 focus:ring-emerald-400 text-base">
-                  Baixar Relatório Completo ({report.year})
-                </Button>
-              </a>
-            </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- Seção: Conheça Nosso Time Visionário (Reutilizando CallToActionSection) --- */}
-      <section id="equipe">
-        {/* Este componente já tem seu próprio título e conteúdo, alinhado com o estilo dark */}
-        <CallToActionSection />
-      </section>
-
-      {/* --- Seção: Sua Ajuda Transforma Vidas! (Chamada para Doação/Apoio) --- */}
-      <section id="apoie" className="py-20 px-4 bg-gradient-to-br from-slate-900 via-emerald-950 to-black text-gray-200 text-center">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">
-            Sua Ajuda Transforma Vidas!
-          </h2>
-          <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-            Cada doação, grande ou pequena, nos aproxima de um futuro mais justo e sustentável. Seja parte dessa corrente do bem.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <Link to="/doacoes"> {/* Link para a página específica de doações (se tiver) */}
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white rounded-lg shadow-lg hover:shadow-red-500/30 focus:ring-2 focus:ring-red-400 transition-all transform hover:scale-105"
-              >
-                <HeartHandshake className="mr-2 w-5 h-5" />
-                Faça uma Doação Agora
-              </Button>
-            </Link>
-            <Link to="/parcerias"> {/* Link para a seção de parcerias da própria página, ou uma página de parcerias */}
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-gray-500 text-gray-300 hover:bg-gray-700/20 hover:text-white rounded-lg shadow-md hover:shadow-gray-500/20 focus:ring-2 focus:ring-gray-400 transition-all transform hover:scale-105 backdrop-blur-sm bg-slate-700/10"
-              >
-                <Handshake className="mr-2 w-5 h-5" />
-                Seja Nosso Parceiro
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* --- Rodapé da Página --- */}
-      <footer className="py-16 bg-gray-950 border-t border-emerald-900/30 text-gray-400 text-center">
+      {/* Navegação das Subabas */}
+      <nav className="sticky top-16 z-40 bg-primary-100/80 backdrop-blur-md border-b border-primary-200">
         <div className="container mx-auto px-4">
-          <p className="text-lg mb-2">&copy; {new Date().getFullYear()} Fundação Ripi Iaiá. Todos os direitos reservados.</p>
-          <p className="text-sm">Impulsionando a inovação social com raízes na Amazônia.</p>
-          <div className="mt-6 flex justify-center space-x-6">
-            {/* Links para políticas e contato */}
-            <Link to="/privacidade" className="hover:text-emerald-400 transition-colors">Política de Privacidade</Link>
-            <Link to="/termos-de-uso" className="hover:text-emerald-400 transition-colors">Termos de Uso</Link>
-            <Link to="/contato" className="hover:text-emerald-400 transition-colors">Contato</Link>
-            {/* Link para redes sociais */}
-            <a href="https://www.linkedin.com/company/ripiiaia" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors" aria-label="LinkedIn da Ripi Iaiá">
-              <Linkedin className="w-5 h-5" />
-            </a>
-            {/* Adicione outros links de redes sociais se houver */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-6 py-4">
+            {subabas.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center px-4 py-2 rounded-full transition-all ${activeTab === tab.id ? 'bg-primary-600 text-primary-100 border border-primary-400' : 'text-primary-700 hover:text-primary-500 hover:bg-primary-200'}`}
+              >
+                <span className="text-xl mr-2">{tab.icon}</span>
+                <span>{tab.title}</span>
+              </button>
+            ))}
           </div>
-          {/* Informações legais e de contato */}
-          <p className="mt-4 text-xs text-gray-500">CNPJ: XX.XXX.XXX/XXXX-XX (Exemplo)</p>
-          <p className="text-xs text-gray-500">Endereço: [Seu Endereço da Sede, Manaus, AM, Brasil]</p>
-          <p className="mt-2 text-xs text-gray-500">Data atual: 11 de junho de 2025</p>
+        </div>
+      </nav>
+
+      {/* Conteúdo das Subabas */}
+      <main className="container mx-auto px-4 py-16 max-w-6xl">
+        {/* Subaba: Nossa Essência */}
+        {activeTab === "essencia" && (
+          <section className="space-y-16">
+            {/* Carta de Apresentação */}
+            <div className="bg-gradient-to-br from-primary-100/50 to-primary-300/50 border border-primary-200/30 rounded-2xl p-8 md:p-12 backdrop-blur-sm">
+              <div className="flex items-center mb-8">
+                <span className="text-4xl mr-3">🌱</span>
+                <h2 className="text-3xl font-bold text-primary-700">Nossa Essência</h2>
+              </div>
+              
+              <div className="prose prose-invert max-w-none">
+                <p className="text-xl leading-relaxed mb-6">
+                  <strong>O que nos move é floresta. É gente. É verdade.</strong>
+                </p>
+                <p className="text-lg leading-relaxed mb-6">
+                  Nascemos do encontro entre tecnologia e ancestralidade. Um gesto de escuta profunda aos povos que vivem, protegem e alimentam a floresta com sabedoria, resistência e beleza.
+                </p>
+                <p className="text-lg leading-relaxed mb-6">
+                  A Ripi Iaiá é uma fundação que se guia pela <strong>florestania</strong>: o direito de viver com dignidade no território onde se tem raiz. Nossa essência é ser ponte — entre mundos, saberes, tempos. Entre o invisibilizado e o reconhecido. Entre o local e o global.
+                </p>
+                <p className="text-lg leading-relaxed mb-8">
+                  Sonhamos uma inclusão digital que respeita a cultura, protege a memória e fortalece a vida dos que sustentam a Amazônia em pé. Somos ação, sim — mas também silêncio atento, ritual, presença e verdade.
+                </p>
+                
+                <div className="bg-primary-900/20 border border-primary-800/30 rounded-xl p-6 mb-8">
+                  <h3 className="text-2xl font-bold text-primary-700 mb-4 flex items-center">
+                    <span className="mr-2">🌿</span> O que acreditamos:
+                  </h3>
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span>Que cultura é viva, mutante, sagrada.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span>Que memória coletiva é futuro.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span>Que o digital pode ser território de pertencimento.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span>Que escutar é um ato de justiça.</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-lg leading-relaxed">
+                  Ripi Iaiá é semente lançada no coração da floresta. Uma semente que cresce com escuta, se ramifica com saberes e floresce em rede.
+                </p>
+              </div>
+            </div>
+
+            {/* Valores Fundamentais */}
+            <div>
+              <h3 className="text-2xl font-bold text-primary-700 mb-8 text-center">Nossos Valores Fundamentais</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {coreValues.map((value, index) => (
+                  <div 
+                    key={index}
+                    className={`bg-gray-800/50 border ${expandedValues.includes(index) ? 'border-primary-400' : 'border-gray-700'} rounded-xl p-6 cursor-pointer transition-all hover:border-primary-500/50`}
+                    onClick={() => toggleValueExpansion(index)}
+                  >
+                    <div className="flex items-start mb-4">
+                      <div className={`p-3 rounded-lg mr-4 ${expandedValues.includes(index) ? 'bg-primary-900/30' : 'bg-gray-700/50'}`}>
+                        <value.icon className="w-6 h-6 text-primary-500" />
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-bold text-primary-700">{value.title}</h4>
+                        <p className="text-gray-400">{value.shortDesc}</p>
+                      </div>
+                      <button className="ml-auto text-gray-500 hover:text-primary-400">
+                        {expandedValues.includes(index) ? <ChevronUp /> : <ChevronDown />}
+                      </button>
+                    </div>
+                    {expandedValues.includes(index) && (
+                      <p className="text-gray-300 mt-3 pl-16">{value.longDesc}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Linha do Tempo */}
+            <div className="mt-16">
+              <h3 className="text-2xl font-bold text-primary-700 mb-8 text-center">Nossa Jornada</h3>
+              <div className="relative">
+                {/* Linha vertical */}
+                <div className="absolute left-1/2 h-full w-0.5 bg-primary-900/50 transform -translate-x-1/2"></div>
+                
+                {/* Itens da linha do tempo */}
+                <div className="space-y-12">
+                  {timeline.map((item, index) => (
+                    <div 
+                      key={index}
+                      className={`relative flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center`}
+                    >
+                      <div className={`w-1/2 px-8 py-6 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                        <h4 className="text-xl font-bold text-primary-700">{item.event}</h4>
+                        <p className="text-gray-400">{item.description}</p>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-primary-600 border-4 border-primary-900 flex items-center justify-center z-10 mx-auto">
+                        <span className="text-xs font-bold">{item.year}</span>
+                      </div>
+                      <div className="w-1/2 px-8">
+                        {/* Espaço vazio para alternar os lados */}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Subaba: Governança Viva */}
+        {activeTab === "governanca" && (
+          <section className="space-y-16">
+            <div className="flex items-center mb-8">
+              <span className="text-4xl mr-3">🤍</span>
+              <h2 className="text-3xl font-bold text-primary-700">Governança Viva</h2>
+            </div>
+            
+            <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-primary-700 mb-4 flex items-center">
+                    <Shield className="mr-3" /> Princípios de Gestão
+                  </h3>
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Transparência radical:</strong> Todos os nossos dados financeiros e de projetos são abertos</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Decisão em círculo:</strong> Conselhos participativos com representantes das comunidades</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Prestação de contas afetiva:</strong> Relatórios que contam histórias, não apenas números</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-primary-700 mb-4 flex items-center">
+                    <Users className="mr-3" /> Estrutura Organizacional
+                  </h3>
+                  <ul className="space-y-4">
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Conselho de Saberes:</strong> 12 lideranças comunitárias e anciãos</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Conselho Técnico:</strong> Especialistas em tecnologia, ecologia e educação</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary-500 mr-3">•</span>
+                      <span><strong>Equipe Executiva:</strong> 23 profissionais multidisciplinares</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-primary-700 mb-4 flex items-center">
+                  <FileText className="mr-3" /> Documentos Públicos
+                </h3>
+                <div className="space-y-4">
+                  <a href="#" className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg hover:bg-gray-700 transition-colors">
+                    <span>Estatuto Social</span>
+                    <span className="text-primary-500 text-sm">PDF, 2MB</span>
+                  </a>
+                  <a href="#" className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg hover:bg-gray-700 transition-colors">
+                    <span>Relatório Anual 2023</span>
+                    <span className="text-primary-500 text-sm">PDF, 5MB</span>
+                  </a>
+                  <a href="#" className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg hover:bg-gray-700 transition-colors">
+                    <span>Prestação de Contas</span>
+                    <span className="text-primary-500 text-sm">PDF, 3MB</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-8">
+                <h3 className="text-2xl font-bold text-primary-700 mb-4 flex items-center">
+                  <BarChart2 className="mr-3" /> Transparência Financeira
+                </h3>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-300 mb-2">Orçamento 2024</h4>
+                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-full bg-primary-500" style={{ width: '70%' }}></div>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-400 mt-1">
+                      <span>R$ 1,2M</span>
+                      <span>70% projetos de campo</span>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-300 mb-2">Fontes de Recursos</h4>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-primary-900/30 text-primary-300">Doações 45%</Badge>
+                      <Badge className="bg-primary-900/30 text-primary-300">Editais 30%</Badge>
+                      <Badge className="bg-primary-900/30 text-primary-300">Parcerias 25%</Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Subaba: Rede de Guardiões */}
+        {activeTab === "rede" && (
+          <section className="space-y-16">
+            <div className="flex items-center mb-8">
+              <span className="text-4xl mr-3">🌀</span>
+              <h2 className="text-3xl font-bold text-primary-700">Rede de Guardiões</h2>
+            </div>
+            
+            <div className="prose prose-invert max-w-none mb-12">
+              <p className="text-lg leading-relaxed">
+                Nossa força vem da rede diversa que construímos - lideranças comunitárias, especialistas, artistas, educadores e parceiros institucionais que compartilham o sonho de uma Amazônia vibrante e tecnologicamente empoderada.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Exemplo de membro da rede */}
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl overflow-hidden hover:border-primary-500/50 transition-colors">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
+                  alt="Guardião"
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-primary-700 mb-1">Aritana Yawalapiti</h3>
+                  <p className="text-gray-400 text-sm mb-3">Liderança Indígena | Conselho de Saberes</p>
+                  <p className="text-gray-300 text-sm">
+                    "A tecnologia deve servir para fortalecer nossa cultura, não para diluí-la. Na Ripi Iaiá encontramos parceiros que entendem isso."
+                  </p>
+                </div>
+              </div>
+
+              {/* Adicione mais membros da rede aqui */}
+            </div>
+
+            <div className="bg-gradient-to-br from-primary-900/30 to-primary-800/50 border border-primary-800/30 rounded-xl p-8 mt-12 text-center">
+              <h3 className="text-2xl font-bold text-primary-700 mb-4">Faça Parte Dessa Rede</h3>
+              <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+                Se você se identifica com nossa causa e quer contribuir com seu conhecimento, experiência ou recursos, venha caminhar conosco.
+              </p>
+              <Button className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-8 py-3 rounded-lg">
+                <Network className="mr-2" />
+                Quero Me Conectar
+              </Button>
+            </div>
+          </section>
+        )}
+
+        {/* Subaba: Impacto e Compromissos */}
+        {activeTab === "impacto" && (
+          <section className="space-y-16">
+            <div className="flex items-center mb-8">
+              <span className="text-4xl mr-3">🌍</span>
+              <h2 className="text-3xl font-bold text-primary-700">Impacto e Compromissos</h2>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 text-center">
+                <div className="text-5xl font-bold text-primary-500 mb-2">23</div>
+                <div className="text-gray-300">Comunidades Atendidas</div>
+              </div>
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 text-center">
+                <div className="text-5xl font-bold text-primary-500 mb-2">9</div>
+                <div className="text-gray-300">Projetos em Andamento</div>
+              </div>
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 text-center">
+                <div className="text-5xl font-bold text-primary-500 mb-2">500+</div>
+                <div className="text-gray-300">Pessoas Impactadas</div>
+              </div>
+            </div>
+
+            <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-primary-700 mb-6 flex items-center">
+                <Globe className="mr-3" /> Áreas de Atuação
+              </h3>
+              {/* Mapa ou representação visual das áreas de atuação */}
+              <div className="bg-gray-700/50 rounded-lg h-64 flex items-center justify-center text-gray-400">
+                [Mapa interativo ou representação visual das áreas de atuação]
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold text-primary-700 mb-6 flex items-center">
+                <Target className="mr-3" /> Nossas Metas para 2025
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+                  <div className="flex items-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-primary-900/50 flex items-center justify-center mr-4">
+                      <Bookmark className="w-4 h-4 text-primary-500" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-primary-700">Ampliar o Programa Educação Amazônica</h4>
+                  </div>
+                  <p className="text-gray-300 pl-12">Levar capacitação digital para mais 15 comunidades ribeirinhas</p>
+                </div>
+                {/* Adicione mais metas aqui */}
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+
+      {/* Seção de Chamada para Ação */}
+      <section className="bg-gradient-to-br from-primary-900 to-primary-800 py-20 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-700 mb-6">Pronto para Caminhar Conosco?</h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Seja apoiando nossos projetos, compartilhando conhecimento ou fazendo uma doação, sua participação fortalece essa rede de transformação.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-8 py-3 rounded-lg">
+              <Heart className="mr-2" />
+              Apoiar a Causa
+            </Button>
+            <Button variant="outline" className="border-primary-500 text-primary-700 hover:bg-primary-100 px-8 py-3 rounded-lg">
+              <Handshake className="mr-2" />
+              Seja Parceiro
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Rodapé */}
+      <footer className="bg-gray-950 border-t border-primary-900/30 py-12 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 className="text-lg font-bold text-primary-700 mb-4">Fundação Ripi Iaiá</h4>
+              <p className="text-gray-400 text-sm">
+                Tecnologia com raízes na Amazônia, criando pontes entre saberes ancestrais e inovação contemporânea.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-primary-700 mb-4">Navegação</h4>
+              <ul className="space-y-2">
+                {subabas.map((tab) => (
+                  <li key={tab.id}>
+                    <button 
+                      onClick={() => setActiveTab(tab.id)}
+                      className="text-gray-400 hover:text-primary-500 text-sm"
+                    >
+                      {tab.icon} {tab.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-primary-700 mb-4">Contato</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li>contato@ripiiaia.org</li>
+                <li>+55 (92) 98765-4321</li>
+                <li>Manaus, AM - Brasil</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-primary-700 mb-4">Conecte-se</h4>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-primary-500">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                {/* Adicione outras redes sociais */}
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} Fundação Ripi Iaiá. Todos os direitos reservados.</p>
+            <p className="mt-2">CNPJ: 12.345.678/0001-99</p>
+          </div>
         </div>
       </footer>
     </div>

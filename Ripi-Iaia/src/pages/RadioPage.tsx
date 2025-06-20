@@ -2,12 +2,12 @@ import { Pause, Play, Volume1, Volume2, VolumeX } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const RADIO_STREAM_URL = 'https://radio.ripiiaia.org/'; // Link real do streaming
-const BACKGROUND_MUSIC_URL = `${import.meta.env.BASE_URL}audio/lua-branca/01.mp3`; // Substitua pelo arquivo desejado
-const backgroundImageUrl = `${import.meta.env.BASE_URL}image/Floresta.jpeg`; // Caminho da imagem de fundo
+const BACKGROUND_MUSIC_URL = `${import.meta.env.BASE_URL}audio/ripi2.mp3`; // Substitua pelo arquivo desejado
+const backgroundImageUrl = `${import.meta.env.BASE_URL}image/logos/floresta1.png`; // Caminho da imagem de fundo
 
 const RadioPage = () => {
   const [isBgPlaying, setIsBgPlaying] = useState(true);
-  const [volume, setVolume] = useState(0.05); // Volume inicial mínimo
+  const [volume, setVolume] = useState(0.30); // Volume inicial mínimo
   const [isMuted, setIsMuted] = useState(false);
   const bgAudioRef = useRef<HTMLAudioElement>(null);
 
@@ -127,11 +127,23 @@ const RadioPage = () => {
       </section>
 
       {/* Info Section */}
-      <section className="relative z-10 section">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto bg-white/90 rounded-lg shadow-md p-8 text-center">
-            <h2 className="text-xl font-semibold mb-4 text-primary-800">Sobre a Rádio</h2>
-            <p className="text-gray-700 mb-4">
+      <section className="relative z-10 section py-16">
+        {/* Imagem de fundo da seção */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url('/image/radio2.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            opacity: 0.35,
+          }}
+          aria-hidden="true"
+        />
+        <div className="container-custom relative z-10">
+          <div className="max-w-2xl mx-auto bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-xl border border-primary-200 dark:border-primary-700 p-8 text-center transform transition-all hover:scale-[1.01]">
+            <h2 className="text-2xl font-display font-semibold mb-4 text-primary-800 dark:text-primary-300">Sobre a Rádio</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-6">
               A Rádio Ripi Iaiá é um projeto dedicado à difusão da musicalidade da doutrina do Santo Daime,
               transmitindo hinários, músicas e conteúdos relacionados 24 horas por dia.
             </p>
@@ -139,9 +151,9 @@ const RadioPage = () => {
               href={RADIO_STREAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary-600 hover:text-primary-700 font-medium"
+              className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium inline-flex items-center transition-all duration-300 hover:translate-x-1"
             >
-              Acesse a transmissão em outro site →
+              Acesse a transmissão em outro site <span className="ml-1">→</span>
             </a>
           </div>
         </div>

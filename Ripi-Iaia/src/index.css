@@ -16,7 +16,7 @@
   }
 
   a {
-    @apply text-primary-700 hover:text-primary-800 dark:text-emerald-300 dark:hover:text-emerald-400;
+    @apply text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-400;
   }
 }
 
@@ -26,7 +26,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-emerald-700 dark:hover:bg-emerald-800;
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-primary-700 dark:hover:bg-primary-800;
   }
 
   .btn-secondary {
@@ -34,7 +34,7 @@
   }
 
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 hover:bg-primary-100 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-gray-900;
+    @apply border border-primary-600 text-primary-600 hover:bg-primary-100 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-primary-400 dark:text-primary-300 dark:hover:bg-gray-900;
   }
 
   .card {

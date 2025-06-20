@@ -22,7 +22,7 @@ const SubdomainsSection = () => {
     {
   title: "Fundação Ripi Iaiá",
   subtitle: "Quem somos, Nossa missão",
-  description: "ONG e startup colaborativa com equipe multidisciplinar. Projetos sociais, parcerias institucionais e transparência organizacional.",
+  description: "A Ripi Iaiá é uma fundação comprometida com a inclusão digital das populações tradicionais, nativas e imigrantes, que vivem nas florestas da América do Sul — com foco especial na Amazônia e nos demais territórios que compõem esse bioma sagrado.",
   url: "portal.ripiiaia.org",
   route: "/fundacao", // <--- AQUI ESTÁ A MUDANÇA!
   icon: Building,
@@ -32,15 +32,17 @@ const SubdomainsSection = () => {
   designType: "gradient-card"
 },
     {
-      title: "Comunidades",
-      subtitle: "Espiritualidade e Tradição",
-      description: "Espaço sagrado dedicado aos ensinamentos do Mestre Irineu e da doutrina do Daime. Hinários, acervo histórico e musicalidade sagrada.",
+      title: "🌿 COMUNIDADES",
+      subtitle: "Onde a floresta fala e a tecnologia escuta.",
+      description: `Aqui damos voz aos povos que moldam e mantêm a floresta de pé: caboclos, indígenas, quilombolas, ribeirinhos, mateiros, seringueiros, pescadores e tantos outros guardiões do saber ancestral.
+Acreditamos que tecnologia não é só conexão digital — é ponte entre mundos. Desenvolvemos perfis vivos, reais, que celebram histórias, territórios e ritos espirituais. Escutamos, documentamos e visibilizamos aquilo que por tanto tempo foi silenciado.
+Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar essas pérolas com respeito, transparência e escuta ativa. Porque incluir é reconhecer. E reconhecer é transformar.`,
       url: "daime.ripiiaia.org",
       route: "/comunidades",
       icon: Heart,
       primaryColor: "indigo", // Anis
       secondaryColor: "purple", // Roxo
-      features: ["Hinários Sagrados", "Acervo Histórico", "Vídeos & Áudios", "Memória Viva"],
+      features: ["Cultura Ancestral", "Espiritualidade", "Identidade Territorial", "Conexão Digital"],
       designType: "gradient-card" // Fundo gradiente para este também
     },
     {
@@ -56,9 +58,11 @@ const SubdomainsSection = () => {
       designType: "gradient-card" // Fundo gradiente
     },
     {
-      title: "Comunicação",
-      subtitle: "Conectando Ideias e Pessoas", // Subtítulo mais específico
-      description: "Plataforma de comunicação unificada para notícias, eventos e interação com a comunidade Ripi Iaiá. Voz e informação.",
+      title: "📡 COMUNICAÇÃO",
+      subtitle: "Do território para o planeta. Da memória viva para as novas mídias.", // Subtítulo mais específico
+      description: `Um espaço dinâmico que conecta povos, saberes e territórios através de narrativas plurais e formatos diversos — jornalismo, blogs, IPTV, lives e redes sociais.
+Acreditamos na comunicação como ferramenta de transformação cultural. Aqui, memória e identidade se entrelaçam para contar histórias que resistem ao apagamento. Porque manter viva uma cultura é também manter vivas suas vozes, seus gestos, seus símbolos e suas marcas.
+Entendemos que cultura não é estática — é mutante, moldada pelo tempo, território e experiências coletivas. Por isso, a comunicação na Ripi Iaiá não é apenas informativa: ela é afetiva, viva, orgânica. Um instrumento para ecoar saberes ancestrais e contemporâneos, enraizados e em fluxo.`,
       url: "comunicacao.ripiiaia.org",
       route: "/comunicacao", // Nova rota ou ajuste conforme necessário
       icon: Radio, // Ícone adequado para comunicação
@@ -68,15 +72,18 @@ const SubdomainsSection = () => {
       designType: "gradient-card" // Fundo gradiente
     },
     {
-      title: "Projetos e Parceiros",
-      subtitle: "Inovação e Colaboração",
-      description: "Construindo um futuro melhor através de projetos inovadores e parcerias estratégicas em diversas áreas.",
-      url: "parceiros.ripiiaia.org",
+      title: "🤝 PROJETOS E PARCERIAS",
+      subtitle: "Conexões vivas, alianças com alma.",
+      description:`Acreditamos na força da florestania colaborativa. Nossos projetos nascem da escuta e crescem com parcerias comprometidas com o equilíbrio entre inovação, ancestralidade e bioma.
+Estamos construindo um ecossistema vibrante de cooperação com iniciativas como @amazonaslifecamp, @voaguaxe, sejablah.com.br e tantos outros que compartilham o sonho de um futuro sustentável, justo e conectado às raízes.
+🌎 Estamos abertos ao diálogo internacional, buscando conexões que extrapolem fronteiras e amplifiquem ações de impacto real. Queremos parcerias que plantem agora as sementes do amanhã — em tecnologia, cultura, educação, proteção territorial e economia viva.
+Junte-se à nossa jornada. Ripi Iaiá é rede, é floresta viva, é futuro em construção.
+ Frases de impacto para redes sociais tipo: > "Parceria pra gente é raiz que se entrelaça. Juntos, somos floresta em expansão.`,
       route: "/parceiros",
       icon: Building,
       primaryColor: "pink", // Rosa
       secondaryColor: "fuchsia", // Fúcsia
-      features: ["Inovação", "Colaboração", "Impacto Social", "Desenvolvimento"],
+      features: ["Conexões Sustentáveis", "Inovação Social", "Impacto Coletivo", "Rede Global"],
       designType: "gradient-card" // Fundo gradiente
     },
     {
@@ -102,10 +109,10 @@ const SubdomainsSection = () => {
       secondaryColor: "rose", // Rosa avermelhado
       features: ["Impacto Social", "Transparência Total", "Comunidade Fortalecida", "Futuro Sustentável"], // Features mais atrativas
       designType: "gradient-card-with-image", // Novo designType para este card
-      span: "md:col-span-2", // Continua ocupando 2 colunas
+      span: "col-span-1 md:col-span-2",
       internalBgImage: "https://images.unsplash.com/photo-1543269825-19252be14737?auto=format&fit=crop&w=1200&q=80",
       // Adicionei um min-height específico para o card de doações
-      minHeightClass: "min-h-[450px] md:min-h-[550px]" // Exemplo: ajusta a altura mínima
+      minHeightClass: "min-h-[250px] md:min-h-[350px]" // Exemplo: ajusta a altura mínima
     }
   ];
 
@@ -174,12 +181,12 @@ const SubdomainsSection = () => {
       </div>
       <div className="container mx-auto relative z-20">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-green-400 break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
+          {/* <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-green-400 break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
             Nossos Espaços
-          </h2>
-          <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
+          </h2> */}
+          {/* <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
             Conheça as áreas que compõem a plataforma Ripi Iaiá: tecnologia, tradição, cultura e serviços para um ecossistema inovador e colaborativo.
-          </p>
+          </p> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto items-stretch">
           {subdomains.map((subdomain, index) => (

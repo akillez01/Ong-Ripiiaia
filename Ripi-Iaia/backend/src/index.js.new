@@ -1,0 +1,142 @@
+require('dotenv').config();
+const express = require('express');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const mysql = require('mysql2/promise');
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
+const cors = require('cors');
+
+// Verificação de variáveis de ambiente essenciais
+const requiredEnvVars = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME', 'JWT_SECRET'];
+requiredEnvVars.forEach(env => {
+  if (!process.env[env]) {
+    console.error(`Erro: Variável de ambiente ${env} não configurada`);
+    process.exit(1);
+  }
+});
+
+// Configuração de ambiente
+const isProduction = process.env.NODE_ENV === 'production';
+const MAX_FILE_UPLOAD = parseInt(process.env.MAX_FILE_UPLOAD || '50') * 1024 * 1024; // Tamanho em bytes
+
+// Configuração de diretórios seguros
+const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(__dirname, '../public/uploads');
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true, mode: 0o750 });
+  console.log(`Diretório de uploads criado: ${UPLOAD_DIR}`);
+}
+
+const app = express();
+
+// Middlewares de segurança
+// Helmet só para rotas de API, não para arquivos estáticos
+app.use('/api', helmet());
+app.use(express.json({ limit: `${MAX_FILE_UPLOAD}b` }));
+app.use(express.urlencoded({ extended: true, limit: `${MAX_FILE_UPLOAD}b` }));
+
+// Configuração CORS - Mais restritiva em produção, mais permissiva em desenvolvimento
+app.use(cors({
+  origin: isProduction
+    ? ['https://ripiiaia.org', 'https://www.ripiiaia.org', 'http://localhost:5173'] 
+    : true, // true permite todas as origens em desenvolvimento
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true,
+  optionsSuccessStatus: 204,
+  preflightContinue: false
+}));
+
+// Middleware para debugging de CORS (apenas em desenvolvimento)
+if (!isProduction) {
+  app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origin: ${req.headers.origin || 'N/A'}`);
+    next();
+  });
+}
+
+// Middleware especial para tratar requisições OPTIONS (preflight)
+app.options('*', (req, res) => {
+  res.status(204).end();
+});
+
+// Rate limiting - Mais restritivo em produção
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: isProduction ? 100 : 1000, // limite de requisições por IP
+  message: 'Muitas requisições deste IP, por favor tente novamente após 15 minutos'
+});
+app.use('/api', limiter);
+
+// Conexão segura com o banco de dados
+const createDbPool = () => {
+  const dbConfig = {
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT) || 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectTimeout: 10000,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  };
+  
+  console.log(`Conectando ao banco de dados: ${process.env.DB_NAME} em ${process.env.DB_HOST}:${process.env.DB_PORT || '3306'}`);
+  return mysql.createPool(dbConfig);
+};
+
+// Rotas protegidas
+app.use('/api', require('./routes'));
+
+// Servir arquivos estáticos de forma segura
+app.use('/protected', express.static(UPLOAD_DIR, {
+  dotfiles: 'ignore',
+  etag: true,
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: (res, path) => {
+    res.set('x-timestamp', Date.now());
+  }
+}));
+
+// Servir arquivos públicos de uploads (vídeos, pdfs, imagens, etc)
+app.use('/uploads', express.static(path.resolve(__dirname, '../../public/uploads')));
+
+// Rotas de upload
+const uploadRoutes = require('./routes/upload');
+app.use('/api/upload', uploadRoutes);
+
+// Inicialização segura
+const startServer = async () => {
+  try {
+    const pool = await createDbPool();
+    
+    // Testar conexão
+    await pool.query('SELECT 1');
+    console.log('✅ Conexão com o banco estabelecida');
+    
+    app.locals.db = pool;
+    
+    const PORT = parseInt(process.env.PORT) || 3000;
+    // Permitir conexões de qualquer host, não apenas localhost
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor rodando na porta ${PORT} em modo ${isProduction ? 'PRODUÇÃO' : 'DESENVOLVIMENTO'}`);
+      console.log(`📁 Diretório de uploads: ${UPLOAD_DIR}`);
+      console.log(`🌐 Acesse: http://localhost:${PORT}/api/posts`);
+    });
+  } catch (err) {
+    console.error('❌ Falha na inicialização:', err);
+    process.exit(1);
+  }
+};
+
+// Gerenciamento de erros
+process.on('unhandledRejection', (err) => {
+  console.error('❌ Erro não tratado:', err);
+});
+
+// Iniciar servidor
+startServer();

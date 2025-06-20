@@ -31,11 +31,44 @@ app.use('/api', helmet());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cors({
-  origin: '*', // ou ['http://localhost:5173'] para desenvolvimento
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: false
+  origin: '*', // Permitir qualquer origem temporariamente para debug
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'Accept', 
+    'X-Requested-With',
+    'Cache-Control',
+    'Pragma',
+    'Expires',
+    'Origin'
+  ],
+  exposedHeaders: ['Content-Length', 'X-Timestamp', 'Content-Type'],
+  credentials: true,
+  optionsSuccessStatus: 200, // Alterado de 204 para 200 para melhor compatibilidade
+  preflightContinue: false,
+  maxAge: 86400 // 24 horas
 }));
+
+// Middleware para debug CORS - imprime cabeçalhos e origem
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Origem: ${req.headers.origin || 'desconhecida'}`);
+  console.log('Cabeçalhos da Requisição:', JSON.stringify(req.headers, null, 2));
+  
+  // Adicionar cabeçalhos CORS manualmente para garantir
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With, Cache-Control, Pragma, Expires, Origin');
+  res.header('Access-Control-Expose-Headers', 'Content-Length, X-Timestamp, Content-Type');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  // Responder imediatamente para requisições OPTIONS
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  next();
+});
 
 // Rate limiting
 const limiter = rateLimit({
@@ -59,6 +92,34 @@ const createDbPool = () => {
     queueLimit: 0
   });
 };
+
+// Rota para verificar se a API está acessível
+app.get('/api/test', (req, res) => {
+  console.log('📝 Requisição de teste recebida de:', req.headers.origin);
+  
+  // Responde com informações úteis de debug
+  res.json({ 
+    success: true, 
+    message: 'API funcionando!', 
+    timestamp: new Date().toISOString(),
+    origin: req.headers.origin || 'desconhecida',
+    cors: {
+      allowed: true,
+      methods: 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      headers: 'Content-Type, Authorization, Accept, X-Requested-With'
+    },
+    env: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Endpoint especial só para testar CORS
+app.options('/api/test-cors', (req, res) => {
+  res.status(200).end();
+});
+
+app.get('/api/test-cors', (req, res) => {
+  res.json({ cors_test: 'success' });
+});
 
 // Rotas protegidas
 app.use('/api', require('./routes'));

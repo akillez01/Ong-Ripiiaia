@@ -17,8 +17,14 @@ async function getConnection() {
 
 const router = express.Router();
 
+// Garantindo que o diretório uploads existe
+const uploadsDir = path.join(__dirname, '../../public/uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 const upload = multer({
-  dest: path.join(__dirname, '../../public/uploads'),
+  dest: uploadsDir,
   limits: { fileSize: 50 * 1024 * 1024 }
 });
 

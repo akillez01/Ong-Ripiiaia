@@ -3,11 +3,97 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'; // ALTERADO: Importa o hook de navegação
 
-// Função utilitária (sem alterações)
+// Função para obter a URL da API baseada no ambiente
+const getApiUrl = () => {
+  // Em produção, retorna a URL completa do backend em produção
+  // Em desenvolvimento, usa o localhost
+  const url = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  console.log('API URL:', url);
+  return url;
+};
+
+// Função utilitária para resolver URLs de mídia
 function resolveMediaUrl(url: string) {
   if (!url) return '';
   if (url.startsWith('http')) return url;
-  return `http://localhost:5000${url}`;
+  return `${getApiUrl()}${url}`;
+}
+
+// Função para realizar requisições com tratamento de erros
+async function fetchWithErrorHandling(url: string, options: RequestInit = {}) {
+  // Configure padrões para CORS
+  const fetchOptions: RequestInit = {
+    credentials: 'omit', // Mantemos credentials:omit para evitar problemas com CORS
+    mode: 'cors', // Habilita CORS explicitamente
+    cache: 'no-cache', // Evitar cache
+    headers: {
+      'Accept': 'application/json',
+      ...options.headers, // Preserva cabeçalhos personalizados
+    },
+    ...options,
+  };
+  
+  // Não definimos Content-Type para FormData
+  if (!(options.body instanceof FormData) && !options.headers?.['Content-Type']) {
+    fetchOptions.headers = {
+      ...fetchOptions.headers,
+      'Content-Type': 'application/json',
+    };
+  }
+
+  console.log(`Preparando requisição para ${url}`, {
+    method: fetchOptions.method || 'GET',
+    mode: fetchOptions.mode,
+    credentials: fetchOptions.credentials,
+    headers: fetchOptions.headers
+  });
+
+  try {
+    console.log(`Enviando requisição para: ${url}`, {
+      method: fetchOptions.method || 'GET',
+      headers: fetchOptions.headers,
+      body: fetchOptions.body instanceof FormData ? 'FormData' : fetchOptions.body
+    });
+    
+    // Usar fetch diretamente sem AbortController para simplificar
+    const response = await fetch(url, fetchOptions);
+    
+    console.log(`Resposta recebida de ${url}:`, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: Array.from(response.headers.entries()),
+      ok: response.ok
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'Erro desconhecido');
+      throw new Error(`Erro ${response.status}: ${response.statusText} - ${errorText}`);
+    }
+    
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      const jsonData = await response.json();
+      console.log('Dados JSON recebidos:', jsonData);
+      return jsonData;
+    }
+    
+    const textData = await response.text();
+    console.log('Dados texto recebidos:', textData);
+    return textData;
+  } catch (error: any) {
+    console.error("Erro na requisição:", error);
+    
+    // Mensagem de erro mais detalhada para problemas de CORS
+    if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+      console.error("Erro de CORS ou conectividade:", {
+        url,
+        origem: window.location.origin,
+        navegador: navigator.userAgent,
+        erro: error.message
+      });
+    }
+    throw error;
+  }
 }
 
 // Componente de fundo (sem alterações)
@@ -59,6 +145,8 @@ export default function BlogPage() {
   const [posts, setPosts] = useState<any[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [editingPost, setEditingPost] = useState<any | null>(null); // NOVO: Estado para controlar a edição
+  const [isLoading, setIsLoading] = useState(false); // Novo estado para controlar carregamento
+  const [error, setError] = useState<string | null>(null); // Novo estado para controlar erros
 
   // Estados do formulário
   const [title, setTitle] = useState('');
@@ -80,17 +168,31 @@ export default function BlogPage() {
   const navigate = useNavigate(); // ALTERADO: Hook para navegação programática
 
   // OTIMIZADO: Função para buscar posts, para ser reutilizada
-  const fetchPosts = () => {
-    fetch('http://localhost:5000/api/posts')
-      .then(res => res.json())
-      .then((data) => {
-        setPosts(data);
-        const likesMap: {[key:number]: number} = {};
-        data.forEach((post: any) => {
-          likesMap[post.id] = post.likes || 0;
-        });
-        setLikes(likesMap);
+  const fetchPosts = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await fetchWithErrorHandling(`${getApiUrl()}/api/posts`, {
+        // Adiciona um timestamp para evitar cache
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
       });
+      
+      setPosts(data);
+      const likesMap: {[key:number]: number} = {};
+      data.forEach((post: any) => {
+        likesMap[post.id] = post.likes || 0;
+      });
+      setLikes(likesMap);
+    } catch (error: any) {
+      console.error("Erro ao buscar posts:", error);
+      setError(
+        error.message === "Failed to fetch" || error.message.includes("NetworkError")
+          ? "Não foi possível conectar ao servidor. Verifique se o backend está rodando ou se há problemas de CORS."
+          : "Não foi possível carregar os posts. Verifique sua conexão ou tente novamente mais tarde."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -127,51 +229,140 @@ export default function BlogPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    let pdfUrlToSave = pdfUrl;
-    // Upload automático do PDF, se houver arquivo
-    if (pdfFile) {
-      const pdfForm = new FormData();
-      pdfForm.append('pdf', pdfFile);
-      const res = await fetch('http://localhost:5000/api/upload/pdf', {
-        method: 'POST',
-        body: pdfForm
-      });
-      const data = await res.json();
-      if (data.url) pdfUrlToSave = data.url;
-    }
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('author', author);
-    if (imageFile) formData.append('image', imageFile);
-    else if (imageUrl) formData.append('image_url', imageUrl);
-    if (videoFile) formData.append('video', videoFile);
-    else if (videoUrl) formData.append('video_url', videoUrl);
-    if (pdfUrlToSave) formData.append('pdf_url', pdfUrlToSave);
-    formData.append('imageFit', imageFit);
-    formData.append('imagePosition', imagePosition);
-
-    // ALTERADO: Lógica para criar ou atualizar
-    const url = editingPost ? `http://localhost:5000/api/posts/${editingPost.id}` : 'http://localhost:5000/api/posts';
-    const method = editingPost ? 'PUT' : 'POST';
-
-    await fetch(url, { method, body: formData });
+    setIsLoading(true);
+    setError(null);
     
-    setShowForm(false);
-    clearForm();
-    fetchPosts(); // OTIMIZADO: Atualiza a lista de posts após a ação
+    try {
+      let pdfUrlToSave = pdfUrl;
+      // Upload automático do PDF, se houver arquivo
+      if (pdfFile) {
+        const pdfForm = new FormData();
+        pdfForm.append('pdf', pdfFile);
+        
+        try {
+          const data = await fetchWithErrorHandling(`${getApiUrl()}/api/upload/pdf`, {
+            method: 'POST',
+            body: pdfForm,
+            // Não incluímos Content-Type aqui porque o navegador configurará corretamente com o boundary para o FormData
+            headers: {
+              'Accept': 'application/json',
+            },
+          });
+          
+          if (data && data.url) pdfUrlToSave = data.url;
+        } catch (pdfError) {
+          console.error("Erro ao enviar PDF:", pdfError);
+          throw new Error(`Falha ao enviar PDF: ${pdfError}`);
+        }
+      }
+      
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('content', content);
+      formData.append('author', author);
+      if (imageFile) formData.append('image', imageFile);
+      else if (imageUrl) formData.append('image_url', imageUrl);
+      if (videoFile) formData.append('video', videoFile);
+      else if (videoUrl) formData.append('video_url', videoUrl);
+      if (pdfUrlToSave) formData.append('pdf_url', pdfUrlToSave);
+      formData.append('imageFit', imageFit);
+      formData.append('imagePosition', imagePosition);
+
+      // ALTERADO: Lógica para criar ou atualizar
+      const apiUrl = getApiUrl();
+      const url = editingPost ? `${apiUrl}/api/posts/${editingPost.id}` : `${apiUrl}/api/posts`;
+      const method = editingPost ? 'PUT' : 'POST';
+
+      console.log(`Enviando formulário para ${url} via ${method}`);
+      
+      // Verificamos se o servidor está acessível antes de enviar
+      try {
+        const pingResponse = await fetch(`${apiUrl}/api/test`, { 
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache',
+        });
+        
+        if (!pingResponse.ok) {
+          throw new Error(`Servidor indisponível (status ${pingResponse.status})`);
+        }
+        
+        console.log('Conexão com servidor confirmada, enviando formulário...');
+      } catch (pingError) {
+        console.error("Erro ao verificar disponibilidade do servidor:", pingError);
+        throw new Error(`Servidor não está disponível: ${pingError.message}`);
+      }
+
+      // Como estamos enviando FormData, não definimos Content-Type
+      const result = await fetchWithErrorHandling(url, {
+        method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json',
+          // Content-Type é omitido para formData
+        },
+        cache: 'no-cache',
+      });
+      
+      console.log('Resposta recebida:', result);
+      setShowForm(false);
+      clearForm();
+      fetchPosts(); // OTIMIZADO: Atualiza a lista de posts após a ação
+    } catch (error: any) {
+      console.error("Erro ao enviar formulário:", error);
+      let mensagemErro = `Falha ao ${editingPost ? 'atualizar' : 'criar'} o post`;
+      
+      if (error.message.includes("NetworkError") || 
+          error.message.includes("Failed to fetch") ||
+          error.message.includes("indisponível") ||
+          error.message.includes("não está disponível")) {
+        mensagemErro += ": O servidor não está respondendo. Verifique sua conexão e se o backend está em execução.";
+      } else {
+        mensagemErro += `: ${error.message}`;
+      }
+      
+      setError(mensagemErro);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
-  function handleLike(postId: number) {
-    fetch(`http://localhost:5000/api/posts/${postId}/like`, { method: 'POST' })
-      .then(res => res.json())
-      .then(data => setLikes(l => ({ ...l, [postId]: data.likes })));
+  async function handleLike(postId: number) {
+    try {
+      const data = await fetchWithErrorHandling(`${getApiUrl()}/api/posts/${postId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      setLikes(l => ({ ...l, [postId]: data.likes }));
+    } catch (error: any) {
+      console.error("Erro ao curtir post:", error);
+      // Não exibimos erro na UI, apenas no console para não interromper a experiência
+    }
   }
 
-  function handleDelete(id: number) {
+  async function handleDelete(id: number) {
     if (window.confirm('Tem certeza que deseja excluir este post?')) {
-      fetch(`http://localhost:5000/api/posts/${id}`, { method: 'DELETE' })
-        .then(() => fetchPosts()); // OTIMIZADO: Atualiza a lista após deletar
+      try {
+        setIsLoading(true); // Mostra loading enquanto deleta
+        await fetchWithErrorHandling(`${getApiUrl()}/api/posts/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        fetchPosts(); // OTIMIZADO: Atualiza a lista após deletar
+      } catch (error: any) {
+        console.error("Erro ao excluir post:", error);
+        setError(
+          error.message.includes("NetworkError") || error.message.includes("Failed to fetch")
+          ? "Não foi possível excluir o post. Problema de conexão ou CORS."
+          : "Não foi possível excluir o post. Tente novamente mais tarde."
+        );
+      } finally {
+        setIsLoading(false);
+      }
     }
   }
 
@@ -184,10 +375,28 @@ export default function BlogPage() {
       </div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-3xl font-bold">{t('blog')}</h1>
-        <button className="btn btn-primary" onClick={() => { showForm && !editingPost ? setShowForm(false) : handleShowForm()}}>
+        <button 
+          className={`btn btn-primary ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`} 
+          onClick={() => { showForm && !editingPost ? setShowForm(false) : handleShowForm()}}
+          disabled={isLoading}
+        >
           {showForm && !editingPost ? t('cancel', 'Cancelar') : t('new_post', 'Novo Post')}
         </button>
       </div>
+      
+      {/* Mensagem de erro */}
+      {error && (
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-sm" role="alert">
+          <p className="font-medium">Erro</p>
+          <p>{error}</p>
+          <button 
+            className="mt-2 text-sm underline" 
+            onClick={() => setError(null)}
+          >
+            Fechar
+          </button>
+        </div>
+      )}
 
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6 flex flex-col gap-4">
@@ -245,14 +454,26 @@ export default function BlogPage() {
             </button>
           </div>
         </form>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map((post: any) => (
-          <div
-            key={post.id}
-            className="border rounded-lg shadow bg-white flex flex-col overflow-hidden relative group hover:shadow-lg transition"
-          >
+      )}              {/* Estado de carregamento */}
+              {isLoading && !showForm && (
+                <div className="flex justify-center items-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+                </div>
+              )}
+              
+              {/* Lista de posts */}
+              {!isLoading && posts.length === 0 ? (
+                <div className="text-center py-10">
+                  <h3 className="text-xl font-medium text-gray-600">Nenhum post encontrado</h3>
+                  <p className="mt-2 text-gray-500">Seja o primeiro a criar um post!</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {posts.map((post: any) => (
+                    <div
+                      key={post.id}
+                      className="border rounded-lg shadow bg-white flex flex-col overflow-hidden relative group hover:shadow-lg transition"
+                    >
             <div onClick={() => navigate(`/blog/${post.id}`)} className="cursor-pointer">
               <PostMediaBG 
                 image_url={post.image_url} 
@@ -291,11 +512,10 @@ export default function BlogPage() {
               >
                 🗑️
               </button>
-            </div>
-          </div>
-        ))}
-      </div>
-      {/* REMOVIDO: O modal de imagem não é mais necessário aqui */}
+            </div>                  </div>
+                  ))}
+                </div>
+              )}
     </div>
   );
 }
