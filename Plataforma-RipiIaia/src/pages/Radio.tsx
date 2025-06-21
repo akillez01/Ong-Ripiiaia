@@ -1,4 +1,6 @@
 // src/pages/RadioRipiiaia.tsx
+const BACKGROUND_MUSIC_URL = `${import.meta.env.BASE_URL}audios/ripi2.mp3`;
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +9,7 @@ import {
   BookOpen,
   Calendar,
   CheckCircle,
+  ExternalLink,
   HeartHandshake,
   Leaf,
   MessageSquare,
@@ -24,10 +27,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const RadioRipiiaia = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true); // Inicia tocando automaticamente
   const [activeTab, setActiveTab] = useState("radio");
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState(0.5);
+  const [useLocalAudio, setUseLocalAudio] = useState(true); // Controla se usa áudio local ou stream
   const [currentShow, setCurrentShow] = useState({
     title: "Manhã na Floresta",
     host: "Com Ana Sagrada",
@@ -51,12 +55,44 @@ const RadioRipiiaia = () => {
     return () => clearInterval(timer);
   }, [playerBgImages.length]);
 
+  // Configuração do áudio
+  useEffect(() => {
+    // Limpando o áudio atual para recriar com a fonte apropriada
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    // Fonte do áudio: local ou streaming
+    const audioSource = useLocalAudio
+      ? BACKGROUND_MUSIC_URL
+      : "https://stream.radio.ripiiaia.org/radio/8000/radio.mp3";
+
+    audioRef.current = new Audio(audioSource);
+    audioRef.current.volume = volume;
+    audioRef.current.loop = true;
+
+    if (isPlaying) {
+      audioRef.current.play().catch(e => console.error("Erro ao reproduzir áudio:", e));
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [volume, useLocalAudio, isPlaying]);
+
+  // Controle de volume
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
-    if (!isPlaying) {
-      // Abre a transmissão ao vivo em nova aba
-      window.open("https://radio.ripiiaia.org/", "_blank");
-    }
   };
 
   // Abas de navegação
@@ -219,24 +255,30 @@ const RadioRipiiaia = () => {
               <Badge className="mb-4 bg-emerald-500/90 text-white border-emerald-400/50 hover:bg-emerald-600">
                 <span className="flex items-center">
                   <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
-                  TRANSMISSÃO AO VIVO - 24H
+                  {useLocalAudio ? "DEMONSTRAÇÃO" : "TRANSMISSÃO AO VIVO - 24H"}
                 </span>
               </Badge>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white leading-tight drop-shadow-lg">
                 Ouça a Floresta
               </h2>
               <p className="text-lg md:text-xl mb-8 font-medium text-white bg-black/30 rounded-xl inline-block px-6 py-2 backdrop-blur-sm">
-                Da floresta para o mundo, uma rádio que escuta os que mantêm a mata em pé
+                {useLocalAudio 
+                  ? "Entre na sintonia das raízes - Versão demonstrativa" 
+                  : "Da floresta para o mundo, uma rádio que escuta os que mantêm a mata em pé"}
               </p>
 
               {/* Player */}
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-md mx-auto border border-emerald-200 shadow-xl">
                 <div className="mb-6">
-                  <h3 className="text-xl md:text-2xl font-semibold mb-1 text-emerald-800">{currentShow.title}</h3>
-                  <p className="text-primary-700 mb-2">{currentShow.host}</p>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-1 text-emerald-800">
+                    {useLocalAudio ? "Cânticos da Floresta" : currentShow.title}
+                  </h3>
+                  <p className="text-primary-700 mb-2">
+                    {useLocalAudio ? "Trilha Sonora Ripi Iaiá" : currentShow.host}
+                  </p>
                   <p className="text-sm text-emerald-600 flex items-center justify-center">
                     <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
-                    {currentShow.listeners}
+                    {useLocalAudio ? "Áudio Local" : currentShow.listeners}
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -262,12 +304,32 @@ const RadioRipiiaia = () => {
                 </div>
                 <div className="mt-6">
                   <Button 
-                    variant="link" 
-                    className="text-emerald-600 hover:text-emerald-800"
-                    onClick={() => window.open("https://radio.ripiiaia.org/", "_blank")}
+                    variant="outline" 
+                    className={`w-full mb-3 ${useLocalAudio ? 'bg-emerald-50' : ''}`}
+                    onClick={() => setUseLocalAudio(!useLocalAudio)}
                   >
-                    Abrir player completo em nova janela
+                    <Music className="w-4 h-4 mr-2" />
+                    {useLocalAudio ? "Usando Áudio Local" : "Usando Stream Online"}
                   </Button>
+                  
+                  <div className="flex flex-col sm:flex-row justify-center gap-3">
+                    <Button 
+                      variant="link" 
+                      className="text-emerald-600 hover:text-emerald-800"
+                      onClick={() => window.open("https://radio.ripiiaia.org/", "_blank")}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Abrir site oficial
+                    </Button>
+                    <Button 
+                      variant="link" 
+                      className="text-emerald-600 hover:text-emerald-800"
+                      onClick={() => window.open("https://stream.radio.ripiiaia.org/radio/8000/radio.mp3", "_blank")}
+                    >
+                      <Radio className="w-4 h-4 mr-2" />
+                      Abrir stream direto
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -495,8 +557,6 @@ const RadioRipiiaia = () => {
           </div>
         </section>
       )}
-
-      {/* O footer foi movido para o Layout.tsx para ser exibido em todas as páginas */}
     </div>
   );
 };

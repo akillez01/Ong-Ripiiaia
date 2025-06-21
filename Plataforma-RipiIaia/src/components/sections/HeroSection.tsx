@@ -6,30 +6,41 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            console.log("Vídeo visível - tentando autoplay");
+          if (entry.isIntersecting && videoRef.current) {
+            // Tenta iniciar a reprodução quando o vídeo ficar visível
+            videoRef.current.play().catch(err => {
+              console.log("Erro ao tentar reproduzir o vídeo automaticamente:", err);
+            });
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    if (videoContainerRef.current) {
-      observer.observe(videoContainerRef.current);
+    const currentVideoContainer = videoContainerRef.current;
+
+    if (currentVideoContainer) {
+      observer.observe(currentVideoContainer);
     }
 
     return () => {
-      if (videoContainerRef.current) {
-        observer.unobserve(videoContainerRef.current);
+      if (currentVideoContainer) {
+        observer.unobserve(currentVideoContainer);
       }
     };
   }, []);
+
+  const handleVideoLoaded = () => {
+    setIsLoading(false);
+  };
 
   return (
     <section className="relative py-8 px-4 bg-gradient-to-br from-slate-950 via-gray-950 to-black text-gray-200 min-h-screen flex flex-col">
@@ -68,14 +79,25 @@ const HeroSection = () => {
             className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-emerald-500/30 bg-black relative"
           >
             <div className="aspect-w-16 aspect-h-9 w-full">
-              <iframe
-                className="w-full h-[60vh] min-h-[400px] md:min-h-[500px] lg:min-h-[600px]"
-                src={`https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&mute=${isMuted ? 1 : 0}&controls=1&loop=1&playlist=2Vv-BfVoq4g&modestbranding=1&rel=0&enablejsapi=1`}
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                  <div className="w-12 h-12 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
+                </div>
+              )}
+              <video
+                ref={videoRef}
+                className="w-full h-[60vh] min-h-[400px] md:min-h-[500px] lg:min-h-[600px] object-cover"
+                src="/videos/MANAUS AMAZONIA3.mp4"
                 title="Vídeo de Apresentação Ripi Iaiá"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                frameBorder="0"
-              ></iframe>
+                preload="auto"
+                autoPlay
+                loop
+                playsInline
+                muted={isMuted}
+                controls
+                onLoadedData={handleVideoLoaded}
+                poster="/images/floresta2.jpg"
+              ></video>
             </div>
 
             <button
