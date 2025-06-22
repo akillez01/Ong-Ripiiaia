@@ -1,10 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class', // Ativa o modo dark por classe
+  darkMode: 'class', // Ativa o modo dark por classe baseado na classe .dark
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
+        dark: {
+          base: '#1c1c1e',       // Cor base do tema escuro (grafite)
+          surface: '#2a2a2c',     // Cor para superfícies (cards, modais, etc)
+          hover: '#3a3a3c',       // Cor para estados hover
+          border: '#444446',      // Cor para bordas
+          muted: '#8e8e93',       // Texto secundário/terciário
+        },
         primary: {
           50:  '#FBF9F5',  // bege muito claro
           100: '#F4F0E5',  // bege claro

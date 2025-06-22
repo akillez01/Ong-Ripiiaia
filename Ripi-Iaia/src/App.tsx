@@ -12,6 +12,8 @@ import AdminPostsPage from './pages/AdminPostsPage';
 import AdminVideosPage from './pages/AdminVideosPage';
 import BibliotecaUnificada from './pages/BibliotecaUnificada';
 import BlogPage from './pages/BlogPage';
+import CanticosFlorestaPage from './pages/CanticosFlorestaPage';
+import Colonia5000Page from './pages/Colonia5000Page';
 import ContatoPage from './pages/ContatoPage';
 import HomePage from './pages/HomePage';
 import LivePage from './pages/LivePage';
@@ -137,6 +139,8 @@ function AppContent() {
       {/* Rotas com layout comum */}
       <Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
       <Route path="/biblioteca/*" element={<PageLayout><BibliotecaUnificada /></PageLayout>} />
+      <Route path="/colonia5000" element={<PageLayout><Colonia5000Page /></PageLayout>} />
+      <Route path="/canticos-floresta" element={<PageLayout><CanticosFlorestaPage /></PageLayout>} />
       <Route path="/live" element={<PageLayout><LivePage /></PageLayout>} />
       <Route path="/loja" element={<PageLayout><LojaPage /></PageLayout>} />
       <Route path="/contato" element={<PageLayout><ContatoPage /></PageLayout>} />

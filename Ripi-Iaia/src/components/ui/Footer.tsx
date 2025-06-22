@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 overflow-hidden flex items-center justify-center shadow-lg">
                 <img
-                  src="/image/Mask group.svg" 
+                  src="/image/logo12.png" 
                   alt="Ripi Iaiá Logo" 
                   className="w-12 h-12 object-contain"
                 />
@@ -30,7 +30,7 @@ const Footer = () => {
             <h4 className="font-bold mb-3 text-white text-base">Navegação</h4>
             <ul className="space-y-2 text-xs">
               {/* <li><Link to="/fundacao#Radio" className="text-white hover:text-primary-100 transition-colors">Radio/IPTV</Link></li> */}
-              <li><Link to="/comunidades" className="text-white hover:text-primary-100 transition-colors">Blog</Link></li>
+              {/* <li><Link to="/comunidades" className="text-white hover:text-primary-100 transition-colors">Blog</Link></li> */}
               <li><Link to="/fundacao#valores" className="text-white hover:text-primary-100 transition-colors">Hinários</Link></li>
               <li><Link to="/fundacao#equipe" className="text-white hover:text-primary-100 transition-colors">Videoaulas</Link></li>
               <li><Link to="/fundacao#proposito" className="text-white hover:text-primary-100 transition-colors">Landing Pages</Link></li>

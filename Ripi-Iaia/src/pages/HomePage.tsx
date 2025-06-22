@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Book, Play, Radio, ShoppingBag } from 'lucide-react';
+import { Book, MapPin, Music, Play, ShoppingBag } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -58,10 +58,10 @@ const features = [
 		link: '/acervo',
 	},
 	{
-		icon: <Radio className="h-10 w-10 text-primary-600" />,
-		title: 'Rádio Ripi ia iá',
-		description: 'Ouça nossa programação com hinários e cantos da doutrina.',
-		link: '/radio',
+		icon: <Music className="h-10 w-10 text-primary-600" />,
+		title: 'Biblioteca Musical',
+		description: 'Acesse nossa coleção de hinários, áudios e canções da doutrina.',
+		link: '/biblioteca',
 		external: false,
 	},
 	{
@@ -215,7 +215,8 @@ const HomePage = () => {
 			</section>
 
 			{/* Features */}
-			<section className="section relative overflow-hidden">
+			{/* Categorias principais - Abas */}
+			<section className="section relative overflow-hidden py-16">
 				{/* Imagem de fundo */}
 				<div className="absolute inset-0 z-0">
 					<img
@@ -227,116 +228,377 @@ const HomePage = () => {
 				</div>
 
 				<div className="container-custom relative z-10">
-					<h2 className="section-title text-center mb-12">{t('blog')}</h2>
+					<div className="text-center mb-12">
+						<div className="inline-flex items-center justify-center px-6 py-2 bg-primary-100 rounded-full mb-4">
+							<LogoSvg className="h-6 w-6 mr-2" />
+							<span className="text-primary-800 text-sm font-medium">Universo Daime</span>
+						</div>
+						<h2 className="text-2xl md:text-4xl font-semibold text-primary-800">Explore Nosso Universo</h2>
+						<div className="w-32 h-1 bg-gradient-to-r from-primary-300 via-primary-400 to-primary-300 mx-auto my-4 rounded-full"></div>
+						<p className="text-gray-600 max-w-2xl mx-auto text-lg">
+							Navegue por nossas diferentes áreas de conteúdo e descubra a riqueza do Santo Daime
+						</p>
+					</div>
+
+					{/* Cards com visual mais moderno */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-						{features.map((feature, index) => (
-							<motion.div
-								key={index}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.5, delay: index * 0.1 }}
-								viewport={{ once: true }}
-								className="card p-6 flex flex-col items-center text-center"
-							>
-								<div className="mb-4 p-3 bg-primary-50 rounded-full">
-									{feature.icon}
+						{/* Card 1: Biblioteca */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.1 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/mestre2.png" 
+									alt="Biblioteca Digital" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<Book className="h-6 w-6" />
 								</div>
-								<h3 className="text-xl font-semibold text-gray-800 mb-2">
-									{feature.title}
-								</h3>
-								<p className="text-gray-600 mb-4">{feature.description}</p>
-								{feature.external ? (
-									<a
-										href={feature.link}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="mt-auto text-primary-600 font-medium hover:text-primary-700"
-									>
-										Acessar →
-									</a>
-								) : (
-									<Link
-										to={feature.link}
-										className="mt-auto text-primary-600 font-medium hover:text-primary-700"
-									>
-										Acessar →
-									</Link>
-								)}
-							</motion.div>
-						))}
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Biblioteca Digital</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Hinários, partituras, áudios e vídeos organizados em uma só plataforma.
+								</p>
+								<Link
+									to="/biblioteca"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Explorar conteúdos</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>
+
+						{/* Card 2: Colônia 5000 - Nova Adição */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.2 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/floresta2.jpg" 
+									alt="Colônia 5000" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<MapPin className="h-6 w-6" />
+								</div>
+								<div className="absolute top-4 right-4">
+									<span className="inline-block px-2 py-1 bg-primary-600/90 text-white text-xs font-medium rounded-full backdrop-blur-sm shadow-lg">Novo</span>
+								</div>
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Colônia 5000</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Explore a história e o legado do Padrinho Sebastião na Colônia 5000, berço da expansão do Santo Daime.
+								</p>
+								<Link
+									to="/colonia5000"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Conhecer história</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>						{/* Card: Cânticos da Floresta - Nova Adição */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.3 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/floresta1.png" 
+									alt="Cânticos da Floresta" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<Music className="h-6 w-6" />
+								</div>
+								<div className="absolute top-4 right-4">
+									<span className="inline-block px-2 py-1 bg-primary-600/90 text-white text-xs font-medium rounded-full backdrop-blur-sm shadow-lg">Novo</span>
+								</div>
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Cânticos da Floresta</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Preservando a ancestralidade através da música sagrada do Santo Daime. Um acervo audiovisual único.
+								</p>
+								<Link
+									to="/canticos-floresta"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Explorar sons</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>
+
+						{/* Card 3: Landing Pages */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.4 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/comunidade1.jpg" 
+									alt="Landing Pages" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<Play className="h-6 w-6" />
+								</div>
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Comunidades</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Conheça artistas, mestres e comunidades do Santo Daime através de suas páginas exclusivas.
+								</p>
+								<Link
+									to="/live"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Conhecer perfis</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>
+
+						{/* Card 4: Blog */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.4 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/floresta2.jpg" 
+									alt="Blog" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<Music className="h-6 w-6" />
+								</div>
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Blog e Notícias</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Artigos, reflexões e notícias sobre espiritualidade, rituais e eventos da comunidade.
+								</p>
+								<Link
+									to="/blog"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Ler artigos</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>
+
+						{/* Card 5: Loja */}
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, delay: 0.5 }}
+							viewport={{ once: true }}
+							className="group bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-primary-100"
+						>
+							<div className="h-44 bg-primary-50 overflow-hidden relative">
+								<img 
+									src="/image/mestre5.webp" 
+									alt="Loja Virtual" 
+									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+								/>
+								<div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary-900/70"></div>
+								<div className="absolute top-4 left-4 bg-primary-500 text-white p-2 rounded-full">
+									<ShoppingBag className="h-6 w-6" />
+								</div>
+							</div>
+							
+							<div className="p-6 flex flex-col flex-1">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 group-hover:text-primary-600">Loja Virtual</h3>
+								<p className="text-gray-600 mb-4 flex-1">
+									Adquira produtos, livros e materiais relacionados à doutrina e espiritualidade.
+								</p>
+								<Link
+									to="/loja"
+									className="mt-auto inline-flex items-center justify-between w-full py-2 px-3 bg-primary-50 text-primary-700 rounded-lg group-hover:bg-primary-100 transition-all duration-300"
+								>
+									<span className="font-medium">Visitar loja</span>
+									<span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+								</Link>
+							</div>
+						</motion.div>
 					</div>
 				</div>
 			</section>
 
-			{/* Recent Additions */}
-			<section className="section bg-earth-50">
+			{/* Conteúdos em Destaque - Visual Renovado */}
+			<section className="section bg-earth-50 py-16">
 				<div className="container-custom">
-					<div className="flex items-center justify-between mb-8">
-						<h2 className="section-title mb-0">Adições Recentes</h2>
-						<Link
-							to="/acervo"
-							className="text-primary-600 font-semibold hover:text-primary-700"
-						>
-							Ver tudo →
-						</Link>
+					<div className="flex flex-col md:flex-row items-center justify-between mb-12">
+						<div>
+							<div className="inline-flex items-center mb-3">
+								<div className="h-6 w-1 bg-primary-500 rounded-full mr-3"></div>
+								<span className="text-sm font-medium text-primary-600">Conteúdos Selecionados</span>
+							</div>
+							<h2 className="text-3xl font-semibold text-primary-800">Destaques da Semana</h2>
+						</div>
+						<div className="mt-4 md:mt-0">
+							<Link
+								to="/biblioteca"
+								className="inline-flex items-center gap-2 py-2 px-4 border border-primary-300 rounded-lg text-primary-700 hover:bg-primary-50 transition-all duration-300"
+							>
+								<span>Ver toda a biblioteca</span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+									<path d="M5 12h14"></path>
+									<path d="m12 5 7 7-7 7"></path>
+								</svg>
+							</Link>
+						</div>
 					</div>
 
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-						{[
-							{
-								id: 1,
-								type: 'Hinário',
-								title: 'O Cruzeiro',
-								image: '/image/mestre1.webp',
-								desc: 'Coletânea dos primeiros hinos recebidos pelo Mestre Irineu, fundamentais para a doutrina.',
-							},
-							{
-								id: 2,
-								type: 'Áudio',
-								title: 'Hinos do Mestre Irineu',
-								image: '/image/mestre2.png',
-								desc: 'Gravação restaurada dos hinos interpretados por seguidores diretos do Mestre Irineu.',
-							},
-							{
-								id: 3,
-								type: 'Vídeo',
-								title: 'Escolinha de Musica do Mestre',
-								image: '/image/mestre3.jpeg',
-								desc: 'Registro dos ensaios preparatórios para o Festival de 2025.',
-							},
-						].map((item) => (
-							<div key={item.id} className="card overflow-hidden">
-								<div className="h-48 bg-gray-200">
-									<img
-										src={item.image}
-										alt={item.title}
-										className="w-full h-full object-cover"
-									/>
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+						{/* Item 1 - Hinário */}
+						<div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform transition-all duration-500 hover:shadow-xl border border-primary-50 hover:border-primary-200">
+							<div className="h-52 bg-gray-100 overflow-hidden relative">
+								<img
+									src="/image/mestre1.webp"
+									alt="O Cruzeiro"
+									className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+								/>
+								<div className="absolute top-4 right-4">
+									<span className="inline-block px-3 py-1 bg-primary-600/90 text-white text-xs font-medium rounded-full backdrop-blur-sm shadow-lg">Hinário</span>
 								</div>
-								<div className="p-4">
-									<span className="inline-block px-2 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-full mb-3">
-										{item.type}
-									</span>
-									<h3 className="text-lg font-semibold mb-2">
-										{item.title}
-									</h3>
-									<p className="text-gray-600 text-sm mb-3 line-clamp-2">
-										{item.desc}
-									</p>
-									<div className="flex justify-between items-center">
-										<span className="text-sm text-gray-500">
-											Adicionado: {new Date().toLocaleDateString('pt-BR')}
-										</span>
-										<Link
-											to={`/acervo/item-${item.id}`}
-											className="text-primary-600 hover:text-primary-700 text-sm font-medium"
-										>
-											Acessar
-										</Link>
+							</div>
+							<div className="p-6">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 hover:text-primary-600 transition-colors">
+									O Cruzeiro
+								</h3>
+								<p className="text-gray-600 text-sm mb-4 line-clamp-3">
+									Coletânea dos primeiros hinos recebidos pelo Mestre Irineu, fundamentais para a doutrina. Inclui partituras e histórico de cada hino.
+								</p>
+								<div className="flex items-center justify-between mt-2">
+									<div className="flex items-center">
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary-600 mr-1">
+											<path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+										</svg>
+										<span className="text-xs text-gray-500">{new Date().toLocaleDateString('pt-BR')}</span>
+									</div>
+									<Link to="/biblioteca?categoria=hinarios&id=1" className="text-primary-600 hover:text-primary-700 font-medium text-sm inline-flex items-center gap-1">
+										Acessar <span className="text-sm">→</span>
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* Item 2 - Áudio */}
+						<div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform transition-all duration-500 hover:shadow-xl border border-primary-50 hover:border-primary-200">
+							<div className="h-52 bg-gray-100 overflow-hidden relative">
+								<img
+									src="/image/mestre2.png"
+									alt="Hinos do Mestre Irineu"
+									className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+								/>
+								<div className="absolute top-4 right-4">
+									<span className="inline-block px-3 py-1 bg-primary-600/90 text-white text-xs font-medium rounded-full backdrop-blur-sm shadow-lg">Áudio</span>
+								</div>
+								<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+									<div className="p-4">
+										<button className="bg-white/20 hover:bg-white/30 p-3 rounded-full backdrop-blur-sm transition-all">
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+												<path d="M8 5v14l11-7z" />
+											</svg>
+										</button>
 									</div>
 								</div>
 							</div>
-						))}
+							<div className="p-6">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 hover:text-primary-600 transition-colors">
+									Hinos do Mestre Irineu
+								</h3>
+								<p className="text-gray-600 text-sm mb-4 line-clamp-3">
+									Gravação restaurada dos hinos interpretados por seguidores diretos do Mestre Irineu. Edição comemorativa remasterizada.
+								</p>
+								<div className="flex items-center justify-between mt-2">
+									<div className="flex items-center">
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary-600 mr-1">
+											<path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+										</svg>
+										<span className="text-xs text-gray-500">{new Date().toLocaleDateString('pt-BR')}</span>
+									</div>
+									<Link to="/biblioteca?categoria=audio&id=2" className="text-primary-600 hover:text-primary-700 font-medium text-sm inline-flex items-center gap-1">
+										Acessar <span className="text-sm">→</span>
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* Item 3 - Vídeo */}
+						<div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform transition-all duration-500 hover:shadow-xl border border-primary-50 hover:border-primary-200">
+							<div className="h-52 bg-gray-100 overflow-hidden relative">
+								<img
+									src="/image/mestre3.jpeg"
+									alt="Escolinha de Musica do Mestre"
+									className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+								/>
+								<div className="absolute top-4 right-4">
+									<span className="inline-block px-3 py-1 bg-primary-600/90 text-white text-xs font-medium rounded-full backdrop-blur-sm shadow-lg">Vídeo</span>
+								</div>
+								<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+									<button className="bg-white/20 hover:bg-white/30 p-4 rounded-full backdrop-blur-sm transition-all transform hover:scale-110">
+										<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+											<path d="M8 5v14l11-7z" />
+										</svg>
+									</button>
+								</div>
+							</div>
+							<div className="p-6">
+								<h3 className="text-xl font-semibold text-primary-800 mb-2 hover:text-primary-600 transition-colors">
+									Escolinha de Música do Mestre
+								</h3>
+								<p className="text-gray-600 text-sm mb-4 line-clamp-3">
+									Registro dos ensaios preparatórios para o Festival de 2025. Inclui entrevistas e demonstrações da técnica vocal.
+								</p>
+								<div className="flex items-center justify-between mt-2">
+									<div className="flex items-center">
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary-600 mr-1">
+											<path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+										</svg>
+										<span className="text-xs text-gray-500">{new Date().toLocaleDateString('pt-BR')}</span>
+									</div>
+									<Link to="/biblioteca?categoria=video&id=3" className="text-primary-600 hover:text-primary-700 font-medium text-sm inline-flex items-center gap-1">
+										Acessar <span className="text-sm">→</span>
+									</Link>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
