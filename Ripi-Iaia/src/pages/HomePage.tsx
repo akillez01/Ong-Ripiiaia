@@ -181,7 +181,7 @@ const HomePage = () => {
 								<LogoSvg className="h-48 w-48" />
 							</div>
 						</div>
-						<h2 className="section-title mb-4">Bem-vindo ao Ripi Iaiá</h2>
+						<h2 className="section-title mb-4">Bem-vindo ao Universo Daime</h2>
 						{/* Vídeo de apresentação centralizado e maior */}
 						<div className="w-full flex justify-center">
 							<div className="relative w-full max-w-3xl aspect-video rounded-3xl border-4 border-primary-500 shadow-xl overflow-hidden animate-pulse-border bg-gradient-to-br from-primary-400 via-secondary-300 to-primary-700">

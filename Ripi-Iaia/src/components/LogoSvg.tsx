@@ -5,10 +5,10 @@ interface LogoProps {
 }
 
 const LogoSvg: React.FC<LogoProps> = ({ className = "w-48 h-48" }) => {
-  // Usando uma imagem da pasta public - com tamanho aumentado
+  // Usando o arquivo SVG da pasta public/image
   return (
     <img 
-      src="/image/Vcorpadrao9.png" 
+      src="/image/Vector.svg" 
       alt="Ripi Iaiá Logo" 
       className={`${className} object-contain`} 
     />

@@ -4,6 +4,7 @@ export type FooterPlayerData = {
   audioUrl: string;
   title: string;
   artist?: string;
+  coverImage?: string;
 };
 
 type AudioPlayerContextType = {

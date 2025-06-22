@@ -6,12 +6,11 @@ import { PostForm } from './components/PostForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AudioPlayerProvider, useAudioPlayer } from './context/AudioPlayerContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import AcervoPage from './pages/AcervoPage';
 import AdminBooksPage from './pages/AdminBooksPage';
 import AdminHymnsPage from './pages/AdminHymnsPage';
 import AdminPostsPage from './pages/AdminPostsPage';
 import AdminVideosPage from './pages/AdminVideosPage';
-import Biblioteca from './pages/Biblioteca';
+import BibliotecaUnificada from './pages/BibliotecaUnificada';
 import BlogPage from './pages/BlogPage';
 import ContatoPage from './pages/ContatoPage';
 import HomePage from './pages/HomePage';
@@ -19,9 +18,7 @@ import LivePage from './pages/LivePage';
 import LoginPage from './pages/LoginPage';
 import LojaPage from './pages/LojaPage';
 import PostDetailPage from './pages/PostDetailPage';
-import RadioPage from './pages/RadioPage';
 import RegisterPage from './pages/RegisterPage';
-import VideoAulasPage from './pages/VideoAulasPage';
 
 function AuthHandler() {
   const navigate = useNavigate();
@@ -139,11 +136,8 @@ function AppContent() {
       
       {/* Rotas com layout comum */}
       <Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
-      <Route path="/acervo/*" element={<PageLayout><AcervoPage /></PageLayout>} />
-      <Route path="/radio" element={<PageLayout><RadioPage /></PageLayout>} />
+      <Route path="/biblioteca/*" element={<PageLayout><BibliotecaUnificada /></PageLayout>} />
       <Route path="/live" element={<PageLayout><LivePage /></PageLayout>} />
-      <Route path="/videoaulas" element={<PageLayout><VideoAulasPage /></PageLayout>} />
-      <Route path="/biblioteca" element={<PageLayout><Biblioteca /></PageLayout>} />
       <Route path="/loja" element={<PageLayout><LojaPage /></PageLayout>} />
       <Route path="/contato" element={<PageLayout><ContatoPage /></PageLayout>} />
       

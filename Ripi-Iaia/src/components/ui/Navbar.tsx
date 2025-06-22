@@ -6,11 +6,9 @@ import { cn } from '../../utils/cn';
 
 const navItems = [
   { name: 'Home', path: '/' },
-  { name: 'Rádio/IPTV', path: '/radio' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'Hinários', path: '/biblioteca' },
-  { name: 'Videoaulas', path: '/videoaulas' },
+  { name: 'Biblioteca Digital', path: '/biblioteca' },
   { name: 'Landing Pages', path: '/live' },
+  { name: 'Blog', path: '/blog' },
   { name: 'Loja', path: '/loja' },
   { name: 'Contato', path: '/contato' },
 ];
@@ -111,7 +109,7 @@ const Navbar = () => {
             style={{ minHeight: 48 }}
           >
             <img
-              src={`${import.meta.env.BASE_URL}logo.jpeg`}
+              src={`${import.meta.env.BASE_URL}Mask group.png`}
               alt="Logo"
               className="h-10 w-10 md:h-12 md:w-12 object-contain rounded-full"
               style={{
@@ -232,7 +230,7 @@ const Navbar = () => {
                   alt="Logo"
                   className="h-10 w-10 object-contain rounded-full"
                 />
-                <span className="ml-2 text-lg font-semibold">Ripi Iaiá</span>
+                <span className="ml-2 text-lg font-semibold">Universo Daime</span>
               </Link>
               <button
                 onClick={closeMenu}

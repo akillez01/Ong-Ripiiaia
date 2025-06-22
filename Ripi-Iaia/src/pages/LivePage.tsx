@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import LogoSvg from '../components/LogoSvg';
 
 // Página Portal de Comunidades, Músicos e Produtores
 const langPages = [
@@ -16,10 +17,10 @@ const langPages = [
     link: '/lang/yara-prates'
   },
   {
-    name: 'Yara',
+  name: 'Iara',
     description: 'Artista e produtora cultural, destaque em festivais e eventos.',
     image: `${import.meta.env.BASE_URL}image/yaraguimaraes.png`,
-    link: '/lang/yara'
+    link: '/lang/Iara'
   },
   {
     name: 'Tiago',
@@ -97,7 +98,10 @@ const LivePage = () => {
         <div className="container-custom px-4 max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="relative inline-block mb-4">
-              <span className="inline-block px-6 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-medium">Portfólio</span>
+              <div className="inline-flex items-center justify-center px-6 py-2 bg-primary-100 rounded-full">
+                <LogoSvg className="h-6 w-6 mr-2" />
+                <span className="text-primary-800 text-sm font-medium">Portfólio</span>
+              </div>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-10 h-10 flex items-center justify-center">
                 <div className="w-1 h-10 bg-primary-300 rounded-full"></div>
               </div>

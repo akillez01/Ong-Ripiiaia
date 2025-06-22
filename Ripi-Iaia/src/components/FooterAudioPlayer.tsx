@@ -5,6 +5,7 @@ interface Props {
   audioUrl: string;
   title: string;
   artist?: string;
+  coverImage?: string;
   onClose: () => void;
 }
 
