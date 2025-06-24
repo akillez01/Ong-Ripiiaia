@@ -43,14 +43,14 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative py-8 px-4 bg-gradient-to-br from-slate-950 via-gray-950 to-black text-gray-200 min-h-screen flex flex-col">
-      {/* Fundo abstrato sutil */}
-      <div className="absolute inset-0 z-0 opacity-5">
+    <section className="relative py-8 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/80 text-gray-200 min-h-screen flex flex-col">
+      {/* Fundo abstrato com imagem da floresta */}
+      <div className="absolute inset-0 z-0 opacity-45">
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518779578902-c98f8221800f?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center" 
-          style={{ filter: "blur(1px)" }} 
+          className="absolute inset-0 bg-[url('/images/Frame.png')] bg-cover bg-center" 
+          style={{ filter: "blur(0px)" }} 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/30" />
       </div>
 
       <div className="container mx-auto flex-1 flex flex-col">
@@ -59,15 +59,15 @@ const HeroSection = () => {
           {/* Logo e texto compactos */}
           <div className="w-full flex flex-col items-center mb-2 md:mb-4">
             <img 
-              src="/images/Vector-2.svg" 
+              src="/images/Vector-2.svg"
               alt="Logo Ripi Iaiá"
               className="h-16 md:h-20 lg:h-24 transition-all duration-300 hover:scale-105"
             />
             <div className="text-center mt-4 max-w-2xl">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-green-300">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2  bg-clip-text bg-gradient-to-r from-sabedoria via-luz to-organico">
                 Tecnologia que escuta as raízes
               </h1>
-              <p className="text-sm md:text-base text-gray-300">
+              <p className="text-sm md:text-base font-bold mb-2 text-sabedoria">
                 A floresta conecta. A gente traduz.
               </p>
             </div>
@@ -76,12 +76,12 @@ const HeroSection = () => {
           {/* Player de vídeo em grande destaque */}
           <div 
             ref={videoContainerRef}
-            className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-emerald-500/30 bg-black relative"
+            className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-organico/30 bg-black relative"
           >
             <div className="aspect-w-16 aspect-h-9 w-full">
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/80">
-                  <div className="w-12 h-12 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
+                  <div className="w-12 h-12 border-4 border-organico/30 border-t-organico rounded-full animate-spin"></div>
                 </div>
               )}
               <video
@@ -102,7 +102,7 @@ const HeroSection = () => {
 
             <button
               onClick={() => setIsMuted(!isMuted)}
-              className="absolute bottom-4 right-4 bg-black/70 text-white rounded-full p-2 hover:bg-emerald-600 transition-colors"
+              className="absolute bottom-4 right-4 bg-black/70 text-white rounded-full p-2 hover:bg-organico transition-colors"
               aria-label={isMuted ? "Ativar som" : "Desativar som"}
             >
               {isMuted ? (
@@ -124,10 +124,10 @@ const HeroSection = () => {
 
         {/* Card "Sobre" compacto */}
         <div className="w-full max-w-3xl mx-auto mt-6 mb-8">
-          <div className="bg-gradient-to-br from-emerald-900/80 via-emerald-800/80 to-cyan-900/80 border border-emerald-700/50 rounded-xl p-4 md:p-6 shadow-lg backdrop-blur-sm overflow-hidden">
+          <div className="bg-gradient-to-br from-profundo/80 via-celestial/80 to-raiz/80 border border-organico/50 rounded-xl p-4 md:p-6 shadow-lg backdrop-blur-sm overflow-hidden">
             <div className="absolute inset-0 z-0 pointer-events-none">
               <img
-                src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80"
+                src="/images/floresta1.png"
                 alt="Fundo floresta"
                 className="w-full h-full object-cover opacity-20 rounded-xl"
               />
@@ -139,9 +139,9 @@ const HeroSection = () => {
                   A Ripi Iaiá nasce como um grito da floresta: por respeito, verdade e transparência.
                 </p>
               </div>
-              <div className="md:pl-4 md:border-l md:border-emerald-600/30 w-full md:w-auto">
+              <div className="md:pl-4 md:border-l md:border-organico/30 w-full md:w-auto">
                 <Link to="/fundacao" className="block">
-                  <Button className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-all group text-sm">
+                  <Button className="w-full md:w-auto bg-organico hover:bg-luz text-white px-4 py-2 rounded-lg transition-all group text-sm">
                     <span className="mr-1">Conheça nossa fundação</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>

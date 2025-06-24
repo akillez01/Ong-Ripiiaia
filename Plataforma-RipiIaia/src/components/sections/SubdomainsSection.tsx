@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const SubdomainsSection = () => {
   const bgImages = [
-    "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80"
+    "/images/comunidade3.jpg",
+    "/images/floresta1.png",
+    "/images/Floresta.jpeg",
+    "/images/fundo-floresta.jpg"
   ];
   const [bgIndex, setBgIndex] = useState(0);
 
@@ -28,8 +28,8 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
       url: "daime.ripiiaia.org",
       route: "/comunidades",
       icon: Heart,
-      primaryColor: "indigo", // Anis
-      secondaryColor: "purple", // Roxo
+      primaryColor: "organico", // Cor principal 
+      secondaryColor: "sabedoria", // Cor de apoio
       features: ["Cultura Ancestral", "Espiritualidade", "Identidade Territorial", "Conexão Digital"],
       designType: "gradient-card" // Fundo gradiente para este também
     },
@@ -40,8 +40,8 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
       url: "radio.ripiiaia.org",
       route: "/radio",
       icon: Radio,
-      primaryColor: "amber", // Âmbar
-      secondaryColor: "yellow", // Amarelo
+      primaryColor: "sabedoria", // Cor de apoio
+      secondaryColor: "luz", // Cor clara
       features: ["Música Espiritual", "Cultura Amazônica", "Programação Autoral", "Transmissão 24h"],
       designType: "gradient-card" // Fundo gradiente
     },
@@ -52,8 +52,8 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
       url: "ripiiaia.com.br",
       route: "/servicos",
       icon: Wrench,
-      primaryColor: "blue", // Azul
-      secondaryColor: "sky", // Azul claro
+      primaryColor: "celestial", // Azul institucional
+      secondaryColor: "profundo", // Verde institucional
       features: ["Hospedagem Web", "Registro de Domínios", "Desenvolvimento", "Suporte Técnico"],
       designType: "gradient-card" // Fundo gradiente
     },
@@ -64,12 +64,12 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
       url: "doacoes.ripiiaia.org",
       route: "/Doacoes",
       icon: Heart,
-      primaryColor: "red", // Vermelho forte para doações
-      secondaryColor: "rose", // Rosa avermelhado
+      primaryColor: "organico", // Cor principal
+      secondaryColor: "luz", // Cor para contraste
       features: ["Impacto Social", "Transparência Total", "Comunidade Fortalecida", "Futuro Sustentável"], // Features mais atrativas
       designType: "gradient-card-with-image", // Novo designType para este card
       span: "col-span-full", // Ocupa toda a largura disponível em qualquer resolução
-      internalBgImage: "https://images.unsplash.com/photo-1543269825-19252be14737?auto=format&fit=crop&w=1200&q=80",
+      internalBgImage: "/images/Slide 19.png",
       minHeightClass: "min-h-[250px] md:min-h-[350px]" // Altura mínima para o card de doações
     }
   ];
@@ -118,13 +118,13 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
 
   const getLinkClasses = (primaryColor: string) => {
     return `block text-center py-3 px-6 rounded-xl transition-all duration-300 
-    bg-${primaryColor}-600 hover:bg-${primaryColor}-500 text-white 
+    bg-${primaryColor} hover:bg-${primaryColor === "organico" ? 'luz' : primaryColor === "sabedoria" ? 'organico' : primaryColor === "celestial" ? 'profundo' : 'organico'} text-white 
     font-medium text-sm sm:text-base
-    transform hover:scale-105 border border-${primaryColor}-400/30`;
+    transform hover:scale-105 border border-${primaryColor}/30`;
   };
 
   return (
-    <section id="espacos" className="py-20 px-4 bg-gradient-to-br from-slate-900 via-gray-900 to-black text-gray-200 relative overflow-hidden">
+    <section id="espacos" className="py-20 px-4 bg-gradient-to-br from-raiz via-profundo/80 to-black text-gray-200 relative overflow-hidden">
       {/* Imagem de fundo carrossel IA/tech */}
       <div className="absolute inset-0 z-0">
         {bgImages.map((src, idx) => (
@@ -136,14 +136,14 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
             style={{filter: 'blur(2px)'}}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-emerald-900/40 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-profundo/40 to-transparent z-10" />
       </div>
       <div className="container mx-auto relative z-20">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-green-400 break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-sabedoria via-luz to-organico break-words leading-tight w-full max-w-full overflow-visible whitespace-pre-line" style={{wordBreak: 'break-word', hyphens: 'auto', letterSpacing: '-0.5px', lineHeight: '1.1'}}>
             Nossos Espaços
           </h2>
-          <p className="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl text-sabedoria/80 max-w-2xl mx-auto">
             Conheça as áreas que compõem a plataforma Ripi Iaiá: tecnologia, tradição, cultura e serviços para um ecossistema inovador e colaborativo.
           </p>
         </div>
@@ -171,7 +171,7 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
                 <ul className="mb-6 grid grid-cols-2 gap-2 text-sm">
                   {subdomain.features.map((feature, i) => (
                     <li key={i} className={getFeatureClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>
-                      <span className={`inline-block w-2 h-2 bg-${subdomain.primaryColor}-300 rounded-full`}></span>
+                      <span className={`inline-block w-2 h-2 bg-luz rounded-full`}></span>
                       {feature}
                     </li>
                   ))}
@@ -228,7 +228,7 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
                     <ul className="mb-6 grid grid-cols-2 gap-4 text-base">
                       {subdomain.features.map((feature, i) => (
                         <li key={i} className={getFeatureClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>
-                          <span className={`inline-block w-2 h-2 bg-${subdomain.primaryColor}-300 rounded-full`}></span>
+                          <span className={`inline-block w-2 h-2 bg-luz rounded-full`}></span>
                           {feature}
                         </li>
                       ))}

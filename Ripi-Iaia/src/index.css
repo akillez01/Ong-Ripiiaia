@@ -8,15 +8,15 @@
   }
 
   body {
-    @apply font-body text-primary-900 bg-earth-50 dark:bg-dark-base dark:text-gray-100;
+    @apply font-body text-raiz bg-primary-50 dark:bg-raiz dark:text-sabedoria;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold text-primary-800 dark:text-gray-50;
+    @apply font-display font-semibold text-organico dark:text-luz;
   }
 
   a {
-    @apply text-primary-700 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300;
+    @apply text-organico hover:text-primary-800 dark:text-luz dark:hover:text-luz/80;
   }
 }
 
@@ -26,19 +26,19 @@
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-primary-700 dark:hover:bg-primary-600 dark:focus:ring-primary-400;
+    @apply bg-organico text-white hover:bg-organico/90 focus:ring-2 focus:ring-organico/70 focus:ring-offset-2 dark:bg-organico dark:hover:bg-organico/80 dark:focus:ring-organico/60;
   }
 
   .btn-secondary {
-    @apply bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 dark:bg-secondary-700 dark:hover:bg-secondary-600;
+    @apply bg-profundo text-white hover:bg-profundo/90 focus:ring-2 focus:ring-profundo/70 focus:ring-offset-2 dark:bg-profundo dark:hover:bg-profundo/90;
   }
 
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 hover:bg-primary-100 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-primary-400 dark:text-primary-300 dark:hover:bg-dark-surface;
+    @apply border border-organico text-organico hover:bg-organico/10 focus:ring-2 focus:ring-organico/50 focus:ring-offset-2 dark:border-luz dark:text-luz dark:hover:bg-luz/20;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg dark:bg-dark-surface dark:text-gray-100 dark:shadow-gray-950/50;
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg dark:bg-raiz dark:text-sabedoria dark:shadow-black/50;
   }
 
   .container-custom {
@@ -50,7 +50,7 @@
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold text-primary-800 mb-6;
+    @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold text-organico mb-6;
   }
 
   .animate-star {

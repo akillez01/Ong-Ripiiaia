@@ -8,22 +8,22 @@
   }
 
   body {
-    @apply font-body text-primary-900 bg-primary-50 dark:bg-primary-700 dark:text-primary-50;
+    @apply font-body text-raiz bg-primary-50 dark:bg-primary-800 dark:text-primary-50;
   }
   .dark body {
-    background-color: #965b36; /* brown escuro */
-    color: #D9A66C; /* bege queimado para texto no dark */
+    background-color: #383531; /* Raiz - para fundo escuro */
+    color: #FDF3EC; /* Versão clara do Orgânico para texto no dark */
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold text-primary-800 dark:text-primary-100;
+    @apply font-display font-semibold text-organico dark:text-sabedoria;
   }
   .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    color: #C75B39; /* terracotta vivo */
+    color: #FFAF3A; /* Luz para títulos no dark mode */
   }
 
   a {
-    @apply text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-400;
+    @apply text-organico hover:text-primary-800 dark:text-luz dark:hover:text-luz/80;
   }
 }
 
@@ -32,13 +32,13 @@
     @apply inline-flex items-center justify-center px-4 py-2 rounded-md transition-colors duration-200 font-medium;
   }
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-primary-700 dark:hover:bg-primary-800;
+    @apply bg-organico text-white hover:bg-organico/90 focus:ring-2 focus:ring-organico/70 focus:ring-offset-2 dark:bg-organico dark:hover:bg-organico/80;
   }
   .btn-secondary {
-    @apply bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-500 focus:ring-offset-2;
+    @apply bg-profundo text-white hover:bg-profundo/90 focus:ring-2 focus:ring-profundo/70 focus:ring-offset-2;
   }
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 hover:bg-primary-100 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-primary-400 dark:text-primary-300 dark:hover:bg-primary-900;
+    @apply border border-organico text-organico hover:bg-organico/10 focus:ring-2 focus:ring-organico/50 focus:ring-offset-2 dark:border-organico/80 dark:text-sabedoria dark:hover:bg-organico/20;
   }
   .card {
     @apply bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg dark:bg-primary-900 dark:text-primary-50;

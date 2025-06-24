@@ -69,8 +69,8 @@ const Navbar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-white shadow-md py-3 dark:bg-dark-base dark:shadow-black/40'
-          : 'bg-transparent py-5 dark:bg-dark-base/95 backdrop-blur-sm',
+          ? 'bg-white shadow-md py-3 dark:bg-raiz dark:shadow-black/40'
+          : 'bg-transparent py-5 dark:bg-organico/95 backdrop-blur-sm',
         'dark:text-gray-100'
       )}
       style={{ minHeight: 68 }}
@@ -79,7 +79,7 @@ const Navbar = () => {
         {/* Logo & Mobile Menu Button */}
         <div className="flex items-center">
           <button
-            className="md:hidden mr-4 text-primary-700"
+            className="md:hidden mr-4 text-organico"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -105,7 +105,7 @@ const Navbar = () => {
                 marginBottom: 0,
               }}
             />
-            <span className="ml-2 text-xl font-display font-semibold text-primary-800">
+            <span className="ml-2 text-xl font-display font-semibold text-organico">
               Universo Daime
             </span>
           </Link>
@@ -120,8 +120,8 @@ const Navbar = () => {
               className={cn(
                 'px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200',
                 pathname === item.path
-                  ? 'text-primary-700 bg-primary-50'
-                  : 'text-gray-700 hover:text-primary-600 hover:bg-primary-50'
+                  ? 'text-organico bg-luz/20'
+                  : 'text-gray-700 hover:text-organico hover:bg-luz/10'
               )}
             >
               {item.name}
@@ -131,7 +131,7 @@ const Navbar = () => {
           {isAuthenticated && userRole === 'admin' && (
             <div className="relative group">
               <button
-                className="px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 text-gray-700 hover:text-primary-600 hover:bg-primary-50 flex items-center"
+                className="px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 text-gray-700 hover:text-organico hover:bg-luz/10 flex items-center"
                 type="button"
               >
                 Painel Admin
@@ -144,7 +144,7 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.path}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-700"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-luz/10 hover:text-organico"
                     onClick={closeMenu}
                   >
                     {item.name}
@@ -163,14 +163,14 @@ const Navbar = () => {
           {!isAuthenticated ? (
             <Link
               to="/login"
-              className="flex items-center px-3 py-2 text-sm font-medium text-primary-700 hover:text-primary-800 hover:bg-primary-50 rounded-md transition-colors duration-200"
+              className="flex items-center px-3 py-2 text-sm font-medium text-organico hover:text-luz hover:bg-organico/10 rounded-md transition-colors duration-200"
             >
               Entrar
             </Link>
           ) : (
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center">
-                <svg className="h-5 w-5 text-primary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="h-8 w-8 rounded-full bg-luz/30 flex items-center justify-center">
+                <svg className="h-5 w-5 text-organico" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>

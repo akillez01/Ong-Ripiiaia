@@ -11,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 backdrop-blur-md border-b border-emerald-700/30 z-[60] shadow-lg bg-white/10 dark:bg-slate-900/80">
+    <header className="sticky top-0 backdrop-blur-md border-b border-organico/30 z-[60] shadow-lg bg-white/10 dark:bg-raiz/80">
       {/* Imagem de fundo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
@@ -21,7 +21,7 @@ const Header = () => {
           loading="lazy"
         />
         {/* Overlay dinâmico para melhor contraste */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 to-slate-900/70 dark:from-slate-900/95 dark:to-slate-900/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-organico/90 to-organico/70 dark:from-raiz/95 dark:to-raiz/80"></div>
       </div>
 
       <div className="container mx-auto px-4 py-3 relative z-10">
@@ -32,15 +32,17 @@ const Header = () => {
             className="flex items-center gap-3 group"
           >
             <img 
-              src="/images/Vector6.png" 
+              src="/images/A1.png" 
               alt="Logo Ripi Iaiá" 
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-                Ripi Iaiá
-              </span>
-              <span className="text-xs font-serif text-emerald-200/80 -mt-1">
+              <img 
+                src="/images/ripi2.svg" 
+                alt="Ripi Iaiá" 
+                className="h-8 w-auto transition-colors group-hover:opacity-90"
+              />
+              <span className="text-xs font-serif text-sabedoria/80 -mt-1">
                 Plataforma Digital
               </span>
             </div>
@@ -52,31 +54,31 @@ const Header = () => {
             <nav className="hidden md:flex items-center gap-5">
               <Link 
                 to="/" 
-                className="text-white/90 hover:text-emerald-300 transition-colors font-medium text-sm uppercase tracking-wider"
+                className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Início
               </Link>
               <Link 
                 to="/fundacao" 
-                className="text-white/90 hover:text-emerald-300 transition-colors font-medium text-sm uppercase tracking-wider"
+                className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Fundação
               </Link>
               <Link 
                 to="/comunidades" 
-                className="text-white/90 hover:text-emerald-300 transition-colors font-medium text-sm uppercase tracking-wider"
+                className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Comunidades
               </Link>
               <Link 
                 to="/radio" 
-                className="text-white/90 hover:text-emerald-300 transition-colors font-medium text-sm uppercase tracking-wider"
+                className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Rádio
               </Link>
               <Link 
                 to="/servicos" 
-                className="text-white/90 hover:text-emerald-300 transition-colors font-medium text-sm uppercase tracking-wider"
+                className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Serviços
               </Link>
@@ -85,7 +87,7 @@ const Header = () => {
             {/* Botão do menu mobile */}
             <button 
               onClick={toggleMobileMenu}
-              className="md:hidden text-white p-1 rounded-full hover:bg-emerald-700/20 transition-colors"
+              className="md:hidden text-white p-1 rounded-full hover:bg-organico/30 transition-colors"
               aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
               {mobileMenuOpen ? (
@@ -106,46 +108,46 @@ const Header = () => {
       
       {/* Menu Mobile Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md z-50 border-t border-emerald-700/30 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-organico/95 backdrop-blur-md z-50 border-t border-organico/30 animate-fade-in">
           <nav className="container mx-auto px-4 py-4 flex flex-col">
             <Link 
               to="/" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-white py-3 px-4 border-b border-emerald-800/30 hover:bg-emerald-800/20 transition-colors flex items-center"
+              className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>
+              <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Início
             </Link>
             <Link 
               to="/fundacao" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-white py-3 px-4 border-b border-emerald-800/30 hover:bg-emerald-800/20 transition-colors flex items-center"
+              className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>
+              <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Fundação
             </Link>
             <Link 
               to="/comunidades" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-white py-3 px-4 border-b border-emerald-800/30 hover:bg-emerald-800/20 transition-colors flex items-center"
+              className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>
+              <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Comunidades
             </Link>
             <Link 
               to="/radio" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-white py-3 px-4 border-b border-emerald-800/30 hover:bg-emerald-800/20 transition-colors flex items-center"
+              className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>
+              <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Rádio
             </Link>
             <Link 
               to="/servicos" 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-white py-3 px-4 hover:bg-emerald-800/20 transition-colors flex items-center"
+              className="text-white py-3 px-4 hover:bg-organico/40 transition-colors flex items-center"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span>
+              <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Serviços
             </Link>
           </nav>

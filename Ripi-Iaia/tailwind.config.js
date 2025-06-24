@@ -5,39 +5,47 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Nova paleta de cores personalizada
+        profundo: '#55603C',  // Profundo
+        organico: '#C96820',  // Orgânico - principal para header e footer
+        sabedoria: '#D1B070', // Sabedoria
+        raiz: '#383531',      // Raiz
+        celestial: '#315D85', // Celestial
+        luz: '#FFAF3A',       // Luz
+        
         dark: {
-          base: '#1c1c1e',       // Cor base do tema escuro (grafite)
-          surface: '#2a2a2c',     // Cor para superfícies (cards, modais, etc)
-          hover: '#3a3a3c',       // Cor para estados hover
-          border: '#444446',      // Cor para bordas
-          muted: '#8e8e93',       // Texto secundário/terciário
+          base: '#383531',    // Raiz como cor base do tema escuro
+          surface: '#44423f', // Versão mais clara do Raiz
+          hover: '#4e4c49',   // Para estados hover
+          border: '#5a5856',  // Para bordas
+          muted: '#9a9894',   // Versão mais clara para texto secundário
         },
         primary: {
-          50:  '#FBF9F5',  // bege muito claro
-          100: '#F4F0E5',  // bege claro
-          200: '#E9E0C8',  // creme suave
-          300: '#D7C9A0',  // bege areia
-          400: '#C3B07A',  // bege amarelado
-          500: '#AD9963',  // caramelo suave
-          600: '#998857',  // caramelo médio
-          700: '#877A4F',  // tom mais ameno
-          800: '#7C6E52',  // tom mais escuro definido
-          900: '#716349',  // ligeiramente mais denso
-          950: '#665A43',  // opcional — se quiser mais contraste, pode remover
+          50: '#FDF3EC',
+          100: '#FBE7D9',
+          200: '#F7CFB3',
+          300: '#F3B78C',
+          400: '#EF9F66',
+          500: '#EB8740',
+          600: '#C96820', // Orgânico como cor primária principal
+          700: '#A05319',
+          800: '#773F13',
+          900: '#4E2A0C',
+          950: '#251505',
         },
-        // Manter outras cores se desejar
+        // Cor secundária baseada no Profundo
         secondary: {
-          50: '#F0F9FF',
-          100: '#E0F2FE',
-          200: '#BAE6FD',
-          300: '#7DD3FC',
-          400: '#38BDF8',
-          500: '#0EA5E9',
-          600: '#0284C7',
-          700: '#0369A1',
-          800: '#075985',
-          900: '#0C4A6E',
-          950: '#082F49',
+          50: '#F1F2ED',
+          100: '#E3E5DB',
+          200: '#C7CDB8',
+          300: '#ABB494',
+          400: '#8F9C71',
+          500: '#73844E',
+          600: '#55603C', // Profundo como cor secundária principal
+          700: '#44502F',
+          800: '#333D23',
+          900: '#222A18',
+          950: '#11150C',
         },
         accent: {
           50: '#F6F4E8',
