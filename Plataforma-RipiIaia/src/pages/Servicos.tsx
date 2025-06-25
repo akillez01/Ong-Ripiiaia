@@ -85,19 +85,19 @@ const Servicos = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-luz to-white">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-md border-b border-profundo/10 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Link to="/" className="flex items-center space-x-2 text-slate-600 hover:text-slate-700">
+              <Link to="/" className="flex items-center space-x-2 text-profundo hover:text-sabedoria">
                 <ArrowLeft className="w-5 h-5" />
                 <span>Voltar</span>
               </Link>
             </div>
             <div className="flex items-center space-x-3">
-              <HeartHandshake className="w-8 h-8 text-slate-600" />
+              <HeartHandshake className="w-8 h-8 text-raiz" />
               <div>
                 <h1 className="text-xl font-bold text-gray-800">Ripiiaia Impacto Digital</h1>
                 <p className="text-sm text-gray-600">Tecnologia que transforma</p>
@@ -110,7 +110,7 @@ const Servicos = () => {
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center max-w-4xl">
-          <Badge variant="outline" className="mb-6 border-green-200 bg-green-50 text-green-700">
+          <Badge variant="outline" className="mb-6 border-raiz/20 bg-raiz/10 text-raiz">
             🌍 Tecnologia com Propósito
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
@@ -122,11 +122,11 @@ const Servicos = () => {
             trabalho com serviços comerciais.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700">
+            <Button size="lg" className="bg-raiz hover:bg-raiz/90">
               <Users className="mr-2 w-5 h-5" />
               Serviços Gratuitos
             </Button>
-            <Button size="lg" variant="outline" className="border-slate-600 text-slate-600">
+            <Button size="lg" variant="outline" className="border-profundo text-profundo hover:bg-profundo/10">
               <HandCoins className="mr-2 w-5 h-5" />
               Como Apoiar
             </Button>
@@ -135,21 +135,21 @@ const Servicos = () => {
       </section>
 
       {/* Serviços Gratuitos */}
-      <section className="py-16 px-4 bg-green-50">
+      <section className="py-16 px-4 bg-raiz/5">
         <div className="container mx-auto max-w-6xl">
           <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Nossos Programas de Impacto</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {freeServices.map((service, index) => {
               const IconComponent = service.icon;
               return (
-                <Card key={index} className="hover:shadow-xl transition-all duration-300 group border-green-200">
+                <Card key={index} className="hover:shadow-xl transition-all duration-300 group border-raiz/20">
                   {service.badge && (
-                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600">
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-raiz">
                       {service.badge}
                     </Badge>
                   )}
                   <CardHeader>
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 bg-raiz/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-raiz group-hover:text-white transition-colors">
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <CardTitle className="text-lg">{service.title}</CardTitle>
@@ -159,14 +159,14 @@ const Servicos = () => {
                     <ul className="space-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          <CheckCircle className="w-4 h-4 text-raiz mr-2 flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
                     </ul>
-                    <div className="pt-4 border-t border-green-100">
-                      <p className="font-semibold text-green-600">{service.price}</p>
-                      <Button variant="outline" className="w-full mt-3 border-green-300 text-green-600 hover:bg-green-50">
+                    <div className="pt-4 border-t border-raiz/10">
+                      <p className="font-semibold text-raiz">{service.price}</p>
+                      <Button variant="outline" className="w-full mt-3 border-raiz/30 text-raiz hover:bg-raiz/5">
                         Solicitar
                       </Button>
                     </div>
@@ -189,16 +189,16 @@ const Servicos = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {impactPlans.map((plan, index) => (
-              <Card key={index} className={`relative hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-green-600 scale-105' : ''}`}>
+              <Card key={index} className={`relative hover:shadow-xl transition-all duration-300 ${plan.popular ? 'ring-2 ring-sabedoria scale-105' : ''}`}>
                 {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-600">
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-sabedoria">
                     Recomendado
                   </Badge>
                 )}
                 <CardHeader className="text-center">
                   <CardTitle className="text-2xl">{plan.name}</CardTitle>
                   <div className="py-4">
-                    <span className="text-4xl font-bold text-green-600">{plan.price}</span>
+                    <span className="text-4xl font-bold text-sabedoria">{plan.price}</span>
                     <span className="text-gray-600">{plan.period}</span>
                     <p className="text-sm text-gray-500 mt-1">{plan.for}</p>
                   </div>
@@ -207,12 +207,12 @@ const Servicos = () => {
                   <ul className="space-y-3">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                        <CheckCircle className="w-5 h-5 text-sabedoria mr-3 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full mt-6 ${plan.popular ? 'bg-green-600 hover:bg-green-700' : 'bg-green-500 hover:bg-green-600'}`}>
+                  <Button className={`w-full mt-6 ${plan.popular ? 'bg-sabedoria hover:bg-sabedoria/90' : 'bg-sabedoria/80 hover:bg-sabedoria/90'}`}>
                     {plan.cta}
                   </Button>
                 </CardContent>
@@ -223,7 +223,7 @@ const Servicos = () => {
       </section>
 
       {/* Serviços Comerciais */}
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-16 px-4 bg-luz">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-gray-800">Serviços Comerciais</h3>
@@ -237,7 +237,7 @@ const Servicos = () => {
               return (
                 <Card key={index} className="hover:shadow-xl transition-all duration-300 group">
                   <CardHeader>
-                    <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-slate-600 group-hover:text-white transition-colors">
+                    <div className="w-12 h-12 bg-organico/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-organico group-hover:text-white transition-colors">
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <CardTitle className="text-lg">{service.title}</CardTitle>
@@ -247,14 +247,14 @@ const Servicos = () => {
                     <ul className="space-y-2">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          <CheckCircle className="w-4 h-4 text-organico mr-2 flex-shrink-0" />
                           {feature}
                         </li>
                       ))}
                     </ul>
-                    <div className="pt-4 border-t">
-                      <p className="font-semibold text-slate-600">{service.price}</p>
-                      <Button variant="outline" className="w-full mt-3 border-slate-600 text-slate-600 hover:bg-slate-50">
+                    <div className="pt-4 border-t border-organico/10">
+                      <p className="font-semibold text-profundo">{service.price}</p>
+                      <Button variant="outline" className="w-full mt-3 border-organico/50 text-organico hover:bg-organico/5">
                         Saiba mais
                       </Button>
                     </div>
@@ -267,7 +267,7 @@ const Servicos = () => {
       </section>
 
       {/* Diferenciais */}
-      <section className="py-16 px-4 bg-green-600 text-white">
+      <section className="py-16 px-4 bg-organico text-white">
         <div className="container mx-auto text-center max-w-4xl">
           <h3 className="text-3xl font-bold mb-8">Nosso Modelo de Impacto</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -304,11 +304,11 @@ const Servicos = () => {
             Seja apoiando como cliente comercial ou se inscrevendo para receber nossos serviços gratuitos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700">
+            <Button size="lg" className="bg-raiz hover:bg-raiz/90">
               <HeartHandshake className="mr-2 w-5 h-5" />
               Solicitar Apoio
             </Button>
-            <Button size="lg" variant="outline" className="border-slate-600 text-slate-600">
+            <Button size="lg" variant="outline" className="border-profundo text-profundo hover:bg-profundo/5">
               <HandCoins className="mr-2 w-5 h-5" />
               Tornar-se Apoiador
             </Button>

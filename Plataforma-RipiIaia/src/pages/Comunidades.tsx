@@ -151,26 +151,26 @@ const iconMap: Record<string, JSX.Element> = {
 // --- Componentes ---
 
 const ComunidadesHeaderSection = () => (
-  <section className="relative py-20 md:py-28 text-center bg-gradient-to-b from-emerald-600 to-emerald-800 text-white overflow-hidden">
+  <section className="relative py-20 md:py-28 text-center bg-gradient-to-b from-sabedoria to-profundo text-white overflow-hidden">
     <div className="absolute inset-0 opacity-10">
       <div className="absolute inset-0 bg-[url('/images/Vector1.png')] bg-repeat opacity-50"></div>
     </div>
     <div className="container mx-auto max-w-4xl px-4 relative z-10">
-      <div className="inline-flex items-center justify-center mb-6 bg-emerald-400/30 backdrop-blur-sm rounded-full px-6 py-2 border border-emerald-500/20">
+      <div className="inline-flex items-center justify-center mb-6 bg-sabedoria/30 backdrop-blur-sm rounded-full px-6 py-2 border border-celestial/20">
         <Users className="w-5 h-5 mr-2" />
         <span className="font-medium">Nossa Rede</span>
       </div>
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-        Conecte-se com a <span className="text-emerald-300">Comunidade</span>
+      <h1 className="text-4xl md:text-5xl text-celestial lg:text-6xl font-bold mb-6 leading-tight">
+        Conecte-se com a <span className="text-celestial">Comunidade</span>
       </h1>
-      <p className="text-lg md:text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
+      <p className="text-lg md:text-xl text-luz mb-8 max-w-2xl mx-auto">
         Explore os diversos portais, tradições e artistas que compõem o rico ecossistema do Universo Daime.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
-        <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all">
+        <Button size="lg" className="bg-celestial hover:bg-celestial/90 text-white shadow-lg hover:shadow-xl transition-all">
           Explorar Portais
         </Button>
-        <Button size="lg" variant="outline" className="border-emerald-400 text-white hover:bg-emerald-700/30 hover:text-white">
+        <Button size="lg" variant="outline" className="border-luz/50 text-white hover:bg-sabedoria/30 hover:text-white">
           Conhecer Artistas
         </Button>
       </div>
@@ -198,26 +198,26 @@ const CommunityCard = ({ item }: { item: CommunityItem }) => {
       
       <div className="relative z-20 h-full flex flex-col p-6 justify-end">
         <div className="flex items-center gap-2 mb-2">
-          <div className="text-emerald-400">
+          <div className="text-celestial">
             {iconMap[item.type]}
           </div>
-          <Badge variant="secondary" className="bg-emerald-900/50 text-emerald-100 border-emerald-700/50">
+          <Badge variant="secondary" className="bg-profundo/50 text-luz border-sabedoria/50">
             {item.type}
           </Badge>
         </div>
         
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-celestial transition-colors">
           {item.title}
         </h3>
         
-        <p className="text-emerald-100 mb-4 line-clamp-2">
+        <p className="text-luz mb-4 line-clamp-2">
           {item.description}
         </p>
         
         <Button 
           asChild 
           size="sm" 
-          className="w-full bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100"
+          className="w-full bg-sabedoria hover:bg-sabedoria/90 transition-all duration-300 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100"
         >
           <a href={item.url} target="_blank" rel="noopener noreferrer">
             Acessar
@@ -231,7 +231,7 @@ const CommunityCard = ({ item }: { item: CommunityItem }) => {
 const ArtistCard = ({ item, active }: { item: CommunityItem, active: boolean }) => {
   return (
     <div className={`absolute inset-0 transition-all duration-500 ${active ? 'opacity-100 scale-100 z-10 pointer-events-auto' : 'opacity-0 scale-90 z-0 pointer-events-none'}`}>
-      <div className="bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow">
+      <div className="bg-luz rounded-xl shadow-md overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow">
         <div className="relative h-48 overflow-hidden">
           <img
             src={previewImages[item.title] || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'}
@@ -239,22 +239,22 @@ const ArtistCard = ({ item, active }: { item: CommunityItem, active: boolean }) 
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute bottom-4 right-4 bg-emerald-600 text-white rounded-full p-2 shadow-lg">
+          <div className="absolute bottom-4 right-4 bg-raiz text-luz rounded-full p-2 shadow-lg">
             {iconMap[item.type]}
           </div>
         </div>
         
         <div className="p-6 flex-grow flex flex-col">
           <div className="flex justify-between items-start mb-2">
-            <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
-            <Badge variant="outline" className="border-emerald-300 text-emerald-700">
+            <h3 className="text-lg font-bold text-profundo">{item.title}</h3>
+            <Badge variant="outline" className="border-raiz/30 text-raiz">
               {item.type}
             </Badge>
           </div>
           
-          <p className="text-gray-600 mb-4 flex-grow">{item.description}</p>
+          <p className="text-profundo/80 mb-4 flex-grow">{item.description}</p>
           
-          <Button asChild variant="outline" className="border-emerald-500 text-emerald-600 hover:bg-emerald-50">
+          <Button asChild variant="outline" className="border-raiz text-raiz hover:bg-raiz/5">
             <a href={item.url} target="_blank" rel="noopener noreferrer">
               Ver Perfil
             </a>
@@ -288,13 +288,13 @@ const ArtistsCarousel = () => {
   }, [isPaused]);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-emerald-50">
+    <section className="py-16 bg-gradient-to-b from-luz to-raiz/5">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Artistas e <span className="text-emerald-600">Criadores</span>
+          <h2 className="text-3xl font-bold text-profundo mb-4">
+            Artistas e <span className="text-raiz">Criadores</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-profundo/80 max-w-2xl mx-auto">
             Conheça os talentosos artistas e produtores que dão vida à cultura do Daime
           </p>
         </div>
@@ -304,7 +304,7 @@ const ArtistsCarousel = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative h-[500px] w-full bg-white rounded-xl shadow-md">
+          <div className="relative h-[500px] w-full bg-luz rounded-xl shadow-md">
             {artistas.map((item, index) => (
               <ArtistCard key={index} item={item} active={index === current} />
             ))}
@@ -312,18 +312,18 @@ const ArtistsCarousel = () => {
           
           <button 
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-emerald-50 transition-colors z-20"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-luz p-2 rounded-full shadow-md hover:bg-raiz/5 transition-colors z-20"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 text-emerald-600" />
+            <ChevronLeft className="w-6 h-6 text-raiz" />
           </button>
           
           <button 
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-2 rounded-full shadow-md hover:bg-emerald-50 transition-colors z-20"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-luz p-2 rounded-full shadow-md hover:bg-raiz/5 transition-colors z-20"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 text-emerald-600" />
+            <ChevronRight className="w-6 h-6 text-raiz" />
           </button>
         </div>
         
@@ -332,7 +332,7 @@ const ArtistsCarousel = () => {
             <button
               key={index}
               onClick={() => setCurrent(index)}
-              className={`w-3 h-3 rounded-full transition-all ${index === current ? 'bg-emerald-600 w-6' : 'bg-gray-300'}`}
+              className={`w-3 h-3 rounded-full transition-all ${index === current ? 'bg-raiz w-6' : 'bg-profundo/30'}`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -346,26 +346,26 @@ const PortalGrid = () => {
   const [activeTab, setActiveTab] = useState<'portais' | 'subdominios'>('portais');
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-luz">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Nossos <span className="text-emerald-600">Portais</span>
+          <h2 className="text-3xl font-bold text-profundo mb-4">
+            Nossos <span className="text-celestial">Portais</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-profundo/80 max-w-2xl mx-auto mb-6">
             Acesse os diversos portais que compõem o ecossistema Ripi Iaiá
           </p>
           
-          <div className="inline-flex bg-gray-100 rounded-lg p-1">
+          <div className="inline-flex bg-profundo/10 rounded-lg p-1">
             <button
               onClick={() => setActiveTab('portais')}
-              className={`px-4 py-2 rounded-md transition-all ${activeTab === 'portais' ? 'bg-white shadow-sm text-emerald-600 font-medium' : 'text-gray-600'}`}
+              className={`px-4 py-2 rounded-md transition-all ${activeTab === 'portais' ? 'bg-luz shadow-sm text-celestial font-medium' : 'text-profundo/70'}`}
             >
               Portais Principais
             </button>
             <button
               onClick={() => setActiveTab('subdominios')}
-              className={`px-4 py-2 rounded-md transition-all ${activeTab === 'subdominios' ? 'bg-white shadow-sm text-emerald-600 font-medium' : 'text-gray-600'}`}
+              className={`px-4 py-2 rounded-md transition-all ${activeTab === 'subdominios' ? 'bg-luz shadow-sm text-celestial font-medium' : 'text-profundo/70'}`}
             >
               Tradições Irmãs
             </button>
@@ -383,29 +383,29 @@ const PortalGrid = () => {
 };
 
 const TradicoesSection = () => (
-  <section className="py-16 bg-emerald-900 text-white">
+  <section className="py-16 bg-profundo text-white">
     <div className="container mx-auto px-4 max-w-4xl text-center">
-      <div className="inline-flex items-center justify-center mb-6 bg-emerald-800/50 backdrop-blur-sm rounded-full px-6 py-2 border border-emerald-500/20">
+      <div className="inline-flex items-center justify-center mb-6 bg-sabedoria/60 backdrop-blur-sm rounded-full px-6 py-2 border border-celestial/20">
         <Sprout className="w-5 h-5 mr-2" />
         <span className="font-medium">Diversidade Espiritual</span>
       </div>
       
       <h2 className="text-3xl font-bold mb-6">
-        Tradições <span className="text-emerald-300">Respeitadas</span>
+        Tradições <span className="">Respeitadas</span>
       </h2>
       
-      <p className="text-emerald-100 mb-10 max-w-2xl mx-auto">
+      <p className="text-luz mb-10 max-w-2xl mx-auto">
         Honramos todas as expressões da doutrina e das medicinas da floresta, preservando a diversidade e a riqueza dos ensinamentos.
       </p>
       
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
         {tradicoes.map((tradicao) => (
           <div key={tradicao} className="group">
-            <div className="bg-emerald-800/30 rounded-xl p-4 h-full flex flex-col items-center justify-center border border-emerald-700/50 hover:border-emerald-400/50 transition-colors hover:bg-emerald-800/40">
-              <div className="w-16 h-16 bg-emerald-700/20 rounded-full flex items-center justify-center mb-3 group-hover:bg-emerald-600/30 transition-colors">
-                <Sprout className="w-8 h-8 text-emerald-300 group-hover:text-emerald-200 transition-colors" />
+            <div className="bg-sabedoria/20 rounded-xl p-4 h-full flex flex-col items-center justify-center border border-sabedoria/30 hover:border-celestial/50 transition-colors hover:bg-sabedoria/30">
+              <div className="w-16 h-16 bg-sabedoria/20 rounded-full flex items-center justify-center mb-3 group-hover:bg-celestial/30 transition-colors">
+                <Sprout className="w-8 h-8 text-celestial group-hover:text-luz transition-colors" />
               </div>
-              <h3 className="font-medium text-center">{tradicao}</h3>
+              <h3 className="font-medium text-center text-luz font-tribal drop-shadow-sm">{tradicao}</h3>
             </div>
           </div>
         ))}

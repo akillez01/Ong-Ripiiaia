@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importação de fonte tribal */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+/* Classe para texto tribal */
+.tribal-text {
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tribal-heading {
+  background-image: linear-gradient(135deg, #ead6aa 0%, #f1f1f1 50%, #ead6aa 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.3);
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-gray-800 bg-white dark:bg-gray-900 dark:text-gray-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold text-organico dark:text-luz;
+  }
+
+  a {
+    @apply text-celestial hover:text-organico transition-colors dark:text-luz dark:hover:text-sabedoria;
+  }
+
+  p {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-organico text-white hover:bg-organico/90 focus:ring-organico dark:bg-organico dark:hover:bg-organico/90;
+  }
+
+  .btn-secondary {
+    @apply bg-profundo text-white hover:bg-profundo/90 focus:ring-profundo dark:bg-profundo dark:hover:bg-profundo/90;
+  }
+
+  .btn-outline {
+    @apply border border-organico text-organico hover:bg-organico/10 focus:ring-organico dark:border-sabedoria dark:text-sabedoria dark:hover:bg-sabedoria/10;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg dark:bg-gray-800 dark:border dark:border-gray-700;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-display font-bold text-organico dark:text-luz mb-8;
+  }
+
+  .animate-star {
+    @apply animate-float;
+  }
+
+  /* Componentes específicos da paleta */
+  .bg-header {
+    @apply bg-organico dark:bg-gray-900;
+  }
+
+  .bg-footer {
+    @apply bg-profundo dark:bg-gray-950;
+  }
+
+  .text-accent {
+    @apply text-sabedoria dark:text-luz;
+  }
+  
+  /* Mais classes utilitárias para acessibilidade e estado dos componentes */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-organico focus:ring-offset-2 dark:focus:ring-luz;
+  }
+  
+  .hover-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Classes para fundo gradiente */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-organico to-sabedoria;
+  }
+  
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-r from-profundo to-celestial;
+  }
+  
+  /* Classes para componentes específicos e interativos */
+  .nav-link {
+    @apply text-gray-800 hover:text-organico dark:text-gray-200 dark:hover:text-luz font-medium transition-colors;
+  }
+  
+  .nav-link-active {
+    @apply text-organico dark:text-luz font-semibold;
+  }
+  
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply bg-organico text-white;
+  }
+  
+  .badge-secondary {
+    @apply bg-sabedoria text-gray-900;
+  }
+  
+  .badge-outline {
+    @apply border border-current text-current;
+  }
+  
+  .form-input {
+    @apply block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-800 shadow-sm placeholder:text-gray-500 focus:border-organico focus:outline-none focus:ring-1 focus:ring-organico dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-400;
+  }
+}

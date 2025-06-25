@@ -15,8 +15,8 @@ const Header = () => {
       {/* Imagem de fundo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src="/images/img3.png" 
-          alt="Fundo Amazônico" 
+          src="/images/img3.png"
+          alt="Fundo Amazônico"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -31,15 +31,15 @@ const Header = () => {
             to="/"
             className="flex items-center gap-3 group"
           >
-            <img 
-              src="/images/A1.png" 
-              alt="Logo Ripi Iaiá" 
+            <img
+              src="/images/Mask group.svg"
+              alt="Logo Ripi Iaiá"
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <img 
-                src="/images/ripi2.svg" 
-                alt="Ripi Iaiá" 
+              <img
+                src="/images/ripi2.svg"
+                alt="Ripi Iaiá"
                 className="h-8 w-auto transition-colors group-hover:opacity-90"
               />
               <span className="text-xs font-serif text-sabedoria/80 -mt-1">
@@ -52,32 +52,32 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {/* Menu para desktop */}
             <nav className="hidden md:flex items-center gap-5">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Início
               </Link>
-              <Link 
-                to="/fundacao" 
+              <Link
+                to="/fundacao"
                 className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Fundação
               </Link>
-              <Link 
-                to="/comunidades" 
+              <Link
+                to="/comunidades"
                 className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Comunidades
               </Link>
-              <Link 
-                to="/radio" 
+              <Link
+                to="/radio"
                 className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Rádio
               </Link>
-              <Link 
-                to="/servicos" 
+              <Link
+                to="/servicos"
                 className="text-white/90 hover:text-luz transition-colors font-medium text-sm uppercase tracking-wider"
               >
                 Serviços
@@ -85,7 +85,7 @@ const Header = () => {
             </nav>
 
             {/* Botão do menu mobile */}
-            <button 
+            <button
               onClick={toggleMobileMenu}
               className="md:hidden text-white p-1 rounded-full hover:bg-organico/30 transition-colors"
               aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
@@ -110,40 +110,40 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-organico/95 backdrop-blur-md z-50 border-t border-organico/30 animate-fade-in">
           <nav className="container mx-auto px-4 py-4 flex flex-col">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
               <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Início
             </Link>
-            <Link 
-              to="/fundacao" 
+            <Link
+              to="/fundacao"
               onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
               <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Fundação
             </Link>
-            <Link 
-              to="/comunidades" 
+            <Link
+              to="/comunidades"
               onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
               <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Comunidades
             </Link>
-            <Link 
-              to="/radio" 
+            <Link
+              to="/radio"
               onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 border-b border-organico/30 hover:bg-organico/40 transition-colors flex items-center"
             >
               <span className="w-2 h-2 rounded-full bg-luz mr-3"></span>
               Rádio
             </Link>
-            <Link 
-              to="/servicos" 
+            <Link
+              to="/servicos"
               onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 hover:bg-organico/40 transition-colors flex items-center"
             >

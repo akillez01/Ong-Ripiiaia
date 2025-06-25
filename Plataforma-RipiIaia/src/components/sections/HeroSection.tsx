@@ -43,12 +43,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative py-8 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/80 text-gray-200 min-h-screen flex flex-col">
+    <section className="relative py-8 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/100 text-gray-100 min-h-screen flex flex-col">
       {/* Fundo abstrato com imagem da floresta */}
-      <div className="absolute inset-0 z-0 opacity-45">
+      <div className="absolute inset-0 z-0 opacity-100">
         <div 
-          className="absolute inset-0 bg-[url('/images/Frame.png')] bg-cover bg-center" 
-          style={{ filter: "blur(0px)" }} 
+          className="absolute inset-0 bg-[url('/images/Frame2.jpg')] bg-cover bg-center"
+          style={{ filter: "blur(0px)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/30" />
       </div>
@@ -58,29 +58,39 @@ const HeroSection = () => {
         <div className="flex-1 flex flex-col justify-center">
           {/* Logo e texto compactos */}
           <div className="w-full flex flex-col items-center mb-2 md:mb-4">
-            <img 
-              src="/images/Vector-2.svg"
-              alt="Logo Ripi Iaiá"
-              className="h-16 md:h-20 lg:h-24 transition-all duration-300 hover:scale-105"
-            />
-            <div className="text-center mt-4 max-w-2xl">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2  bg-clip-text bg-gradient-to-r from-sabedoria via-luz to-organico">
-                Tecnologia que escuta as raízes
-              </h1>
-              <p className="text-sm md:text-base font-bold mb-2 text-sabedoria">
-                A floresta conecta. A gente traduz.
-              </p>
+            <div className="bg-profundo/40 backdrop-blur-sm p-3 md:p-4 rounded-xl border-2 border-celestial/40 shadow-md mb-2">
+              <img
+                src="/images/ripi3.png"
+                alt="Logo Ripi Iaiá"
+                className="h-16 md:h-20 lg:h-24 transition-all duration-300 hover:scale-105"
+              />
+            </div>
+            <div className="text-center mt-6 max-w-2xl relative z-10">
+              <div className="bg-profundo/40 backdrop-blur-sm p-4 md:p-6 rounded-xl border-2 border-celestial/40 shadow-md">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-white"
+                    style={{ 
+                      textShadow: "0 2px 3px rgba(0,0,0,0.5)",
+                      letterSpacing: "0.02em"
+                    }}>
+                  Tecnologia que escuta as raízes
+                </h1>
+                <div className="h-1 w-24 mx-auto bg-celestial/70 rounded-full mb-3"></div>
+                <p className="text-sm md:text-base font-medium text-white"
+                   style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}>
+                  A floresta conecta. A gente traduz.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Player de vídeo em grande destaque */}
-          <div 
+          <div
             ref={videoContainerRef}
-            className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-organico/30 bg-black relative"
+            className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-organico/30 bg-amber-700 relative"
           >
             <div className="aspect-w-16 aspect-h-9 w-full">
               {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                   <div className="w-12 h-12 border-4 border-organico/30 border-t-organico rounded-full animate-spin"></div>
                 </div>
               )}

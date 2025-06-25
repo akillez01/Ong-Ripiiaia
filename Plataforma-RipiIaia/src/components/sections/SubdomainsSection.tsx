@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const SubdomainsSection = () => {
   const bgImages = [
-    "/images/comunidade3.jpg",
-    "/images/floresta1.png",
     "/images/Floresta.jpeg",
-    "/images/fundo-floresta.jpg"
+    "/images/floresta1.png",
+    "/images/img3.png",
+    "/images/Slide 19.png"
   ];
   const [bgIndex, setBgIndex] = useState(0);
 
