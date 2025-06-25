@@ -1,5 +1,6 @@
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import LogoSvg from "../LogoSvg";
 
 const Footer = () => {
   return (
@@ -8,14 +9,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Seção 1: Logo e Descrição */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-12 h-12 overflow-hidden flex items-center justify-center shadow-lg">
-                <img
-                  src="/image/logo12.png" 
-                  alt="Ripi Iaiá Logo" 
-                  className="w-12 h-12 object-contain"
-                />
-              </div>
+            <div className="flex items-center space-x-10 mb-4">
+              <LogoSvg 
+                size="sm" 
+                variant="light" 
+                animated={true} 
+                className="shadow-lg" 
+              />
               <span className="text-2xl font-bold text-white drop-shadow-md">Universo Daime</span>
             </div>
             {/* <p className="text-white text-xs leading-relaxed">

@@ -10,21 +10,21 @@ const banners = [
 		id: 1,
 		title: 'Caminho abertos sempre',
 		description: 'Acesse nossa coleção atualizada de hinários com partituras e áudios.',
-		image: '/image/mestre5.webp',
+		image: '/image/justiceiro.jpg',
 		link: '/acervo', // Corrigido para uma rota que existe
 	},
 	{
 		id: 2,
-		title: 'Fé para seguir',
+		title: 'Força para seguir',
 		description: 'Acompanhe nossos encontros espirituais com transmissão em tempo real.',
-		image: '/image/mestre1.webp',
+		image: '/image/pad.jpeg',
 		link: '/live',
 	},
 	{
 		id: 3,
 		title: 'Viva ao nosso Festival☆',
 		description: 'Conheça os novos itens disponíveis em nossa loja virtual.',
-		image: '/image/mestre2.png',
+		image: '/image/images1.webp',
 		link: '/loja',
 	},
 	// {
@@ -252,7 +252,7 @@ const HomePage = () => {
 						>
 							<div className="h-44 bg-primary-50 overflow-hidden relative">
 								<img 
-									src="/image/mestre2.png" 
+									src="/image/pad3.jpg" 
 									alt="Biblioteca Digital" 
 									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
 								/>

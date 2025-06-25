@@ -20,6 +20,7 @@ export default {
     extend: {
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-subtle': 'pulse-subtle 4s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
@@ -27,6 +28,18 @@ export default {
         'scale-in': 'scale-in 0.4s ease-out',
       },
       keyframes: {
+        'pulse-subtle': {
+          '0%, 100%': { 
+            opacity: '1',
+            transform: 'scale(1)',
+            boxShadow: '0 0 0 0 rgba(255, 211, 158, 0.4)'
+          },
+          '50%': { 
+            opacity: '0.9',
+            transform: 'scale(1.05)',
+            boxShadow: '0 0 0 10px rgba(255, 211, 158, 0)'
+          },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },

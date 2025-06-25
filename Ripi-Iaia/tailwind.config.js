@@ -80,11 +80,24 @@ export default {
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
+        'pulse-subtle': 'pulse-subtle 4s ease-in-out infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-subtle': {
+          '0%, 100%': { 
+            opacity: '1',
+            transform: 'scale(1)',
+            boxShadow: '0 0 0 0 rgba(255, 175, 58, 0.4)'
+          },
+          '50%': { 
+            opacity: '0.9',
+            transform: 'scale(1.05)',
+            boxShadow: '0 0 0 10px rgba(255, 175, 58, 0)'
+          },
         },
       },
     },

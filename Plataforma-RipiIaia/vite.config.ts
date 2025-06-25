@@ -10,6 +10,8 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    strictPort: true,
+    historyApiFallback: true, // Habilita o suporte para History API Fallback (roteamento SPA)
   },
 
   plugins: [

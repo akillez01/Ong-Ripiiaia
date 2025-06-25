@@ -125,7 +125,7 @@ const Footer = () => {
         </div>
 
         {/* Rodapé inferior */}
-        <div className="pt-6 border-t border-profundo/30 text-center text-sm text-sabedoria">
+        <div className="pt-6 border-t border-profundo/30 text-center text-sm ">
           <div className="flex flex-col md:flex-row justify-center items-center gap-2">
             <span>© {new Date().getFullYear()} Ripi Iaiá. Todos os direitos reservados.</span>
             <span className="hidden md:block">•</span>

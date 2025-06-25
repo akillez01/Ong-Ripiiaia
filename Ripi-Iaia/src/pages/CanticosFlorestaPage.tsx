@@ -9,7 +9,7 @@ const featuredVideos = [
   {
     id: 1,
     title: "Hino da Rainha da Floresta",
-    thumbnail: "/image/mestre2.png",
+    thumbnail: "/image/yao.jpg",
     duration: "5:42",
     event: "Encontro Anual 2024",
     description: "Interpretação coletiva do tradicional hino da Rainha da Floresta durante o encontro de músicos em Rio Branco."
@@ -17,7 +17,7 @@ const featuredVideos = [
   {
     id: 2,
     title: "Círculo de Tambores Sagrados",
-    thumbnail: "/image/mestre1.webp",
+    thumbnail: "/image/floresta2.jpeg",
     duration: "8:15",
     event: "Festival das Águas",
     description: "Apresentação especial com instrumentos de percussão tradicionais e cantos de invocação da floresta."
@@ -25,7 +25,7 @@ const featuredVideos = [
   {
     id: 3,
     title: "Canto dos Ancestrais",
-    thumbnail: "/image/mestre3.jpeg",
+    thumbnail: "/image/cantos.jpg",
     duration: "7:23",
     event: "Encontro Anual 2023",
     description: "Homenagem aos mestres ancestrais com cantos tradicionais da linhagem do Santo Daime."
@@ -141,7 +141,7 @@ const CanticosFlorestaPage = () => {
             <div className="inline-block mb-6">
               <div className="flex items-center justify-center p-3 bg-white/10 backdrop-blur-md rounded-full">
                 <Music className="h-6 w-6 text-primary-300 mr-2" />
-                <span className="text-sm font-medium text-white">Projeto Cultural</span>
+                <span className="text-sm font-medium text-white">Projeto Cultural e Institucional</span>
               </div>
             </div>
             
@@ -149,8 +149,13 @@ const CanticosFlorestaPage = () => {
               Cânticos da Floresta
             </h1>
             <div className="w-32 h-1 bg-primary-400 mx-auto mb-8"></div>
-            <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
-              Preservando a Ancestralidade através da Música Sagrada do Santo Daime
+            <p className="text-lg md:text-xl text-white/90 mb-6 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+              Preservando a Ancestralidade através da Música Sagrada do Santo Daime e outras Tradições Ayahuasqueiras
+            </p>
+            
+            <p className="text-base md:text-lg text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+              Um projeto de documentação, preservação e difusão do patrimônio cultural imaterial brasileiro, 
+              com compromisso de acessibilidade e inclusão social.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 mt-8">
@@ -199,8 +204,8 @@ const CanticosFlorestaPage = () => {
             <div className="prose prose-lg max-w-none text-gray-700">
               <p>
                 O <strong>Cânticos da Floresta</strong> nasceu do desejo de preservar e difundir o patrimônio cultural imaterial presente 
-                nos hinos e músicas do Santo Daime. Através de registros audiovisuais de alta qualidade, documentamos encontros musicais 
-                que conectam tradições afroindígenas, espiritualidade brasileira e a sabedoria ancestral da floresta.
+                nos hinos e músicas do Santo Daime e outras tradições ayahuasqueiras brasileiras. Através de registros audiovisuais de alta qualidade, 
+                documentamos encontros musicais que conectam tradições afroindígenas, espiritualidade brasileira e a sabedoria ancestral da floresta.
               </p>
               
               <p>
@@ -210,9 +215,86 @@ const CanticosFlorestaPage = () => {
               </p>
               
               <p>
-                Cada vídeo em nosso acervo é cuidadosamente produzido com legendas e audiodescrição, tornando este conhecimento acessível a todos. 
-                Convidamos você a explorar os sons, as histórias e os ensinamentos que ecoam da floresta e ressoam em nossa alma coletiva.
+                Com sede na cidade de Rio Branco, Acre, o projeto estende suas ações para comunidades tradicionais 
+                da Floresta Amazônica e centros urbanos, criando um diálogo entre saberes ancestrais e contemporâneos.
               </p>
+            </div>
+            
+            {/* Tabs para informações institucionais */}
+            <div className="mt-12 bg-white rounded-xl shadow-sm border border-primary-100 overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary-100">
+                <button className="py-4 px-6 bg-primary-50 text-primary-800 font-medium">
+                  Informações Institucionais
+                </button>
+              </div>
+              
+              <div className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-primary-800 mb-3 flex items-center">
+                    <MapPin className="h-5 w-5 mr-2" />
+                    Local de Realização
+                  </h3>
+                  <p className="text-gray-700">
+                    O projeto é realizado principalmente em Rio Branco (AC), com irradiações para comunidades tradicionais 
+                    da Floresta Amazônica, incluindo a Colônia 5000, Vila Céu do Mapiá, e outras comunidades ayahuasqueiras 
+                    do Brasil. Atividades de difusão ocorrem também em centros culturais de capitais brasileiras.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-bold text-primary-800 mb-3 flex items-center">
+                    <Users className="h-5 w-5 mr-2" />
+                    Público-Alvo
+                  </h3>
+                  <p className="text-gray-700">
+                    Atendemos músicos, membros de comunidades tradicionais, pesquisadores, estudantes, artistas e o público em geral 
+                    interessado em manifestações culturais brasileiras. Nosso conteúdo é especialmente direcionado para preservar 
+                    este conhecimento para as novas gerações e criar pontes entre tradição e modernidade.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-bold text-primary-800 mb-3 flex items-center">
+                    <PlayCircle className="h-5 w-5 mr-2" />
+                    Objetivos e Metas
+                  </h3>
+                  <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                    <li>Catalogar e preservar pelo menos 200 hinos e cantos tradicionais até 2026</li>
+                    <li>Realizar anualmente 4 oficinas de formação musical em comunidades tradicionais</li>
+                    <li>Criar um acervo digital completo com acesso público e gratuito</li>
+                    <li>Publicar materiais didáticos sobre a história e contexto cultural dos cantos</li>
+                    <li>Promover intercâmbio musical entre diversas tradições ayahuasqueiras</li>
+                    <li>Alcançar pelo menos 50.000 visualizações em nosso canal até o final do ano</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-bold text-primary-800 mb-3 flex items-center">
+                    <Globe className="h-5 w-5 mr-2" />
+                    Acessibilidade e Inclusão
+                  </h3>
+                  <p className="text-gray-700">
+                    Todo nosso conteúdo audiovisual é produzido com legendas em português e inglês, audiodescrição e 
+                    recursos de acessibilidade digital. Organizamos eventos com interpretação em Libras e espaços 
+                    fisicamente acessíveis. Como contrapartida social, realizamos oficinas gratuitas em escolas 
+                    públicas e comunidades de baixa renda, levando o conhecimento musical e cultural a pessoas 
+                    que normalmente não teriam acesso a este conteúdo.
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-bold text-primary-800 mb-3 flex items-center">
+                    <Music className="h-5 w-5 mr-2" />
+                    Perfil do Projeto
+                  </h3>
+                  <p className="text-gray-700">
+                    O Cânticos da Floresta é um projeto cultural de documentação e preservação do patrimônio imaterial brasileiro, 
+                    com ênfase nos hinos e cantos das tradições ayahuasqueiras. Além da dimensão artística, nosso trabalho tem 
+                    relevância antropológica, educativa e social, criando um arquivo vivo da cultura brasileira amazônica 
+                    e suas expressões musicais espirituais.
+                  </p>
+                </div>
+              </div>
             </div>
             
             {/* Números do projeto */}
@@ -478,12 +560,12 @@ const CanticosFlorestaPage = () => {
               Sua participação é fundamental para mantermos viva esta tradição.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-10">
               <Link 
                 to="#" 
                 className="btn bg-white text-primary-700 hover:bg-white/90 px-8 py-3 rounded-lg shadow-md transition-all duration-300 font-medium"
               >
-                Seja um Apoiador
+                Seja um Apoiador Institucional
               </Link>
               <Link 
                 to="/contato" 
@@ -492,32 +574,127 @@ const CanticosFlorestaPage = () => {
                 Entre em Contato
               </Link>
             </div>
+            
+            <div className="mt-10 pt-10 border-t border-white/20">
+              <h3 className="text-xl font-medium mb-6">Formas de Apoio Institucional</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-xl">
+                  <h4 className="text-lg font-semibold mb-3">Patrocínio</h4>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Empresas e instituições podem apoiar o projeto através de patrocínio direto,
+                    leis de incentivo à cultura ou doações para eventos específicos.
+                  </p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-xl">
+                  <h4 className="text-lg font-semibold mb-3">Parceria Técnica</h4>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Instituições educacionais, estúdios e produtoras audiovisuais podem 
+                    contribuir com conhecimento técnico e infraestrutura.
+                  </p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm p-5 rounded-xl">
+                  <h4 className="text-lg font-semibold mb-3">Voluntariado</h4>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Profissionais de diversas áreas podem colaborar com horas de trabalho
+                    voluntário para catalogação, produção e divulgação.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       
       {/* Ferramentas de Acessibilidade */}
-      <aside className="py-6 bg-earth-50 border-t border-primary-100">
+      <aside className="py-12 bg-earth-50 border-t border-primary-100">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center mb-4 md:mb-0">
-              <Globe className="h-5 w-5 text-primary-600 mr-2" />
-              <h3 className="text-sm font-medium text-primary-800">Acessibilidade</h3>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-center mb-6">
+              <Globe className="h-6 w-6 text-primary-600 mr-2" />
+              <h3 className="text-xl font-bold text-primary-800">Acessibilidade e Contrapartidas</h3>
             </div>
             
-            <div className="flex flex-wrap gap-2">
-              <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
-                Alto Contraste
-              </button>
-              <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
-                Aumentar Texto
-              </button>
-              <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
-                Parar Animações
-              </button>
-              <Link to="#" className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
-                Guia de Acessibilidade
-              </Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Recursos de acessibilidade */}
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-primary-100">
+                <h4 className="text-lg font-semibold text-primary-700 mb-4">Recursos de Acessibilidade</h4>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Legendas em português e inglês em todos os vídeos</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Audiodescrição disponível para conteúdo visual</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Intérpretes de Libras em eventos presenciais</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Site com recursos de alto contraste e texto ampliável</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Espaços físicos com acessibilidade para cadeirantes</span>
+                  </li>
+                </ul>
+                
+                <div className="flex flex-wrap gap-2 mt-6">
+                  <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
+                    Alto Contraste
+                  </button>
+                  <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
+                    Aumentar Texto
+                  </button>
+                  <button className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
+                    Parar Animações
+                  </button>
+                  <Link to="#" className="px-3 py-1 bg-white border border-primary-200 rounded-md text-sm text-primary-700 hover:bg-primary-50">
+                    Guia de Acessibilidade
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Contrapartidas sociais */}
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-primary-100">
+                <h4 className="text-lg font-semibold text-primary-700 mb-4">Contrapartidas Sociais</h4>
+                
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Oficinas gratuitas de música em escolas públicas</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Doação de instrumentos para comunidades tradicionais</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Capacitação técnica para jovens da periferia em produção audiovisual</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Acervo digital de livre acesso para pesquisadores e estudantes</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3 flex-shrink-0">✓</span>
+                    <span className="text-gray-700">Programa de bolsas para mestres de cultura popular</span>
+                  </li>
+                </ul>
+                
+                <Link 
+                  to="/contato" 
+                  className="mt-6 inline-block px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300"
+                >
+                  Quero participar das ações sociais
+                </Link>
+              </div>
             </div>
           </div>
         </div>

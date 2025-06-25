@@ -1,6 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import LogoSvg from '../../components/LogoSvg';
 import { useAuth } from "../../context/AuthContext";
 import { cn } from '../../utils/cn';
 import ThemeToggle from './ThemeToggle';
@@ -8,6 +9,8 @@ import ThemeToggle from './ThemeToggle';
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'Colônia 5000', path: '/colonia5000' },
+  { name: 'A Barquinha', path: '/barquinha' },
+  { name: 'Centros Espirituais', path: '/centros-espirituais' },
   { name: 'Cânticos da Floresta', path: '/canticos-floresta' },
   { name: 'Biblioteca Digital', path: '/biblioteca' },
   { name: 'Landing Pages', path: '/live' }, 
@@ -92,18 +95,11 @@ const Navbar = () => {
             onClick={closeMenu}
             style={{ minHeight: 48 }}
           >
-            <img
-              src={`${import.meta.env.BASE_URL}image/logo12.png`}
-              alt="Logo"
-              className="h-10 w-10 md:h-12 md:w-12 object-contain rounded-full"
-              style={{
-                maxHeight: 48,
-                maxWidth: 48,
-                objectFit: 'contain',
-                display: 'block',
-                marginTop: 0,
-                marginBottom: 0,
-              }}
+            <LogoSvg 
+              size="sm" 
+              variant="light" 
+              animated={true}
+              className="h-10 w-10 md:h-12 md:w-12"
             />
             <span className="ml-2 text-xl font-display font-semibold text-organico">
               Universo Daime
@@ -158,7 +154,7 @@ const Navbar = () => {
         {/* Botão de alternância de tema */}
         <ThemeToggle className="ml-2" />
 
-        {/* Login/Account Button */}
+        {/* Login/Account Button
         <div className="hidden md:block">
           {!isAuthenticated ? (
             <Link
@@ -182,7 +178,7 @@ const Navbar = () => {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Mobile Navigation Menu */}
         <div

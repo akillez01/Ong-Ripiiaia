@@ -6,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 
 // Importações de bibliotecas
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { HashRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 // Importações de componentes de layout
 import Layout from "./components/Layout"
@@ -40,7 +40,7 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="ripiiaia-ui-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <HashRouter>
+          <BrowserRouter>
             <Layout>
               <Header />
               <Routes>
@@ -61,7 +61,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
-          </HashRouter>
+          </BrowserRouter>
           
           {/* Componentes de notificação global */}
           <Toaster />

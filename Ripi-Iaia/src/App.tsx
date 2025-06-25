@@ -10,9 +10,11 @@ import AdminBooksPage from './pages/AdminBooksPage';
 import AdminHymnsPage from './pages/AdminHymnsPage';
 import AdminPostsPage from './pages/AdminPostsPage';
 import AdminVideosPage from './pages/AdminVideosPage';
+import BarquinhaPage from './pages/BarquinhaPage';
 import BibliotecaUnificada from './pages/BibliotecaUnificada';
 import BlogPage from './pages/BlogPage';
 import CanticosFlorestaPage from './pages/CanticosFlorestaPage';
+import CentrosEspirituaisPage from './pages/CentrosEspirituaisPage';
 import Colonia5000Page from './pages/Colonia5000Page';
 import ContatoPage from './pages/ContatoPage';
 import HomePage from './pages/HomePage';
@@ -140,6 +142,8 @@ function AppContent() {
       <Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
       <Route path="/biblioteca/*" element={<PageLayout><BibliotecaUnificada /></PageLayout>} />
       <Route path="/colonia5000" element={<PageLayout><Colonia5000Page /></PageLayout>} />
+      <Route path="/barquinha" element={<PageLayout><BarquinhaPage /></PageLayout>} />
+      <Route path="/centros-espirituais" element={<PageLayout><CentrosEspirituaisPage /></PageLayout>} />
       <Route path="/canticos-floresta" element={<PageLayout><CanticosFlorestaPage /></PageLayout>} />
       <Route path="/live" element={<PageLayout><LivePage /></PageLayout>} />
       <Route path="/loja" element={<PageLayout><LojaPage /></PageLayout>} />
