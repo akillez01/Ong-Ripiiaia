@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const Colonia5000Page = () => {
-  const { t, i18n } = useTranslation();
+  useTranslation();
 
   useEffect(() => {
     document.title = 'Colônia 5000 | Santo Daime - Padrinho Sebastião';

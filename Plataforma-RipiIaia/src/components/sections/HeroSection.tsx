@@ -1,5 +1,6 @@
 // src/components/HeroSection.tsx
 import { Button } from "@/components/ui/button";
+import getMediaPath from "@/lib/utils/assetPath";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -43,50 +44,69 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative py-8 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/100 text-gray-100 min-h-screen flex flex-col">
-      {/* Fundo abstrato com imagem da floresta */}
-      <div className="absolute inset-0 z-0 opacity-100">
-        <div 
-          className="absolute inset-0 bg-[url('/images/Frame2.jpg')] bg-cover bg-center"
-          style={{ filter: "blur(0px)" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/30" />
-      </div>
+    <>
+      {/* Seção Hero - apenas com o texto principal */}
+      <section className="relative py-20 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/100 text-gray-100 min-h-[70vh] flex flex-col justify-center items-center">
+        {/* Fundo abstrato com imagem da floresta */}
+        <div className="absolute inset-0 z-0 opacity-100">
+          <div 
+            className="absolute inset-0 bg-[url('/images/Frame2.jpg')] bg-cover bg-center"
+            style={{ filter: "blur(0px)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/30" />
+        </div>
 
-      <div className="container mx-auto flex-1 flex flex-col">
-        {/* Conteúdo principal com vídeo em destaque */}
-        <div className="flex-1 flex flex-col justify-center">
-          {/* Logo e texto compactos */}
-          <div className="w-full flex flex-col items-center mb-2 md:mb-4">
-            <div className="bg-profundo/40 backdrop-blur-sm p-3 md:p-4 rounded-xl border-2 border-celestial/40 shadow-md mb-2">
-              <img
-                src="/images/ripi3.png"
-                alt="Logo Ripi Iaiá"
-                className="h-16 md:h-20 lg:h-24 transition-all duration-300 hover:scale-105"
-              />
+        <div className="container mx-auto relative z-10">
+          {/* Logo e texto principal alinhados à direita */}
+          <div className="w-full flex flex-col items-end mb-12">
+            {/* Logo à direita */}
+            <div className="mb-6">
+              {/* <div className="bg-profundo/40 backdrop-blur-sm p-3 md:p-5 rounded-xl border-2 border-celestial/40 shadow-md">
+                <img
+                  src={getMediaPath("/images/ripi3.png")}
+                  alt="Logo Ripi Iaiá"
+                  className="h-20 md:h-24 lg:h-28 transition-all duration-300 hover:scale-105"
+                />
+              </div> */}
             </div>
-            <div className="text-center mt-6 max-w-2xl relative z-10">
-              <div className="bg-profundo/40 backdrop-blur-sm p-4 md:p-6 rounded-xl border-2 border-celestial/40 shadow-md">
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-white"
+            
+            {/* Conteúdo à direita */}
+            <div className="flex flex-col items-end max-w-xl">
+              <div className="bg-profundo/40 backdrop-blur-sm p-6 md:p-8 rounded-xl border-2 border-celestial/40 shadow-md w-full">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white text-right"
                     style={{ 
                       textShadow: "0 2px 3px rgba(0,0,0,0.5)",
                       letterSpacing: "0.02em"
                     }}>
-                  Tecnologia que escuta as raízes
+                  A Ripi Iaiá nasce como um grito da floresta: por respeito, verdade e transparência.
                 </h1>
-                <div className="h-1 w-24 mx-auto bg-celestial/70 rounded-full mb-3"></div>
-                <p className="text-sm md:text-base font-medium text-white"
+                <div className="h-1 w-32 ml-auto bg-celestial/70 rounded-full mb-6"></div>
+                {/* <p className="text-xl md:text-2xl font-medium text-white mb-4 text-right"
                    style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}>
                   A floresta conecta. A gente traduz.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Player de vídeo em grande destaque */}
+      {/* Seção do vídeo - separada e abaixo do Hero */}
+      <section className="py-16 px-4 bg-gradient-to-br from-profundo/90 to-raiz/70 text-gray-100">
+        <div className="container mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-white">
+              TECNOLOGIA QUE ESCULTSA AS RAÍZES
+            </h2>
+            <p className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-white">
+              A fLORESTA CONECTA A GENTE TRADUZ.
+            </p>
+          </div>
+
+          {/* Player de vídeo */}
           <div
             ref={videoContainerRef}
-            className="w-full max-w-6xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-organico/30 bg-amber-700 relative"
+            className="w-full max-w-5xl mx-auto rounded-lg overflow-hidden shadow-2xl border-2 border-celestial/30 bg-profundo relative mb-12"
           >
             <div className="aspect-w-16 aspect-h-9 w-full">
               {isLoading && (
@@ -97,7 +117,7 @@ const HeroSection = () => {
               <video
                 ref={videoRef}
                 className="w-full h-[60vh] min-h-[400px] md:min-h-[500px] lg:min-h-[600px] object-cover"
-                src="/videos/MANAUS AMAZONIA3.mp4"
+                src={getMediaPath("/videos/MANAUS AMAZONIA3.mp4")}
                 title="Vídeo de Apresentação Ripi Iaiá"
                 preload="auto"
                 autoPlay
@@ -106,7 +126,7 @@ const HeroSection = () => {
                 muted={isMuted}
                 controls
                 onLoadedData={handleVideoLoaded}
-                poster="/images/floresta2.jpg"
+                poster={getMediaPath("/images/floresta2.jpg")}
               ></video>
             </div>
 
@@ -130,38 +150,39 @@ const HeroSection = () => {
               )}
             </button>
           </div>
-        </div>
 
-        {/* Card "Sobre" compacto */}
-        <div className="w-full max-w-3xl mx-auto mt-6 mb-8">
-          <div className="bg-gradient-to-br from-profundo/80 via-celestial/80 to-raiz/80 border border-organico/50 rounded-xl p-4 md:p-6 shadow-lg backdrop-blur-sm overflow-hidden">
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <img
-                src="/images/floresta1.png"
-                alt="Fundo floresta"
-                className="w-full h-full object-cover opacity-20 rounded-xl"
-              />
-            </div>
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center">
-              <div className="flex-1 mb-3 md:mb-0">
-                <p className="text-gray-100 text-sm md:text-base leading-relaxed">
-                  A Ripi Iaiá nasce como um grito da floresta: por respeito, verdade e transparência.
-                </p>
+          {/* Card "Sobre" - agora abaixo do vídeo */}
+          <div className="w-full max-w-3xl mx-auto">
+            <div className="bg-gradient-to-br from-profundo/90 via-celestial/60 to-raiz/80 border border-organico/50 rounded-xl p-6 md:p-8 shadow-lg backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <img
+                  src={getMediaPath("/images/floresta1.png")}
+                  alt="Fundo floresta"
+                  className="w-full h-full object-cover opacity-20 rounded-xl"
+                />
               </div>
-              <div className="md:pl-4 md:border-l md:border-organico/30 w-full md:w-auto">
-                <Link to="/fundacao" className="block">
-                  <Button className="w-full md:w-auto bg-organico hover:bg-luz text-white px-4 py-2 rounded-lg transition-all group text-sm">
-                    <span className="mr-1">Conheça nossa fundação</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+              
+              <div className="relative z-10 flex flex-col md:flex-row items-center">
+                {/* <div className="flex-1 mb-6 md:mb-0">
+                  <h3 className="text-xl font-bold text-luz mb-3">Nossa Fundação</h3>
+                  <p className="text-gray-100 text-base md:text-lg leading-relaxed">
+                    Somos uma organização dedicada a criar pontes entre a sabedoria ancestral da floresta e o mundo digital, trazendo transparência e respeito às tradições.
+                  </p>
+                </div> */}
+                <div className="md:pl-6 md:border-l md:border-organico/30 w-full md:w-auto">
+                  <Link to="/fundacao" className="block">
+                    <Button className="w-full md:w-auto bg-organico hover:bg-luz text-white px-6 py-3 rounded-lg transition-all group">
+                      <span className="mr-2">Conheça nossa fundação</span>
+                      <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

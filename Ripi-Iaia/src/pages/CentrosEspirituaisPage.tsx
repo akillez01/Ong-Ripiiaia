@@ -83,7 +83,7 @@ const centrosEspirituais = [
 const linhagens = ["Todas", "Santo Daime", "Barquinha", "Ayahuasca", "Umbandaime"];
 
 const CentrosEspirituaisPage = () => {
-  const { t } = useTranslation();
+  useTranslation();
   const [filtroLinhagem, setFiltroLinhagem] = useState("Todas");
   const [centrosFiltrados, setCentrosFiltrados] = useState(centrosEspirituais);
 

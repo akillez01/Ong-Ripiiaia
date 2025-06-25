@@ -1,4 +1,5 @@
 import { OptimizedImage } from '@/components/ui/media/OptimizedImage';
+import getMediaPath from '@/lib/utils/assetPath';
 import React from 'react';
 
 interface LogoProps {
@@ -41,10 +42,10 @@ const LogoSvg: React.FC<LogoProps> = ({
       flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-105
     `}>
       <OptimizedImage
-        src="logo04.png"
+        src="ripi1.svg"
         alt="Ripi Iaiá Logo"
         className="object-contain w-full h-full"
-        baseUrl="/image/"
+        baseUrl={getMediaPath("/images/")}
         loading="eager" // Logo é importante, deve carregar com prioridade
         sizes={size === 'xl' ? '8rem' : size === 'lg' ? '5rem' : size === 'md' ? '3rem' : '2rem'}
       />

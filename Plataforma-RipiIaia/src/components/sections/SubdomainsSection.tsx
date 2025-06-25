@@ -10,6 +10,21 @@ const SubdomainsSection = () => {
     "/images/Slide 19.png"
   ];
   const [bgIndex, setBgIndex] = useState(0);
+  const [expandedCards, setExpandedCards] = useState<number[]>([]);
+
+  // Função para controlar a expansão/contração dos cards
+  const toggleCardExpansion = (index: number) => {
+    setExpandedCards(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index) 
+        : [...prev, index]
+    );
+  };
+
+  // Verifica se um card está expandido
+  const isCardExpanded = (index: number) => {
+    return expandedCards.includes(index);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -75,18 +90,12 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
   ];
 
   // Funções de estilo
-  const getCardClasses = (designType: string, primaryColor: string, secondaryColor: string, span?: string, minHeightClass?: string) => {
-    // Base classes para todos os cards
-    let classes = `group relative overflow-hidden bg-black text-white rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${minHeightClass || 'min-h-[450px]'} `;
+  const getCardClasses = (designType: string, primaryColor: string, secondaryColor: string, span?: string, minHeightClass?: string, expanded?: boolean) => {
+    // Base classes para todos os cards - reduzindo a altura mínima
+    let classes = `group relative overflow-hidden text-raiz rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${minHeightClass || (expanded ? 'min-h-[400px]' : 'min-h-[300px]')} `;
 
-    // Classes específicas com base no tipo de design do card
-    if (designType === "gradient-card") {
-      classes += `bg-gradient-to-br from-${primaryColor}-500/80 via-${secondaryColor}-500/60 to-transparent backdrop-blur-md border border-${primaryColor}-400/20 `;
-    } 
-    else if (designType === "gradient-card-with-image") {
-      // Para cards com imagem de fundo (como o de doação)
-      classes += `bg-gradient-to-br from-${primaryColor}-800/40 via-${secondaryColor}-600/20 to-transparent backdrop-blur-sm border border-${primaryColor}-400/20 `;
-    }
+    // Usando a cor sabedoria (#D1B070) como cor de fundo para todos os cards
+    classes += `bg-sabedoria border border-organico/20 shadow-md `;
 
     // Adiciona classes de span (para controle de grade)
     if (span) {
@@ -97,30 +106,36 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
   };
 
   const getIconClasses = (designType: string, primaryColor: string) => {
-    return `inline-flex items-center justify-center p-2 rounded-full ${designType === "gradient-card" ? `bg-${primaryColor}-500/80` : `bg-${primaryColor}-600`}`;
+    return `inline-flex items-center justify-center p-2 rounded-full bg-${primaryColor} text-white`;
   };
 
   const getTitleClasses = (designType: string, primaryColor: string) => {
-    return `font-bold text-xl lg:text-2xl text-${designType === "gradient-card" ? `${primaryColor}-200` : 'white'}`;
+    return `font-bold text-xl lg:text-2xl text-raiz`;
   };
 
   const getSubtitleClasses = (designType: string, primaryColor: string) => {
-    return `text-sm lg:text-base italic text-${designType === "gradient-card" ? `${primaryColor}-300/80` : 'gray-300'}`;
+    return `text-sm lg:text-base italic text-profundo/80`;
   };
 
-  const getDescriptionClasses = (designType: string) => {
-    return `mb-8 text-sm lg:text-base ${designType === "flat-card" ? 'text-gray-300' : 'text-gray-200'}`;
+  const getDescriptionClasses = (designType: string, isExpanded?: boolean) => {
+    return `mb-4 text-sm lg:text-base text-raiz/90 ${isExpanded ? '' : 'line-clamp-3'}`;
   };
 
   const getFeatureClasses = (designType: string, primaryColor: string) => {
-    return `flex items-center gap-2 text-${primaryColor}-200 text-sm`;
+    return `flex items-center gap-2 text-profundo text-sm`;
   };
 
-  const getLinkClasses = (primaryColor: string) => {
-    return `block text-center py-3 px-6 rounded-xl transition-all duration-300 
-    bg-${primaryColor} hover:bg-${primaryColor === "organico" ? 'luz' : primaryColor === "sabedoria" ? 'organico' : primaryColor === "celestial" ? 'profundo' : 'organico'} text-white 
+  const getLinkClasses = (primaryColor: string, isExpanded?: boolean) => {
+    return `block text-center py-2 px-4 rounded-lg transition-all duration-300 
+    ${isExpanded ? 'bg-raiz' : 'bg-profundo'} hover:bg-organico text-white 
     font-medium text-sm sm:text-base
-    transform hover:scale-105 border border-${primaryColor}/30`;
+    transform hover:scale-105 border border-white/10`;
+  };
+  
+  const getExpandButtonClasses = () => {
+    return `block text-center py-2 px-4 w-full mt-4 rounded-lg transition-all duration-300 
+    bg-organico/80 hover:bg-organico text-white 
+    font-medium text-sm transform hover:scale-105`;
   };
 
   return (
@@ -150,42 +165,69 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
         
         {/* Grid principal - reorganizado para 3 cards em linha em telas médias */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto items-stretch">
-          {subdomains.slice(0, 3).map((subdomain, index) => (
-            <div
-              key={index}
-              className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, "", subdomain.minHeightClass) + ' w-full max-w-full min-w-0'}
-              style={{wordBreak: 'break-word', hyphens: 'auto'}}
-            >
-              {/* Conteúdo do Card */}
-              <div className={`relative z-10 p-4 sm:p-6 md:p-8 flex flex-col justify-between h-full`}>
-                <div className="flex items-center gap-4 border-b border-white/10 pb-6 sm:pb-8 mb-6 sm:mb-8">
-                  <span className={getIconClasses(subdomain.designType, subdomain.primaryColor)}>
-                    {subdomain.icon && <subdomain.icon className="w-8 h-8 text-white" />}
-                  </span>
-                  <div className="text-left">
-                    <h3 className={getTitleClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.title}</h3>
-                    <span className={getSubtitleClasses(subdomain.designType, subdomain.primaryColor)}>{subdomain.subtitle}</span>
+          {subdomains.slice(0, 3).map((subdomain, index) => {
+            const expanded = isCardExpanded(index);
+            return (
+              <div
+                key={index}
+                className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, "", subdomain.minHeightClass, expanded) + ' w-full max-w-full min-w-0'}
+                style={{wordBreak: 'break-word', hyphens: 'auto'}}
+              >
+                {/* Conteúdo do Card */}
+                <div className={`relative z-10 p-4 sm:p-6 flex flex-col justify-between h-full`}>
+                  <div className="flex items-center gap-4 border-b border-raiz/20 pb-4 sm:pb-6 mb-4 sm:mb-6">
+                    <span className={getIconClasses(subdomain.designType, subdomain.primaryColor)}>
+                      {subdomain.icon && <subdomain.icon className="w-6 h-6 text-white" />}
+                    </span>
+                    <div className="text-left">
+                      <h3 className={getTitleClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.title}</h3>
+                      <span className={getSubtitleClasses(subdomain.designType, subdomain.primaryColor)}>{subdomain.subtitle}</span>
+                    </div>
+                  </div>
+                  
+                  {/* Conteúdo expansível */}
+                  <div className={`transition-all duration-300 ${expanded ? 'max-h-[800px]' : 'max-h-[120px] overflow-hidden'}`}>
+                    <p className={getDescriptionClasses(subdomain.designType, expanded) + ' break-words w-full max-w-full'} 
+                       style={{wordBreak: 'break-word', hyphens: 'auto'}}>
+                      {subdomain.description}
+                    </p>
+                    
+                    {expanded && (
+                      <ul className="mb-4 grid grid-cols-2 gap-2 text-sm">
+                        {subdomain.features.map((feature, i) => (
+                          <li key={i} className={getFeatureClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} 
+                              style={{wordBreak: 'break-word', hyphens: 'auto'}}>
+                            <span className={`inline-block w-2 h-2 bg-organico rounded-full`}></span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  
+                  {/* Botões */}
+                  <div className="mt-auto pt-4">
+                    <button 
+                      onClick={() => toggleCardExpansion(index)}
+                      className={getExpandButtonClasses()}
+                    >
+                      {expanded ? 'Mostrar menos' : 'Saiba mais'}
+                    </button>
+                    
+                    {expanded && (
+                      <Link
+                        to={subdomain.route}
+                        className={getLinkClasses(subdomain.primaryColor, expanded) + ' mt-4 w-full max-w-full break-words'}
+                        style={{wordBreak: 'break-word', hyphens: 'auto'}}
+                      >
+                        Acessar
+                      </Link>
+                    )}
                   </div>
                 </div>
-                <p className={getDescriptionClasses(subdomain.designType) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.description}</p>
-                <ul className="mb-6 grid grid-cols-2 gap-2 text-sm">
-                  {subdomain.features.map((feature, i) => (
-                    <li key={i} className={getFeatureClasses(subdomain.designType, subdomain.primaryColor) + ' break-words w-full max-w-full'} style={{wordBreak: 'break-word', hyphens: 'auto'}}>
-                      <span className={`inline-block w-2 h-2 bg-luz rounded-full`}></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to={subdomain.route}
-                  className={getLinkClasses(subdomain.primaryColor) + ' w-full max-w-full break-words'}
-                  style={{wordBreak: 'break-word', hyphens: 'auto'}}
-                >
-                  Acessar
-                </Link>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         {/* Card de doação em destaque abaixo */}
@@ -196,33 +238,24 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
               className={getCardClasses(subdomain.designType, subdomain.primaryColor, subdomain.secondaryColor, subdomain.span, subdomain.minHeightClass) + ' w-full max-w-full min-w-0'}
               style={{wordBreak: 'break-word', hyphens: 'auto'}}
             >
-              {/* Internal Background Image para o card de doações */}
-              {subdomain.internalBgImage && (subdomain.designType === "gradient-card-with-image") && (
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={subdomain.internalBgImage}
-                    alt={`${subdomain.title} Background`}
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-                  {/* Overlay para escurecer e contraste do texto */}
-                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/70 transition-colors duration-300 rounded-2xl" />
-                </div>
-              )}
-
               {/* Conteúdo do Card */}
               <div className={`relative z-10 p-6 sm:p-8 md:p-10 flex flex-col justify-between h-full`}>
-                <div className="flex items-center gap-4 border-b border-white/10 pb-6 sm:pb-8 mb-6 sm:mb-8">
-                  <span className={getIconClasses(subdomain.designType, subdomain.primaryColor)}>
-                    {subdomain.icon && <subdomain.icon className="w-10 h-10 text-white" />}
+                <div className="flex items-center gap-4 border-b border-raiz/20 pb-4 sm:pb-6 mb-4 sm:mb-6">
+                  <span className={`inline-flex items-center justify-center p-3 rounded-full bg-${subdomain.primaryColor} text-white`}>
+                    {subdomain.icon && <subdomain.icon className="w-12 h-12 text-white" />}
                   </span>
                   <div className="text-left">
-                    <h3 className={`text-3xl ${getTitleClasses(subdomain.designType, subdomain.primaryColor)} break-words w-full max-w-full`} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.title}</h3>
-                    <span className={`text-base ${getSubtitleClasses(subdomain.designType, subdomain.primaryColor)}`}>{subdomain.subtitle}</span>
+                    <h3 className={`text-xl sm:text-2xl lg:text-3xl font-bold text-raiz leading-tight tracking-tight break-words w-full max-w-full`} style={{wordBreak: 'break-word', hyphens: 'auto'}}>Doações e Apoio, sua Contribuição Transforma Vidas</h3>
                   </div>
                 </div>
+                
+                {/* Conteúdo em duas colunas - sem expansão */}
                 <div className="md:grid md:grid-cols-2 gap-8">
                   <div>
-                    <p className={`text-xl ${getDescriptionClasses(subdomain.designType)} break-words w-full max-w-full`} style={{wordBreak: 'break-word', hyphens: 'auto'}}>{subdomain.description}</p>
+                    <p className={`text-lg ${getDescriptionClasses(subdomain.designType)} break-words w-full max-w-full`} 
+                       style={{wordBreak: 'break-word', hyphens: 'auto'}}>
+                      {subdomain.description}
+                    </p>
                   </div>
                   <div>
                     <ul className="mb-6 grid grid-cols-2 gap-4 text-base">
@@ -233,14 +266,22 @@ Cada comunidade é única. Cada cultura, um universo. Nossa missão é revelar e
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      to={subdomain.route}
-                      className={`text-lg py-4 ${getLinkClasses(subdomain.primaryColor)} w-full max-w-full break-words`}
-                      style={{wordBreak: 'break-word', hyphens: 'auto'}}
-                    >
-                      Apoiar Agora
-                    </Link>
                   </div>
+                </div>
+                
+                {/* Botão de Apoiar */}
+                <div className="mt-4 text-center">
+                  <Link
+                    to={subdomain.route}
+                    className={`block py-3 px-8 rounded-lg transition-all duration-300 
+                    bg-raiz hover:bg-organico text-white 
+                    font-medium text-lg sm:text-xl
+                    transform hover:scale-105 border border-white/10 
+                    max-w-md mx-auto`}
+                    style={{wordBreak: 'break-word', hyphens: 'auto'}}
+                  >
+                    Apoiar Agora
+                  </Link>
                 </div>
               </div>
             </div>

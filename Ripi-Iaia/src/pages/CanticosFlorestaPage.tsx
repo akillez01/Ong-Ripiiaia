@@ -99,7 +99,7 @@ const partners = [
 ];
 
 const CanticosFlorestaPage = () => {
-  const { t, i18n } = useTranslation();
+  useTranslation();
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {

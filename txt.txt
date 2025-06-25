@@ -5,3 +5,39 @@ Raiz #383531
 Celestial  #315D85
 Luz #FFAF3A
 
+# Comandos usados para corrigir os scripts de otimização de mídia
+
+## Diagnóstico inicial
+- `npm run build` - Verificação do processo de build
+- `npm run deploy` - Revelou o erro com o require em módulos ES
+
+## Inspeção dos arquivos
+- `ls scripts/optimize-images.js` - Localizar script de imagens
+- `ls scripts/optimize-videos.js` - Localizar script de vídeos
+
+## Correção dos scripts
+- `node --trace-warnings scripts/optimize-images.js` - Executar script com rastreamento de warnings
+- `npm run create-image-dirs` - Criar diretórios necessários para os scripts
+
+## Teste dos scripts corrigidos
+- `npm run optimize-images` - Testar script de imagens após correção
+- `npm install ffprobe-static --save-dev` - Instalar dependência para o ffprobe no script de vídeos
+- `npm run optimize-videos` - Testar script de vídeos após correção
+- `npm run optimize-media` - Testar ambos os scripts em conjunto
+
+## Atualização de dependências
+- `npx update-browserslist-db@latest` - Atualizar database do browserslist
+
+## Modificações realizadas
+1. Correção do script de otimização de imagens:
+   - Substituição da sintaxe dinâmica `[format]({...})` por chamadas condicionais explícitas
+   - Uso de métodos específicos como `.webp()`, `.jpeg()` e `.png()`
+
+2. Correção do script de otimização de vídeos:
+   - Adição do pacote `ffprobe-static` 
+   - Configuração do caminho do ffprobe com `ffmpeg.setFfprobePath(ffprobeStatic.path)`
+
+## Comandos do deploy completo
+- `npm run optimize-media && vite build` - Otimizar mídia e fazer o build
+- `npm run deploy` - Deploy para o GitHub Pages
+

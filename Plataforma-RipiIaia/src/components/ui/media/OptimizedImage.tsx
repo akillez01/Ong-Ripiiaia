@@ -31,9 +31,18 @@ export const OptimizedImage = ({
   // Remove a extensão do arquivo se existir
   const baseName = src.replace(/\.(jpg|jpeg|png|gif|webp)$/i, "");
   
+  // Base URL do Vite para ativos estáticos
+  const viteBaseUrl = import.meta.env.BASE_URL || '/';
+  
   // Se o src já for uma URL completa, use-a diretamente
   const isExternalUrl = src.startsWith('http') || src.startsWith('//');
-  const imgSrc = isExternalUrl ? src : `${baseUrl}${baseName}`;
+  
+  // Adiciona a base URL do Vite aos caminhos de imagens
+  const processedBaseUrl = baseUrl.startsWith('/') ? 
+    `${viteBaseUrl}${baseUrl.substring(1)}` : 
+    baseUrl;
+  
+  const imgSrc = isExternalUrl ? src : `${processedBaseUrl}${baseName}`;
   
   // Tamanhos disponíveis para imagens responsivas
   const availableSizes = [400, 800, 1200];
@@ -43,7 +52,7 @@ export const OptimizedImage = ({
     if (isExternalUrl) return undefined;
     
     return availableSizes
-      .map(size => `${baseUrl}${baseName}-${size}.${format} ${size}w`)
+      .map(size => `${processedBaseUrl}${baseName}-${size}.${format} ${size}w`)
       .join(', ');
   };
 

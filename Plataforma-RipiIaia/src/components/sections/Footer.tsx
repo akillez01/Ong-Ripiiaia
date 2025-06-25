@@ -1,6 +1,7 @@
 // src/components/Footer.tsx
 
 import { Button } from "@/components/ui/button";
+import getMediaPath from "@/lib/utils/assetPath";
 import { Facebook, Instagram, Mail, MapPin, Radio, Twitter, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -13,7 +14,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <Link to="/" className="flex items-center gap-3 mb-6 group">
               <img 
-                src="/images/Vector6.png" 
+                src={getMediaPath("/images/Vector6.png")} 
                 alt="Logo Ripi Iaiá" 
                 className="h-12 w-auto transition-transform group-hover:scale-105"
               />

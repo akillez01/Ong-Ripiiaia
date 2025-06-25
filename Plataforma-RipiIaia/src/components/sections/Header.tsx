@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import getMediaPath from "@/lib/utils/assetPath";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ const Header = () => {
       {/* Imagem de fundo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src="/images/img3.png"
+          src={getMediaPath("/images/img3.png")}
           alt="Fundo Amazônico"
           className="w-full h-full object-cover"
           loading="lazy"
@@ -32,19 +33,19 @@ const Header = () => {
             className="flex items-center gap-3 group"
           >
             <img
-              src="/images/Mask group.svg"
+              src={getMediaPath("/images/Mask group.svg")}
               alt="Logo Ripi Iaiá"
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col">
               <img
-                src="/images/ripi2.svg"
+                src={getMediaPath("/images/logoheader1.svg")}
                 alt="Ripi Iaiá"
                 className="h-8 w-auto transition-colors group-hover:opacity-90"
               />
-              <span className="text-xs font-serif text-sabedoria/80 -mt-1">
+              {/* <span className="text-xs font-serif text-sabedoria/80 -mt-1">
                 Plataforma Digital
-              </span>
+              </span> */}
             </div>
           </Link>
 

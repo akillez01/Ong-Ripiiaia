@@ -1,3 +1,4 @@
+import getMediaPath from "@/lib/utils/assetPath";
 import { ArrowLeft, Clock, Construction, Leaf } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -17,7 +18,7 @@ const NotFound = () => {
       {/* Imagem de fundo com overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/floresta2.jpg" 
+          src={getMediaPath("/images/floresta2.jpg")} 
           alt="Floresta" 
           className="w-full h-full object-cover opacity-20"
         />

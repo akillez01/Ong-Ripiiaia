@@ -7,14 +7,21 @@
  * 2. Coloque seus vídeos em src/videos-original
  * 3. Execute: node scripts/optimize-videos.js
  */
-const ffmpeg = require('fluent-ffmpeg');
-const ffmpegPath = require('ffmpeg-static');
-const fs = require('fs-extra');
-const path = require('path');
-const glob = require('glob');
+import ffmpegStatic from 'ffmpeg-static';
+import ffprobeStatic from 'ffprobe-static';
+import ffmpeg from 'fluent-ffmpeg';
+import fs from 'fs-extra';
+import { glob } from 'glob';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Configura o caminho do ffmpeg
-ffmpeg.setFfmpegPath(ffmpegPath);
+// Obter o diretório atual em módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configura o caminho do ffmpeg e ffprobe
+ffmpeg.setFfmpegPath(ffmpegStatic);
+ffmpeg.setFfprobePath(ffprobeStatic.path);
 
 // Configuração
 const config = {
@@ -58,7 +65,7 @@ async function optimizeVideos() {
     await fs.ensureDir(config.thumbnailDir);
     
     // Lê todos os arquivos de vídeo na pasta de entrada
-    const videoFiles = glob.sync(
+    const videoFiles = await glob(
       path.join(config.inputDir, '**/*.{mp4,mov,avi,mkv,webm,flv}'),
       { nodir: true }
     );

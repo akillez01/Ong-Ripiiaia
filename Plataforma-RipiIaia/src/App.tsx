@@ -40,7 +40,7 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="ripiiaia-ui-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Layout>
               <Header />
               <Routes>

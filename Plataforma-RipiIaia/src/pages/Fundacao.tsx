@@ -2,29 +2,30 @@
 import CallToActionSection from "@/components/sections/CallToActionSection";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import getMediaPath from "@/lib/utils/assetPath";
 import {
-  ArrowLeft,
-  ArrowRight,
-  Bookmark,
-  BookOpen,
-  Calendar,
-  ChevronDown,
-  ChevronUp,
-  CircleDashed,
-  FileText,
-  Globe,
-  Handshake,
-  Heart,
-  HeartHandshake,
-  Leaf,
-  Mountain,
-  Network,
-  Shield,
-  Sprout,
-  Target,
-  Users,
-  Waves,
-  Zap
+    ArrowLeft,
+    ArrowRight,
+    Bookmark,
+    BookOpen,
+    Calendar,
+    ChevronDown,
+    ChevronUp,
+    CircleDashed,
+    FileText,
+    Globe,
+    Handshake,
+    Heart,
+    HeartHandshake,
+    Leaf,
+    Mountain,
+    Network,
+    Shield,
+    Sprout,
+    Target,
+    Users,
+    Waves,
+    Zap
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -113,7 +114,7 @@ const Fundacao = () => {
             </Link>
             <div className="flex items-center space-x-3">
               <img
-                src="/images/Vector6.png"
+                src={getMediaPath("/images/Vector6.png")}
                 alt="Logo Ripi Iaiá"
                 className="w-10 h-10 object-contain"
               />
@@ -130,7 +131,7 @@ const Fundacao = () => {
       <section className="relative py-24 px-4 bg-gradient-to-br from-profundo to-raiz/90 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="./images/Slide 19.png"
+            src={getMediaPath("images/Slide 19.png")}
             alt="Floresta Amazônica"
             className="w-full h-full object-cover opacity-60"
           />

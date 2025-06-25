@@ -1,6 +1,7 @@
 // src/pages/Comunidades.tsx
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import getMediaPath from "@/lib/utils/assetPath";
 import { BookOpen, ChevronLeft, ChevronRight, Disc3, Film, Globe, Mic2, Music, Sprout, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -17,7 +18,7 @@ const plataformas: CommunityItem[] = [
   {
     title: "Ripi Iaiá - Universo Daime",
     description: "Conteúdo, cultura e espiritualidade do Daime e medicinas da floresta.",
-    url: "https://dreamy-carson.66-179-92-233.plesk.page/",
+    url: "https://universodaime.ripiiaia.org",
     type: "Portal Principal",
     category: 'portal'
     // Imagem definida no objeto previewImages como: "/images/floresta1.png"
@@ -118,7 +119,7 @@ const tradicoes = ["Alto Santo", "Barquinha", "CEFLURIS", "Umbanda Sagrada", "Ay
 
 const previewImages: Record<string, string> = {
   "Cânticos da Floresta Online": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-  "Ripi Iaiá - Universo Daime": "/images/Floresta.jpeg",
+  "Ripi Iaiá - Universo Daime": getMediaPath("/images/logo04.png"),
   "Comunidade 5000": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
   "Tribos": "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
   "Santo Daime Internacional": "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
@@ -191,7 +192,7 @@ const CommunityCard = ({ item }: { item: CommunityItem }) => {
       <div 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500"
         style={{
-          backgroundImage: `url(${previewImages[item.title] || 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'})`,
+          backgroundImage: `url(${previewImages[item.title] || getMediaPath('/images/floresta1.png')})`,
           transform: isHovered ? 'scale(1.05)' : 'scale(1)'
         }}
       ></div>
@@ -234,7 +235,7 @@ const ArtistCard = ({ item, active }: { item: CommunityItem, active: boolean }) 
       <div className="bg-luz rounded-xl shadow-md overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow">
         <div className="relative h-48 overflow-hidden">
           <img
-            src={previewImages[item.title] || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'}
+            src={previewImages[item.title] || getMediaPath('/images/floresta1.png')}
             alt={item.title}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             loading="lazy"

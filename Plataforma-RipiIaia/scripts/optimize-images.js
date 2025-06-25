@@ -8,10 +8,15 @@
  * 2. Coloque suas imagens em src/images-original
  * 3. Execute: node scripts/optimize-images.js
  */
-const sharp = require('sharp');
-const fs = require('fs-extra');
-const path = require('path');
-const glob = require('glob');
+import fs from 'fs-extra';
+import { glob } from 'glob';
+import path from 'path';
+import sharp from 'sharp';
+import { fileURLToPath } from 'url';
+
+// Obter o diretório atual em módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuração
 const config = {
@@ -53,7 +58,7 @@ async function optimizeImages() {
     await fs.ensureDir(config.outputDir);
     
     // Lê todos os arquivos de imagem na pasta de entrada
-    const imageFiles = glob.sync(
+    const imageFiles = await glob(
       path.join(config.inputDir, '**/*.{jpg,jpeg,png,gif,svg}'),
       { nodir: true }
     );
@@ -127,15 +132,24 @@ async function processImage(filePath) {
         const outputPath = path.join(outputFolder, `${fileNameWithoutExt}-${size}.${format}`);
         
         // Redimensiona e salva a imagem
-        await image
-          .clone()
-          .resize({ width: size, withoutEnlargement: true })
-          [format]({
+        const resizedImage = image.clone().resize({ width: size, withoutEnlargement: true });
+        
+        // Aplica o formato correto
+        if (format === 'webp') {
+          await resizedImage.webp({
             quality: config.quality[format] || 80,
-            progressive: format === 'jpg',
-            lossless: format === 'webp' ? false : undefined
-          })
-          .toFile(outputPath);
+            lossless: false
+          }).toFile(outputPath);
+        } else if (format === 'jpg' || format === 'jpeg') {
+          await resizedImage.jpeg({
+            quality: config.quality[format] || 80,
+            progressive: true
+          }).toFile(outputPath);
+        } else if (format === 'png') {
+          await resizedImage.png({
+            quality: config.quality[format] || 80
+          }).toFile(outputPath);
+        }
           
         console.log(`  ✓ ${format.toUpperCase()} ${size}px`);
       }
@@ -145,14 +159,24 @@ async function processImage(filePath) {
     for (const format of formats) {
       const outputPath = path.join(outputFolder, `${fileNameWithoutExt}.${format}`);
       
-      await image
-        .clone()
-        [format]({
+      const clonedImage = image.clone();
+      
+      // Aplica o formato correto
+      if (format === 'webp') {
+        await clonedImage.webp({
           quality: config.quality[format] || 80,
-          progressive: format === 'jpg',
-          lossless: format === 'webp' ? false : undefined
-        })
-        .toFile(outputPath);
+          lossless: false
+        }).toFile(outputPath);
+      } else if (format === 'jpg' || format === 'jpeg') {
+        await clonedImage.jpeg({
+          quality: config.quality[format] || 80,
+          progressive: true
+        }).toFile(outputPath);
+      } else if (format === 'png') {
+        await clonedImage.png({
+          quality: config.quality[format] || 80
+        }).toFile(outputPath);
+      }
         
       console.log(`  ✓ ${format.toUpperCase()} original`);
     }
