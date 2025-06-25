@@ -4,8 +4,8 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Para deploy no GitHub Pages a URL será https://akillez01.github.io/Ong-Ripiiaia/
-  base: '/Ong-Ripiiaia/',
+  // Agora para deploy no domínio principal
+  base: '/',
 
   server: {
     host: "::",

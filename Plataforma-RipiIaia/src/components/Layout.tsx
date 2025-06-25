@@ -1,5 +1,5 @@
 import Footer from "@/components/sections/Footer"
-import { useTheme } from "@/components/theme/ThemeProvider"
+import { useTheme } from "@/components/theme/use-theme"
 import { ReactNode, useEffect } from 'react'
 
 const Layout = ({ children }: { children: ReactNode }) => {

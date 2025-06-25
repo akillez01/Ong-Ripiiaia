@@ -1,6 +1,9 @@
 /* Importação de fonte tribal */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 
+/* Importação dos estilos de tema */
+@import './theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -16,8 +16,8 @@ const Header = () => {
       {/* Imagem de fundo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src={getMediaPath("/images/img3.png")}
-          alt="Fundo Amazônico"
+           src={getMediaPath("/images/img3.png")}
+          // alt="Fundo Amazônico"
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -99,9 +99,12 @@ const Header = () => {
             </button>
 
             {/* Toggle de Tema Aprimorado */}
-            <div className="relative">
-              <ThemeToggle />
-              <div className="absolute inset-0 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300 bg-white/10 dark:bg-black/10"></div>
+            <div className="relative z-10 ml-2">
+              <ThemeToggle className="relative z-20" iconSize={5} />
+              <span 
+                className="absolute inset-0 -m-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/10 dark:bg-black/10"
+                style={{ pointerEvents: 'none' }}
+              ></span>
             </div>
           </div>
         </div>

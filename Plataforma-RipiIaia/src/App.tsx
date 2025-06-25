@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider"
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { useEffect } from "react"
 
 // Importações de bibliotecas
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -35,9 +36,22 @@ const queryClient = new QueryClient({
   },
 })
 
+// Importação do ThemeObserver
+import { ThemeObserver } from "./components/theme/ThemeObserver"
+
 function App() {
+  // Efeito para debugging de tema global
+  useEffect(() => {
+    console.log("[App] Inicializando aplicação");
+    console.log("[App] Tema atual (documentElement):", 
+      document.documentElement.classList.contains("dark") ? "dark" : "light");
+  }, []);
+
   return (
     <ThemeProvider defaultTheme="light" storageKey="ripiiaia-ui-theme">
+      {/* Componente de monitoramento de tema */}
+      <ThemeObserver />
+      
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <BrowserRouter basename={import.meta.env.BASE_URL}>

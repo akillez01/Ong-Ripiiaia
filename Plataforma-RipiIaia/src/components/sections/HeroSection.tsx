@@ -11,6 +11,7 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
 
+  // Controla a reprodução do vídeo quando visível
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -47,13 +48,23 @@ const HeroSection = () => {
     <>
       {/* Seção Hero - apenas com o texto principal */}
       <section className="relative py-20 px-4 bg-gradient-to-br from-transparent via-transparent to-raiz/100 text-gray-100 min-h-[70vh] flex flex-col justify-center items-center">
-        {/* Fundo abstrato com imagem da floresta */}
-        <div className="absolute inset-0 z-0 opacity-100">
-          <div 
-            className="absolute inset-0 bg-[url('/images/Frame2.jpg')] bg-cover bg-center"
-            style={{ filter: "blur(0px)" }}
+        {/* Fundo abstrato com imagem da floresta - solução simplificada e robusta */}
+        <div className="absolute inset-0 z-0">
+          {/* Background de fallback */}
+          <div className="absolute inset-0 bg-raiz"></div>
+          
+          {/* Imagem estática diretamente no DOM, sem técnicas avançadas que podem falhar */}
+          <img 
+            src="/images/Frame2.jpg" 
+            alt="Fundo Floresta"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              objectPosition: 'center'
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/30" />
+          
+          {/* Overlay de gradiente para garantir que o texto seja legível */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-raiz/40" />
         </div>
 
         <div className="container mx-auto relative z-10">
@@ -92,16 +103,16 @@ const HeroSection = () => {
       </section>
 
       {/* Seção do vídeo - separada e abaixo do Hero */}
-      <section className="py-16 px-4 bg-gradient-to-br from-profundo/90 to-raiz/70 text-gray-100">
-        <div className="container mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-white">
-              TECNOLOGIA QUE ESCULTSA AS RAÍZES
-            </h2>
-            <p className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-white">
-              A fLORESTA CONECTA A GENTE TRADUZ.
-            </p>
-          </div>
+      <section className="py-16 px-4 bg-sabedoria text-raiz">
+  <div className="container mx-auto">
+    <div className="text-center mb-10">
+      <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6 text-raiz">
+        TECNOLOGIA QUE OUVE A SABEDORIA DAS RAÍZES
+      </h2>
+      <p className="text-3xl md:text-4xl lg:text-4xl font-bold text-raiz">
+        A FLORESTA FALA. NÓS DAMOS VOZ.
+      </p>
+    </div>
 
           {/* Player de vídeo */}
           <div
@@ -126,7 +137,7 @@ const HeroSection = () => {
                 muted={isMuted}
                 controls
                 onLoadedData={handleVideoLoaded}
-                poster={getMediaPath("/images/floresta2.jpg")}
+                poster={getMediaPath("/images/Vector45.png")}
               ></video>
             </div>
 
@@ -153,10 +164,10 @@ const HeroSection = () => {
 
           {/* Card "Sobre" - agora abaixo do vídeo */}
           <div className="w-full max-w-3xl mx-auto">
-            <div className="bg-gradient-to-br from-profundo/90 via-celestial/60 to-raiz/80 border border-organico/50 rounded-xl p-6 md:p-8 shadow-lg backdrop-blur-sm overflow-hidden">
+            <div className="bg-raiz/95 border border-organico/50 rounded-xl p-6 md:p-8 shadow-lg backdrop-blur-sm overflow-hidden">
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <img
-                  src={getMediaPath("/images/floresta1.png")}
+                  src={getMediaPath("/images/Vectorripi.png")}
                   alt="Fundo floresta"
                   className="w-full h-full object-cover opacity-20 rounded-xl"
                 />

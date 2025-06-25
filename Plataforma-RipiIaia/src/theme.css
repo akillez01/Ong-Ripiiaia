@@ -1,0 +1,84 @@
+/* Estilos específicos para tema escuro */
+:root[data-theme="dark"],
+.dark {
+  --color-background: #3A3532;
+  --color-foreground: #D9A66C;
+  --color-text: #D9A66C;
+  --color-text-muted: #A68B6C;
+  --color-primary: #FFAF3A;
+  --color-secondary: #D1B070;
+  --color-accent: #55603C;
+  --color-card-bg: #403A36;
+  --color-card-border: #4A4340;
+  --color-header: #333130;
+  --color-footer: #2A2826;
+}
+
+/* Estilos específicos para tema claro */
+:root[data-theme="light"],
+.light {
+  --color-background: #FBF9F5;
+  --color-foreground: #334155;
+  --color-text: #334155;
+  --color-text-muted: #64748B;
+  --color-primary: #C96820;
+  --color-secondary: #D1B070;
+  --color-accent: #55603C;
+  --color-card-bg: #FFFFFF;
+  --color-card-border: #E2E8F0;
+  --color-header: #F8FAFC;
+  --color-footer: #F1F5F9;
+}
+
+/* Modo escuro - substituições específicas */
+.dark {
+  background-color: #3A3532;
+  color: #D1B070;
+}
+
+.dark .card {
+  background-color: #403A36;
+  border-color: #4A4340;
+}
+
+.dark .btn-primary {
+  background-color: #FFAF3A;
+}
+.dark .btn-primary:hover {
+  background-color: rgba(255, 175, 58, 0.9);
+}
+
+.dark .bg-header {
+  background-color: #333130;
+}
+
+.dark .bg-footer {
+  background-color: #2A2826;
+}
+
+/* Transições suaves ao mudar de tema */
+html,
+body,
+.card,
+.btn,
+.navbar,
+h1, h2, h3, h4, h5, h6,
+p, a, span, div {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Animação ao alternar tema */
+.theme-transition-fade-in {
+  animation: themeTransitionFade 0.5s ease forwards;
+}
+
+@keyframes themeTransitionFade {
+  from {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

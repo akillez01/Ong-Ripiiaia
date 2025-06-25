@@ -191,7 +191,7 @@ const RadioRipiiaia = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-luz to-luz/50 text-profundo font-body">
+    <div className="min-h-screen bg-gradient-to-b  to-luz/50 text-profundo font-body">
       {/* Header */}
       <header className="bg-luz/90 backdrop-blur-md border-b border-profundo/10 sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
@@ -204,7 +204,7 @@ const RadioRipiiaia = () => {
               <Radio className="w-8 h-8 text-organico" />
               <div>
                 <h1 className="text-xl font-bold text-profundo">Rádio Ripi Iaiá</h1>
-                <p className="text-sm text-organico">A voz da floresta em frequência digital</p>
+                <p className="text-sm ">A voz da floresta em frequência digital</p>
               </div>
             </div>
           </div>
@@ -268,7 +268,7 @@ const RadioRipiiaia = () => {
               </p>
 
               {/* Player */}
-              <div className="bg-luz/90 backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-md mx-auto border border-celestial/20 shadow-xl">
+              <div className="bg-luz/100 backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-md mx-auto border border-celestial/20 shadow-xl">
                 <div className="mb-6">
                   <h3 className="text-xl md:text-2xl font-semibold mb-1 ">
                     {useLocalAudio ? "Cânticos da Floresta" : currentShow.title}
@@ -336,7 +336,7 @@ const RadioRipiiaia = () => {
           </section>
 
           {/* Sobre a Rádio */}
-          <section className="py-16 px-4 bg-luz">
+          <section className="py-16 px-4 ">
             <div className="container mx-auto max-w-6xl">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div className="bg-luz rounded-xl shadow-inner border border-profundo/10 p-8 h-full">

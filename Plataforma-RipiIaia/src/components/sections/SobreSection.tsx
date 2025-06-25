@@ -1,4 +1,4 @@
-import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTheme } from "@/components/theme/use-theme";
 import { Building } from "lucide-react";
 import { Link } from "react-router-dom";
 

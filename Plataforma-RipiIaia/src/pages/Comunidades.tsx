@@ -289,7 +289,7 @@ const ArtistsCarousel = () => {
   }, [isPaused]);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-luz to-raiz/5">
+    <section className="py-16 bg-gradient-to-b  to-raiz/5">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-profundo mb-4">
@@ -347,7 +347,7 @@ const PortalGrid = () => {
   const [activeTab, setActiveTab] = useState<'portais' | 'subdominios'>('portais');
 
   return (
-    <section className="py-16 bg-luz">
+    <section className="py-16 ">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-profundo mb-4">

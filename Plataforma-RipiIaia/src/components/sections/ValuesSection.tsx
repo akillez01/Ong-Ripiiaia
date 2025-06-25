@@ -1,4 +1,4 @@
-import { useTheme } from "@/components/theme/ThemeProvider";
+import { useTheme } from "@/components/theme/use-theme";
 import { Globe, Leaf, LucideIcon, Users } from "lucide-react";
 
 interface Value {

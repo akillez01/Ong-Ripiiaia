@@ -85,7 +85,7 @@ const Servicos = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-luz to-white">
+    <div className="min-h-screen bg-gradient-to-br  to-white">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-profundo/10 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -223,7 +223,7 @@ const Servicos = () => {
       </section>
 
       {/* Serviços Comerciais */}
-      <section className="py-16 px-4 bg-luz">
+      <section className="py-16 px-4 ">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-gray-800">Serviços Comerciais</h3>
@@ -267,29 +267,29 @@ const Servicos = () => {
       </section>
 
       {/* Diferenciais */}
-      <section className="py-16 px-4 bg-organico text-white">
+      <section className="py-16 px-4 bg-gradient-primary text-white">
         <div className="container mx-auto text-center max-w-4xl">
-          <h3 className="text-3xl font-bold mb-8">Nosso Modelo de Impacto</h3>
+          <h3 className="text-3xl font-bold mb-8 text-white">Nosso Modelo de Impacto</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <HeartHandshake className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">1. Apoiamos Comunidades</h4>
+              <h4 className="font-semibold text-white mb-2">1. Apoiamos Comunidades</h4>
               <p className="opacity-90">Oferecemos serviços gratuitos para quem está transformando realidades</p>
             </div>
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <HandCoins className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">2. Negócios nos Sustentam</h4>
+              <h4 className="font-semibold text-white  mb-2">2. Negócios nos Sustentam</h4>
               <p className="opacity-90">Serviços comerciais financiam nossa operação e projetos sociais</p>
             </div>
             <div>
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8" />
               </div>
-              <h4 className="font-semibold mb-2">3. Juntos Transformamos</h4>
+              <h4 className="font-semibold text-white mb-2">3. Juntos Transformamos</h4>
               <p className="opacity-90">Cada contrato comercial permite apoiar mais uma iniciativa social</p>
             </div>
           </div>
