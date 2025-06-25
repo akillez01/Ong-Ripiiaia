@@ -26,4 +26,7 @@ cd ..
 rm -rf "$PLATAFORMA_DIST/Ripi-Iaia"
 cp -r "$RIPI_IAIA_DIST" "$PLATAFORMA_DIST/Ripi-Iaia"
 
+# 4. Cria arquivo .nojekyll para evitar processamento Jekyll no GitHub Pages
+touch "$PLATAFORMA_DIST/.nojekyll"
+
 echo "✅ Tudo pronto! O build da plataforma já inclui o Ripi-Iaia em /Ripi-Iaia/"

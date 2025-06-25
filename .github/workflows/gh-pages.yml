@@ -30,6 +30,10 @@ jobs:
         run: |
           bash build-tudo.sh
 
+      - name: Criar arquivo .nojekyll
+        run: |
+          touch ./Plataforma-RipiIaia/dist/.nojekyll
+
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

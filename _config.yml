@@ -1,0 +1,27 @@
+# Configurações do site
+title: ONG RipiIaia
+description: Plataforma Digital da ONG RipiIaia.
+
+# Tema do GitHub Pages (pode ser ajustado conforme necessário)
+theme: jekyll-theme-primer
+
+# Arquivos e diretórios a serem excluídos do processamento do Jekyll
+exclude:
+  - node_modules/
+  - Plataforma-RipiIaia/node_modules/
+  - Ripi-Iaia/node_modules/
+  - "*/node_modules/"
+  - package.json
+  - package-lock.json
+  - bun.lockb
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .github/
+  - .vscode/
+  - .git/
+  - "*.sh"
+  - "*.log"
+  - "*.config.js"
+  - "*.config.ts"
+  - README.md
