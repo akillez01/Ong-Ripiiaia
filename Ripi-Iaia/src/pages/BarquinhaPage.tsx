@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const BarquinhaPage = () => {
-  const { t, i18n } = useTranslation();
+  useTranslation();
 
   useEffect(() => {
     document.title = 'A Barquinha | Santo Daime - Frei Daniel';

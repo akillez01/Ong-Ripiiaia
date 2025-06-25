@@ -50,33 +50,6 @@ const banners = [
 	},
 ];
 
-const features = [
-	{
-		icon: <Book className="h-10 w-10 text-primary-600" />,
-		title: 'Acervo Completo',
-		description: 'Hinários, partituras e materiais organizados e fáceis de acessar.',
-		link: '/acervo',
-	},
-	{
-		icon: <Music className="h-10 w-10 text-primary-600" />,
-		title: 'Biblioteca Musical',
-		description: 'Acesse nossa coleção de hinários, áudios e canções da doutrina.',
-		link: '/biblioteca',
-		external: false,
-	},
-	{
-		icon: <Play className="h-10 w-10 text-primary-600" />,
-		title: 'Transmissões ao Vivo',
-		description: 'Acompanhe eventos e encontros em tempo real.',
-		link: '/live',
-	},
-	{
-		icon: <ShoppingBag className="h-10 w-10 text-primary-600" />,
-		title: 'Loja Virtual',
-		description: 'Adquira produtos relacionados à doutrina com facilidade.',
-		link: '/loja',
-	},
-];
 
 const HomePage = () => {
 	const { t, i18n } = useTranslation();
